@@ -11,7 +11,7 @@
 
 <style>
 /* ============================================================
-   VARIABLES — Day / Night
+   VARIABLES
    ============================================================ */
 :root {
   --bg: #1a0a0a;
@@ -36,8 +36,6 @@ body.light {
   --bg-grad-2: rgba(201,169,106,0.15);
   --text: #2b2b2b;
   --gold: #8b6b2a;
-  --red: #8b1a1a;
-  --deep-red: #4a0808;
   --book-cover: #4a0808;
   --page-bg: #fdf8ec;
   --page-text: #1a1a1a;
@@ -72,18 +70,17 @@ body {
   -webkit-user-select: none;
 }
 
-/* Grain overlay */
 body::after {
   content: '';
   position: fixed; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='80' height='80' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='80' height='80' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 999;
   mix-blend-mode: overlay;
 }
 
 /* ============================================================
-   INTRO SCREEN
+   INTRO
    ============================================================ */
 #intro {
   position: fixed; inset: 0;
@@ -195,7 +192,7 @@ body::after {
 .brand {
   font-family: 'Cinzel', serif;
   font-weight: 600;
-  font-size: clamp(0.85rem, 2.8vw, 1.1rem);
+  font-size: clamp(0.8rem, 2.6vw, 1.05rem);
   letter-spacing: 3px;
   color: var(--gold);
   text-shadow: 0 0 14px rgba(201,169,106,0.5);
@@ -214,13 +211,11 @@ body::after {
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   transition: transform 0.25s, background 0.25s;
-  -webkit-tap-highlight-color: transparent;
 }
 .icon-btn:active { transform: scale(0.9); }
-.icon-btn:hover { background: rgba(139,26,26,0.7); }
 
 /* ============================================================
-   BOOK SCENE — 3D
+   SCENE + BOOK
    ============================================================ */
 #scene {
   width: 100%;
@@ -228,7 +223,7 @@ body::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  perspective: 2200px;
+  perspective: 2400px;
   perspective-origin: 50% 50%;
   padding: 60px 10px 80px;
   opacity: 0;
@@ -239,14 +234,12 @@ body::after {
 .book {
   position: relative;
   width: min(1000px, 96vw);
-  height: min(620px, 82vh);
+  height: min(640px, 82vh);
   transform-style: preserve-3d;
-  transform: rotateX(12deg);
-  transition: transform 1s cubic-bezier(0.4,0,0.2,1);
+  transform: rotateX(10deg);
   will-change: transform;
 }
 
-/* خلفية الكتاب - غلاف 3D */
 .book-base {
   position: absolute;
   inset: -14px -18px;
@@ -262,8 +255,6 @@ body::after {
   transform: translateZ(-8px);
   transition: background 0.6s ease;
 }
-
-/* كعب الكتاب */
 .book-base::after {
   content: '';
   position: absolute;
@@ -277,7 +268,7 @@ body::after {
 }
 
 /* ============================================================
-   PAGES
+   PAGES — with page curl wave
    ============================================================ */
 .page {
   position: absolute;
@@ -291,14 +282,28 @@ body::after {
   -webkit-backface-visibility: hidden;
   transform-style: preserve-3d;
   will-change: transform;
-  transition: transform 0.9s cubic-bezier(0.4,0,0.2,1);
-  box-shadow:
-    inset 0 0 30px rgba(120,60,30,0.12),
-    inset 0 0 4px rgba(0,0,0,0.08);
   color: var(--page-text);
+  /* Curl effect via box-shadow + gradient overlay */
+  transition: transform 1s cubic-bezier(0.42, 0, 0.35, 1);
 }
 
-/* ورقة خطوط خفيفة */
+/* Wave/curl overlay (يظهر أثناء التقليب) */
+.page .curl-shade {
+  position: absolute;
+  top: 0; bottom: 0; right: 0;
+  width: 100%;
+  background: linear-gradient(90deg, transparent 60%, rgba(0,0,0,0.15) 85%, rgba(0,0,0,0.35) 100%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+  transition: opacity 0.4s ease;
+}
+.page.left .curl-shade {
+  background: linear-gradient(-90deg, transparent 60%, rgba(0,0,0,0.15) 85%, rgba(0,0,0,0.35) 100%);
+  right: auto; left: 0;
+}
+.page.flipping .curl-shade { opacity: 1; }
+
 .page::before {
   content: '';
   position: absolute; inset: 0;
@@ -309,29 +314,19 @@ body::after {
   z-index: 1;
 }
 
-/* الصفحة اليمنى */
 .page.right {
   right: 0;
   border-radius: 2px 8px 8px 2px;
   transform-origin: left center;
   transform: rotateY(0deg);
   z-index: 5;
-}
-.page.right::after {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0; left: 0;
-  width: 20px;
-  background: linear-gradient(90deg, rgba(0,0,0,0.25), transparent);
-  pointer-events: none;
-  z-index: 4;
+  box-shadow: inset 20px 0 30px -20px rgba(0,0,0,0.3);
 }
 .page.right.flipped {
   transform: rotateY(-180deg);
   box-shadow: -30px 15px 50px rgba(0,0,0,0.55);
 }
 
-/* الصفحة اليسرى */
 .page.left {
   left: 0;
   border-radius: 8px 2px 2px 8px;
@@ -340,15 +335,7 @@ body::after {
   opacity: 0;
   pointer-events: none;
   z-index: 4;
-}
-.page.left::after {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0; right: 0;
-  width: 20px;
-  background: linear-gradient(-90deg, rgba(0,0,0,0.25), transparent);
-  pointer-events: none;
-  z-index: 4;
+  box-shadow: inset -20px 0 30px -20px rgba(0,0,0,0.3);
 }
 .page.left.show {
   transform: rotateY(0deg);
@@ -357,9 +344,15 @@ body::after {
   z-index: 5;
 }
 
-/* صفحة أثناء التقليب (ظل متحرك) */
+/* Wave animation — subtle sway أثناء التقليب */
 .page.flipping {
-  box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+  animation: pageWave 1s ease-in-out;
+}
+@keyframes pageWave {
+  0%   { filter: brightness(1) contrast(1); }
+  40%  { filter: brightness(0.94) contrast(1.05); }
+  70%  { filter: brightness(0.97) contrast(1.02); }
+  100% { filter: brightness(1) contrast(1); }
 }
 
 /* ============================================================
@@ -386,9 +379,6 @@ body::after {
   z-index: 2;
 }
 
-/* ============================================================
-   POLAROIDS
-   ============================================================ */
 .polaroid {
   position: absolute;
   background: #fdfbf5;
@@ -436,8 +426,6 @@ body::after {
   z-index: 5;
   pointer-events: none;
 }
-.tape.tl { left: 10px; transform: rotate(-35deg); top: -6px; }
-.tape.tr { right: 10px; left: auto; transform: rotate(35deg); top: -6px; }
 
 .sticker {
   position: absolute;
@@ -464,35 +452,27 @@ body::after {
   z-index: 3;
 }
 
-/* ============================================================
-   HINT (يدل المستخدم)
-   ============================================================ */
 .tap-hint {
   position: absolute;
   bottom: 14px;
   font-family: 'Caveat', cursive;
   font-size: clamp(0.75rem, 1.6vw, 0.95rem);
   color: var(--page-sub);
-  opacity: 0.7;
   z-index: 6;
   pointer-events: none;
   animation: hintPulse 2s ease-in-out infinite;
 }
 .tap-hint.right-hint { right: 20px; }
-.tap-hint.left-hint { left: 20px; }
+.tap-hint.left-hint { left: 20px; animation-name: hintPulseL; }
 @keyframes hintPulse {
-  0%,100% { opacity: 0.4; transform: translateX(0); }
-  50% { opacity: 0.85; transform: translateX(-4px); }
+  0%,100% { opacity: 0.35; transform: translateX(0); }
+  50% { opacity: 0.8; transform: translateX(-4px); }
 }
-.tap-hint.left-hint { animation-name: hintPulseL; }
 @keyframes hintPulseL {
-  0%,100% { opacity: 0.4; transform: translateX(0); }
-  50% { opacity: 0.85; transform: translateX(4px); }
+  0%,100% { opacity: 0.35; transform: translateX(0); }
+  50% { opacity: 0.8; transform: translateX(4px); }
 }
 
-/* ============================================================
-   PAGE NUMBERS
-   ============================================================ */
 .page-num {
   position: absolute;
   bottom: 10px;
@@ -521,7 +501,6 @@ body::after {
   box-shadow: 0 8px 22px rgba(139,26,26,0.75), 0 0 20px rgba(176,48,48,0.5);
   z-index: 200;
   display: flex; align-items: center; justify-content: center;
-  transition: transform 0.3s;
   animation: heartBeat 1.6s ease-in-out infinite;
 }
 @keyframes heartBeat {
@@ -529,10 +508,52 @@ body::after {
   25% { transform: scale(1.12); }
   40% { transform: scale(1); }
 }
-#heartBtn:active { transform: scale(0.9); animation: none; }
+#heartBtn:active { transform: scale(0.9); }
+
+#musicBtn {
+  position: fixed;
+  bottom: 20px; right: 20px;
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #c9a96a, #8b6b2a);
+  border: 2px solid #0a0505;
+  color: #0a0505;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(201,169,106,0.6);
+  z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.3s;
+}
+#musicBtn.playing { animation: musicPulse 1.2s ease-in-out infinite; }
+#musicBtn:active { transform: scale(0.9); }
+@keyframes musicPulse {
+  0%,100% { box-shadow: 0 8px 22px rgba(201,169,106,0.6); }
+  50% { box-shadow: 0 8px 30px rgba(201,169,106,1); }
+}
 
 /* ============================================================
-   MODAL (MEMORY)
+   VIDEO BUTTON
+   ============================================================ */
+#videoBtn {
+  position: fixed;
+  bottom: 84px; right: 20px;
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #8b1a1a, #4a0808);
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(139,26,26,0.7);
+  z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.3s;
+}
+#videoBtn:active { transform: scale(0.9); }
+
+/* ============================================================
+   MODALS
    ============================================================ */
 .modal-overlay {
   position: fixed; inset: 0;
@@ -568,10 +589,8 @@ body::after {
   background: none; border: none;
   font-size: 1.7rem; color: var(--page-accent);
   cursor: pointer; line-height: 1;
-  transition: transform 0.3s;
   z-index: 5;
 }
-.modal .close:active { transform: rotate(90deg) scale(0.9); }
 .modal .m-img {
   width: 100%; height: clamp(180px, 35vh, 240px);
   object-fit: cover;
@@ -602,7 +621,33 @@ body::after {
 }
 
 /* ============================================================
-   LOVE MODAL + TEDDY
+   VIDEO MODAL
+   ============================================================ */
+.video-modal {
+  background: #0a0202;
+  max-width: 700px;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 0 3px var(--gold);
+  position: relative;
+}
+.video-modal video,
+.video-modal iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+  display: block;
+  background: #000;
+}
+.video-modal .close {
+  color: var(--gold);
+  font-size: 2rem;
+  position: absolute;
+  top: -40px; right: 0;
+}
+
+/* ============================================================
+   LOVE MODAL
    ============================================================ */
 .love-overlay {
   position: fixed; inset: 0;
@@ -632,7 +677,6 @@ body::after {
     inset 0 0 60px rgba(139,26,26,0.15);
   transform: scale(0.7) rotate(-6deg);
   transition: transform 0.6s cubic-bezier(0.34,1.56,0.64,1);
-  overflow: hidden;
   color: #e8e8e8;
   max-height: 92vh;
   overflow-y: auto;
@@ -646,7 +690,6 @@ body::after {
   cursor: pointer; line-height: 1;
   z-index: 5;
 }
-.love-letter .close-love:active { transform: rotate(90deg); }
 
 /* TEDDY */
 .teddy-container {
@@ -686,7 +729,6 @@ body::after {
   position: absolute; width: 26px; height: 26px;
   background: #6b4423; border-radius: 50%;
   top: -4px; z-index: 2;
-  box-shadow: inset -4px -4px 8px rgba(0,0,0,0.3);
 }
 .teddy .ear.left { left: 2px; }
 .teddy .ear.right { right: 2px; }
@@ -723,7 +765,6 @@ body::after {
   position: absolute; width: 22px; height: 40px;
   background: #6b4423; border-radius: 50%;
   top: 40px;
-  box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3);
   z-index: 1;
 }
 .teddy .arm.left {
@@ -748,7 +789,6 @@ body::after {
   position: absolute; width: 26px; height: 18px;
   background: #6b4423; border-radius: 50%;
   bottom: -7px;
-  box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3);
   z-index: 2;
 }
 .teddy .foot.left { left: 5px; }
@@ -826,19 +866,18 @@ body::after {
 .love-letter .signature.show { opacity: 1; }
 
 /* ============================================================
-   RESPONSIVE — MOBILE PRIORITY
+   RESPONSIVE
    ============================================================ */
 @media (max-width: 700px) {
   .book {
-    transform: rotateX(6deg);
+    transform: rotateX(5deg);
     height: min(560px, 78vh);
   }
   .book-base { inset: -8px -10px; }
   .book-base::after { width: 18px; }
   .polaroid { padding: 5px 5px 24px; }
-  .polaroid .cap { font-size: 0.75rem; bottom: 4px; }
+  .polaroid .cap { font-size: 0.72rem; bottom: 4px; }
   .tape { width: 44px; height: 14px; top: -7px; }
-  .page.right::after, .page.left::after { width: 12px; }
 }
 
 @media (max-width: 500px) {
@@ -846,31 +885,20 @@ body::after {
   .book {
     width: 98vw;
     height: min(520px, 76vh);
-    transform: rotateX(4deg);
+    transform: rotateX(3deg);
   }
   .book-base { inset: -6px; }
   .book-base::after { width: 14px; }
   .page { padding: 14px 10px; }
   .polaroid { padding: 4px 4px 20px; }
-  .polaroid .cap { font-size: 0.65rem; bottom: 3px; }
+  .polaroid .cap { font-size: 0.62rem; bottom: 3px; }
   .tape { width: 36px; height: 12px; top: -6px; }
   .sticker { font-size: 1.2rem; }
   .page-num { font-size: 0.6rem; }
   .teddy-container { width: 120px; height: 120px; }
   .teddy { width: 85px; height: 85px; }
-  .teddy .body { width: 60px; height: 52px; }
-  .teddy .head { width: 52px; height: 50px; }
-  .teddy .ear { width: 22px; height: 22px; }
-  .teddy .eye { width: 7px; height: 7px; top: 19px; }
-  .teddy .eye.left { left: 12px; }
-  .teddy .eye.right { right: 12px; }
-  .teddy .nose { width: 9px; height: 7px; top: 28px; }
-  .teddy .mouth { width: 13px; height: 6px; top: 33px; }
-  .teddy .arm { width: 18px; height: 34px; top: 35px; }
-  .teddy .foot { width: 22px; height: 15px; }
 }
 
-/* Landscape phones */
 @media (max-height: 500px) and (orientation: landscape) {
   .book { height: 88vh; }
   #scene { padding: 40px 4px; }
@@ -904,16 +932,17 @@ body::after {
   </div>
 </div>
 
-<!-- ============ BOOK SCENE ============ -->
+<!-- ============ BOOK ============ -->
 <div id="scene">
   <div class="book" id="book">
     <div class="book-base"></div>
-    <!-- الصفحات تُبنى عبر JS -->
   </div>
 </div>
 
-<!-- ============ FLOATING HEART ============ -->
+<!-- ============ FLOATING BUTTONS ============ -->
 <button id="heartBtn" title="رسالة حب">❤️</button>
+<button id="musicBtn" title="الموسيقى">🎵</button>
+<button id="videoBtn" title="الفيديو">🎬</button>
 
 <!-- ============ MODAL (MEMORY) ============ -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
@@ -923,6 +952,16 @@ body::after {
     <h3 id="mTitle"></h3>
     <div class="date" id="mDate"></div>
     <p id="mText"></p>
+  </div>
+</div>
+
+<!-- ============ VIDEO MODAL ============ -->
+<div class="modal-overlay" id="videoOverlay" onclick="closeVideo(event)">
+  <div class="video-modal" onclick="event.stopPropagation()">
+    <button class="close" onclick="closeVideo()">×</button>
+    <video id="theVideo" controls preload="metadata">
+      <source src="video.mp4" type="video/mp4">
+    </video>
   </div>
 </div>
 
@@ -964,32 +1003,40 @@ body::after {
 'use strict';
 
 /* ============================================================
-   IMAGES — الصور الستة اللي بعتها
+   ⚙️ الإعدادات — عدّل هنا
    ============================================================ */
 const IMG = {
-  p1: "https://i.pinimg.com/736x/8a/5f/2c/8a5f2c1b3a4e5f6c7d8e9f0a1b2c3d4e.jpg", // استبدلها برابط صورتك
-  p2: "https://i.pinimg.com/736x/1b/4d/9e/1b4d9e2f3a5c6b7d8e9f0a1b2c3d4e5f.jpg",
-  p3: "https://i.pinimg.com/736x/2c/5e/0f/2c5e0f3a4b6d7c8e9f0a1b2c3d4e5f6a.jpg",
-  p4: "https://i.pinimg.com/736x/3d/6f/1a/3d6f1a4b5c7e8d9f0a1b2c3d4e5f6a7b.jpg",
-  p5: "https://i.pinimg.com/736x/4e/7a/2b/4e7a2b5c6d8f9e0a1b2c3d4e5f6a7b8c.jpg",
-  p6: "https://i.pinimg.com/736x/5f/8b/3c/5f8b3c6d7e9f0a1b2c3d4e5f6a7b8c9d.jpg"
+  p1:  "images/photo1.jpg",   // العيون الوردية/الزرقاء
+  p2:  "images/photo2.jpg",   // البجعتان
+  p3:  "images/photo3.jpg",   // الزهرة الوردية
+  p4:  "images/photo4.jpg",   // الكولاج
+  p5:  "images/photo5.jpg",   // الزخرفة الحمراء
+  p6:  "images/photo6.jpg",   // الورق البني
+  p7:  "images/photo7.jpg",   // ذكرى إضافية
+  p8:  "images/photo8.jpg",
+  p9:  "images/photo9.jpg",
+  p10: "images/photo10.jpg"
 };
 
+const SONG_FILE = "song.mp3";     // ← اسم ملف الأغنية
+const VIDEO_FILE = "video.mp4";    // ← اسم ملف الفيديو (أو اتركه واستخدم رابط)
+
 /* ============================================================
-   PAGE DATA
+   📖 بيانات الـ 10 صفحات
    ============================================================ */
 const pagesData = [
+  // SPREAD 1
   {
     left: {
       title: "OUR STORY",
       sub: "— the beginning —",
       photos: [
         { cls: "pol-a", style: "top:16%;left:8%;transform:rotate(-6deg);",
-          img: IMG.p1, cap: "us", title: "أول لقاء", date: "12 أبريل",
-          text: "كانت أول مرة رأيتك فيها. ابتسمت، ووقتها فهمت أن هذه البداية." },
+          img: IMG.p1, cap: "eyes", title: "عيونك", date: "12 أبريل",
+          text: "في عيونك وجدت عالمًا كاملًا، وفي نظراتك وجدت السلام." },
         { cls: "pol-b", style: "bottom:14%;right:10%;transform:rotate(5deg);",
-          img: IMG.p2, cap: "two hearts", title: "قلبان", date: "20 مايو",
-          text: "قلبان التقيا في يوم عادي، فصار أجمل يوم في حياتي." }
+          img: IMG.p2, cap: "swans", title: "البجعتان", date: "20 مايو",
+          text: "مثل بجعتين يسبحان معًا، هكذا نحن — رفيقان إلى الأبد." }
       ],
       stickers: [
         { emoji: "🌹", style: "top:8%;right:8%;" },
@@ -1002,7 +1049,7 @@ const pagesData = [
       sub: "— little universe —",
       photos: [
         { cls: "pol-c", style: "top:14%;right:10%;transform:rotate(4deg);",
-          img: IMG.p3, cap: "flowers", title: "زهرة", date: "3 يوليو",
+          img: IMG.p3, cap: "flower", title: "زهرة", date: "3 يوليو",
           text: "زهرة تنمو في قلبي كل يوم، وأنتِ من تسقيها بحبك." }
       ],
       stickers: [
@@ -1012,17 +1059,18 @@ const pagesData = [
       label: { text: "LOVERS", style: "top:50%;left:6%;" }
     }
   },
+  // SPREAD 2
   {
     left: {
       title: "FIRST KISS",
       sub: "— the moment —",
       photos: [
         { cls: "pol-b", style: "top:14%;left:10%;transform:rotate(-5deg);",
-          img: IMG.p4, cap: "eyes", title: "عيونك", date: "14 أغسطس",
-          text: "في عيونك وجدت وطنًا، وفي نظراتك وجدت السلام." },
+          img: IMG.p4, cap: "us", title: "نحن", date: "14 أغسطس",
+          text: "في تلك اللحظة توقف العالم، وبقيت أنتِ فقط في قلبي." },
         { cls: "pol-a", style: "bottom:12%;right:8%;transform:rotate(7deg);",
-          img: IMG.p5, cap: "kiss", title: "قُبلة", date: "دائمًا",
-          text: "كل لحظة معك ذكرى، وأجمل ذكرى هي تلك اللحظة الأولى." }
+          img: IMG.p5, cap: "ornament", title: "زخرفة", date: "دائمًا",
+          text: "حتى الزخارف الجميلة تبدو عادية أمام جمال روحك." }
       ],
       stickers: [
         { emoji: "🌙", style: "top:6%;right:8%;" },
@@ -1035,16 +1083,79 @@ const pagesData = [
       sub: "— what's next —",
       photos: [
         { cls: "pol-c", style: "top:14%;left:8%;transform:rotate(-3deg);",
-          img: IMG.p6, cap: "swans", title: "البجعتان", date: "معًا",
-          text: "مثل بجعتين يسبحان معًا، هكذا نحن — رفيقان إلى الأبد." }
+          img: IMG.p6, cap: "old paper", title: "ورق قديم", date: "معًا",
+          text: "مثل ورق قديم يحمل ذكريات، قلبك يحمل أجمل قصصي." }
       ],
       stickers: [
-        { emoji: "🦢", style: "top:6%;right:8%;" },
+        { emoji: "📜", style: "top:6%;right:8%;" },
         { emoji: "⭐", style: "bottom:8%;right:10%;", spin: true }
       ],
       label: { text: "DREAM", style: "top:52%;right:6%;" }
     }
   },
+  // SPREAD 3
+  {
+    left: {
+      title: "LAUGHTER",
+      sub: "— our melody —",
+      photos: [
+        { cls: "pol-a", style: "top:18%;left:10%;transform:rotate(-4deg);",
+          img: IMG.p7, cap: "laugh", title: "ضحكتك", date: "كل يوم",
+          text: "ضحكتك أجمل موسيقى سمعتها في حياتي، أريد أن أسمعها للأبد." }
+      ],
+      stickers: [
+        { emoji: "🌻", style: "top:6%;right:10%;" },
+        { emoji: "💛", style: "bottom:10%;left:8%;" }
+      ],
+      label: { text: "HAPPY", style: "top:60%;right:8%;" }
+    },
+    right: {
+      title: "TRIPS",
+      sub: "— far away —",
+      photos: [
+        { cls: "pol-b", style: "top:20%;right:12%;transform:rotate(6deg);",
+          img: IMG.p8, cap: "adventure", title: "رحلة", date: "صيف 2023",
+          text: "كل رحلة معك تصبح أجمل مغامرة، حتى لو كانت مجرد نزهة قصيرة." }
+      ],
+      stickers: [
+        { emoji: "🗺️", style: "top:8%;left:8%;" },
+        { emoji: "✈️", style: "bottom:12%;right:8%;", spin: true }
+      ],
+      label: { text: "JOURNEY", style: "top:60%;left:8%;" }
+    }
+  },
+  // SPREAD 4
+  {
+    left: {
+      title: "LETTERS",
+      sub: "— words of love —",
+      photos: [
+        { cls: "pol-c", style: "top:16%;left:8%;transform:rotate(-5deg);",
+          img: IMG.p9, cap: "letters", title: "رسائل", date: "صيف 2023",
+          text: "كل كلمة كتبتها لك كانت من قلبي، وكل حرف كان ينبض بحبك." }
+      ],
+      stickers: [
+        { emoji: "💌", style: "top:8%;right:8%;" },
+        { emoji: "🖋️", style: "bottom:10%;left:10%;" }
+      ],
+      label: { text: "WORDS", style: "top:58%;right:8%;" }
+    },
+    right: {
+      title: "ALWAYS",
+      sub: "— with you —",
+      photos: [
+        { cls: "pol-a", style: "top:22%;right:14%;transform:rotate(4deg);",
+          img: IMG.p10, cap: "together", title: "معًا", date: "دائمًا",
+          text: "في كل خطوة، في كل نفس، أريدك بجانبي — إلى الأبد." }
+      ],
+      stickers: [
+        { emoji: "🔒", style: "top:10%;left:10%;" },
+        { emoji: "💞", style: "bottom:10%;right:10%;", spin: true }
+      ],
+      label: { text: "ALWAYS", style: "top:62%;left:8%;" }
+    }
+  },
+  // SPREAD 5 — النهاية
   {
     left: {
       title: "FOREVER",
@@ -1086,6 +1197,11 @@ function openBook() {
     document.getElementById('topbar').classList.add('visible');
     document.getElementById('scene').classList.add('visible');
   }, 300);
+  // تحميل الصوت بعد التفاعل
+  setTimeout(() => {
+    const audio = document.getElementById('bgAudio');
+    if (audio) audio.load();
+  }, 1000);
 }
 
 /* ============================================================
@@ -1119,7 +1235,6 @@ function buildBook() {
     book.appendChild(l);
   });
 
-  // Show first left, hide others
   document.querySelectorAll('.page.left')[0].classList.add('show');
   document.querySelectorAll('.page.right').forEach((el, i) => {
     if (i > 0) el.classList.add('flipped');
@@ -1127,10 +1242,12 @@ function buildBook() {
 
   bindPolaroids();
   bindPageTaps();
+  updateHints();
 }
 
 function buildContent(data, side, pageIndex) {
   let html = `
+    <div class="curl-shade"></div>
     <h2 class="page-title">${data.title}</h2>
     <p class="page-sub">${data.sub}</p>
   `;
@@ -1139,7 +1256,7 @@ function buildContent(data, side, pageIndex) {
       <div class="polaroid ${ph.cls}" style="${ph.style}"
            data-title="${ph.title}" data-date="${ph.date}" data-text="${ph.text}">
         <div class="tape"></div>
-        <img src="${ph.img}" alt="${ph.cap}" loading="lazy">
+        <img src="${ph.img}" alt="${ph.cap}" loading="lazy" onerror="this.style.background='#8b1a1a';this.style.opacity='0.3';">
         <div class="cap">${ph.cap}</div>
       </div>
     `;
@@ -1153,36 +1270,23 @@ function buildContent(data, side, pageIndex) {
   if (data.note) {
     html += `<p style="font-family:'Caveat',cursive;font-size:clamp(1.1rem,2.8vw,1.5rem);color:var(--page-text);text-align:center;margin-top:42%;line-height:1.8;padding:0 8%;">${data.note}</p>`;
   }
-
-  // Page number
   const pageNum = pageIndex * 2 + (side === 'right' ? 2 : 1);
   html += `<div class="page-num ${side === 'right' ? 'right-num' : 'left-num'}">${pageNum}</div>`;
-
-  // Tap hint
-  if (side === 'right' && pageIndex < pagesData.length - 1) {
-    html += `<div class="tap-hint right-hint">اضغط للتقليب ←</div>`;
-  } else if (side === 'left' && pageIndex > 0) {
-    html += `<div class="tap-hint left-hint">← ارجع</div>`;
-  }
-
   return html;
 }
 
 /* ============================================================
-   TAP ANYWHERE ON PAGE TO FLIP
+   TAP TO FLIP
    ============================================================ */
 function bindPageTaps() {
-  // Right page: tap anywhere → next page
   document.querySelectorAll('.page.right').forEach(page => {
     page.addEventListener('click', (e) => {
-      // تجاهل الضغط على الصور (لها معالج خاص)
       if (e.target.closest('.polaroid')) return;
       const idx = parseInt(page.dataset.index);
       if (idx === currentPage) nextPage();
     });
   });
 
-  // Left page: tap anywhere → previous page
   document.querySelectorAll('.page.left').forEach(page => {
     page.addEventListener('click', (e) => {
       if (e.target.closest('.polaroid')) return;
@@ -1191,13 +1295,9 @@ function bindPageTaps() {
     });
   });
 
-  // Swipe support (لمس)
   bindSwipe();
 }
 
-/* ============================================================
-   SWIPE GESTURES
-   ============================================================ */
 function bindSwipe() {
   const scene = document.getElementById('scene');
   let startX = 0, startY = 0, startTime = 0;
@@ -1215,17 +1315,15 @@ function bindSwipe() {
     const dx = t.clientX - startX;
     const dy = t.clientY - startY;
     const dt = Date.now() - startTime;
-
-    // سحب سريع وأفقي
     if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5 && dt < 500) {
-      if (dx < 0) nextPage();  // سحب يسار → التالي
-      else prevPage();          // سحب يمين → السابق
+      if (dx < 0) nextPage();
+      else prevPage();
     }
   }, { passive: true });
 }
 
 /* ============================================================
-   FLIP ANIMATION (سلس على الموبايل)
+   FLIP ANIMATION — SMOOTH
    ============================================================ */
 function nextPage() {
   if (animating || currentPage >= pagesData.length - 1) return;
@@ -1233,19 +1331,23 @@ function nextPage() {
 
   const rightPages = document.querySelectorAll('.page.right');
   const leftPages = document.querySelectorAll('.page.left');
-
   const curRight = rightPages[currentPage];
   const nextLeft = leftPages[currentPage + 1];
 
   curRight.classList.add('flipping');
+  // Force reflow
+  void curRight.offsetWidth;
   curRight.classList.add('flipped');
 
   setTimeout(() => {
     nextLeft.classList.add('show');
     currentPage++;
-    curRight.classList.remove('flipping');
-    setTimeout(() => { animating = false; }, 350);
-  }, 900);
+    updateHints();
+    setTimeout(() => {
+      curRight.classList.remove('flipping');
+      animating = false;
+    }, 300);
+  }, 950);
 }
 
 function prevPage() {
@@ -1254,17 +1356,44 @@ function prevPage() {
 
   const rightPages = document.querySelectorAll('.page.right');
   const leftPages = document.querySelectorAll('.page.left');
-
   const curLeft = leftPages[currentPage];
   const prevRight = rightPages[currentPage - 1];
 
+  curLeft.classList.add('flipping');
+  void curLeft.offsetWidth;
   curLeft.classList.remove('show');
-  prevRight.classList.remove('flipped');
 
   setTimeout(() => {
+    prevRight.classList.add('flipping');
+    void prevRight.offsetWidth;
+    prevRight.classList.remove('flipped');
     currentPage--;
-    setTimeout(() => { animating = false; }, 350);
-  }, 900);
+    updateHints();
+    setTimeout(() => {
+      curLeft.classList.remove('flipping');
+      prevRight.classList.remove('flipping');
+      animating = false;
+    }, 300);
+  }, 500);
+}
+
+function updateHints() {
+  document.querySelectorAll('.tap-hint').forEach(el => el.remove());
+  // right hint on current right page
+  const rightPages = document.querySelectorAll('.page.right');
+  const leftPages = document.querySelectorAll('.page.left');
+  if (rightPages[currentPage] && currentPage < pagesData.length - 1) {
+    const h = document.createElement('div');
+    h.className = 'tap-hint right-hint';
+    h.textContent = 'اضغط للتقليب ←';
+    rightPages[currentPage].appendChild(h);
+  }
+  if (leftPages[currentPage] && currentPage > 0) {
+    const h = document.createElement('div');
+    h.className = 'tap-hint left-hint';
+    h.textContent = '→ ارجع';
+    leftPages[currentPage].appendChild(h);
+  }
 }
 
 /* ============================================================
@@ -1289,7 +1418,52 @@ function closeModal(e) {
 }
 
 /* ============================================================
-   LOVE LETTER (Typewriter)
+   VIDEO MODAL
+   ============================================================ */
+document.getElementById('videoBtn').addEventListener('click', () => {
+  document.getElementById('videoOverlay').classList.add('open');
+  const v = document.getElementById('theVideo');
+  v.load();
+});
+
+function closeVideo(e) {
+  if (e && e.target !== e.currentTarget && e.type === 'click') return;
+  document.getElementById('videoOverlay').classList.remove('open');
+  const v = document.getElementById('theVideo');
+  v.pause();
+}
+
+/* ============================================================
+   MUSIC
+   ============================================================ */
+let audioEl = null;
+
+function initAudio() {
+  if (audioEl) return;
+  audioEl = new Audio(SONG_FILE);
+  audioEl.loop = true;
+  audioEl.preload = 'auto';
+}
+
+document.getElementById('musicBtn').addEventListener('click', () => {
+  initAudio();
+  const btn = document.getElementById('musicBtn');
+  if (audioEl.paused) {
+    audioEl.play().then(() => {
+      btn.classList.add('playing');
+      btn.textContent = '❚❚';
+    }).catch(() => {
+      alert('⚠️ ضع ملف الأغنية باسم song.mp3 بجانب الملف.');
+    });
+  } else {
+    audioEl.pause();
+    btn.classList.remove('playing');
+    btn.textContent = '🎵';
+  }
+});
+
+/* ============================================================
+   LOVE LETTER
    ============================================================ */
 const LOVE_MESSAGE = "كل يوم معك هو هدية من السماء، وكل لحظة نتشاركها هي ذكرى أحفظها في قلبي. أحبك أكثر من الأمس، وأقل من الغد. أنت أجمل شيء حدث في حياتي، وسأبقى أحبك حتى آخر نفس. 🖤";
 
@@ -1298,10 +1472,8 @@ function startTypewriter() {
   const sign = document.getElementById('loveSign');
   target.innerHTML = '';
   sign.classList.remove('show');
-
   let i = 0;
   const cursor = '<span class="cursor"></span>';
-
   function type() {
     if (i < LOVE_MESSAGE.length) {
       target.innerHTML = LOVE_MESSAGE.substring(0, i + 1) + cursor;
@@ -1333,7 +1505,7 @@ function closeLove(e) {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight') nextPage();
   if (e.key === 'ArrowLeft') prevPage();
-  if (e.key === 'Escape') { closeModal(); closeLove(); }
+  if (e.key === 'Escape') { closeModal(); closeLove(); closeVideo(); }
 });
 
 /* ============================================================
@@ -1341,8 +1513,6 @@ document.addEventListener('keydown', (e) => {
    ============================================================ */
 window.addEventListener('load', () => {
   buildBook();
-
-  // منع الزوم على iOS
   document.addEventListener('gesturestart', (e) => e.preventDefault());
 });
 </script>
