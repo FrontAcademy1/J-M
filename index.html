@@ -3,30 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Love Scrapbook ❤️</title>
+<title>Our Love Scrapbook 🖤</title>
 
-<!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Sacramento&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Sacramento&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-/* ============ ROOT VARIABLES ============ */
+/* ============================================================
+   ROOT VARIABLES — Light & Dark theme
+   ============================================================ */
 :root {
   --cream: #f7efe0;
   --cream-dark: #ecdfc8;
   --teal: #0f4c4a;
-  --teal-dark: #093331;
-  --emerald: #1a6b5e;
+  --gold: #c9a96a;
   --pastel-pink: #f4c2c2;
   --soft-pink: #e8a3a3;
   --polaroid: #fdfbf5;
   --ink: #2b2b2b;
-  --gold: #c9a96a;
   --shadow: rgba(60, 40, 20, 0.25);
+
+  --book-bg: #0f4c4a;
+  --book-bg-image: none;
+  --page-bg: #fdfbf5;
+  --page-bg-image: none;
+  --page-text: #2b2b2b;
+  --page-accent: #0f4c4a;
+  --page-sub: #e8a3a3;
 }
 
-/* ============ RESET ============ */
+/* Dark theme */
+body.dark {
+  --cream: #0a0a0a;
+  --cream-dark: #1a1a1a;
+  --teal: #c9a96a;
+  --gold: #c9a96a;
+  --pastel-pink: #8b1a1a;
+  --soft-pink: #b03030;
+  --polaroid: #1a1a1a;
+  --ink: #e8e8e8;
+  --shadow: rgba(0, 0, 0, 0.6);
+
+  --book-bg: #0a0a0a;
+  --book-bg-image: none;
+  --page-bg: #141414;
+  --page-bg-image: none;
+  --page-text: #e8e8e8;
+  --page-accent: #c9a96a;
+  --page-sub: #b03030;
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
@@ -35,12 +62,17 @@ body {
   color: var(--ink);
   overflow-x: hidden;
   min-height: 100vh;
+  transition: background 0.6s ease, color 0.6s ease;
   background-image:
-    radial-gradient(circle at 20% 30%, rgba(244,194,194,0.15) 0%, transparent 50%),
+    radial-gradient(circle at 20% 30%, rgba(139,26,26,0.1) 0%, transparent 50%),
     radial-gradient(circle at 80% 70%, rgba(15,76,74,0.08) 0%, transparent 50%);
 }
+body.dark {
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(139,26,26,0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(201,169,106,0.06) 0%, transparent 50%);
+}
 
-/* Paper texture overlay */
 body::before {
   content: '';
   position: fixed; inset: 0;
@@ -49,12 +81,14 @@ body::before {
   z-index: 1;
 }
 
-/* ============ CANDLE INTRO SCREEN ============ */
+/* ============================================================
+   INTRO
+   ============================================================ */
 #intro {
   position: fixed; inset: 0;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  background: linear-gradient(160deg, #1a1f1e 0%, #0a1a19 50%, #1a2b28 100%);
+  background: linear-gradient(160deg, #1a0505 0%, #0a0a0a 50%, #1a0a0a 100%);
   z-index: 100;
   transition: opacity 1.2s ease, visibility 1.2s ease;
 }
@@ -75,56 +109,40 @@ body::before {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(-12px); }
 }
-
 .intro-frame::before, .intro-frame::after {
-  content: '';
-  position: absolute;
+  content: ''; position: absolute;
   border: 1px solid rgba(201,169,106,0.4);
   border-radius: 50% / 40%;
 }
 .intro-frame::before { inset: 12px; }
 .intro-frame::after { inset: 24px; border-color: rgba(201,169,106,0.2); }
 
-/* Candle */
-.candle {
-  position: relative;
-  display: flex; flex-direction: column; align-items: center;
-}
+.candle { position: relative; display: flex; flex-direction: column; align-items: center; }
 .flame {
   width: 22px; height: 40px;
-  background: radial-gradient(circle at 50% 70%, #fff8dc 0%, #ffd700 30%, #ff8c00 70%, transparent 100%);
+  background: radial-gradient(circle at 50% 70%, #fff8dc 0%, #ffd700 30%, #ff4500 70%, transparent 100%);
   border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-  filter: blur(0.5px);
   animation: flicker 0.4s ease-in-out infinite alternate;
-  box-shadow: 0 0 30px 8px rgba(255,180,50,0.5), 0 0 60px 20px rgba(255,140,0,0.25);
+  box-shadow: 0 0 30px 8px rgba(255,80,20,0.5), 0 0 60px 20px rgba(200,20,20,0.3);
   transform-origin: bottom center;
 }
 @keyframes flicker {
   0% { transform: scaleY(1) scaleX(1) rotate(-2deg); opacity: 0.95; }
   100% { transform: scaleY(1.08) scaleX(0.95) rotate(2deg); opacity: 1; }
 }
-.wick {
-  width: 3px; height: 8px; background: #333; margin-top: -2px;
-}
+.wick { width: 3px; height: 8px; background: #333; margin-top: -2px; }
 .candle-body {
   width: 46px; height: 120px;
-  background: linear-gradient(90deg, #e8d8b0 0%, #f5ead0 40%, #d8c79a 100%);
+  background: linear-gradient(90deg, #8b1a1a 0%, #b03030 40%, #6b1010 100%);
   border-radius: 6px 6px 10px 10px;
-  box-shadow: inset -6px 0 12px rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.4);
+  box-shadow: inset -6px 0 12px rgba(0,0,0,0.3), 0 10px 20px rgba(0,0,0,0.5);
   position: relative;
 }
-.candle-body::after {
-  content: '';
-  position: absolute; top: 8px; left: 8px; right: 8px; height: 6px;
-  background: rgba(255,255,255,0.4); border-radius: 50%;
-}
 
-/* Butterflies */
 .butterfly {
-  position: absolute;
-  font-size: 22px;
+  position: absolute; font-size: 22px;
   animation: flutter 6s ease-in-out infinite;
-  filter: drop-shadow(0 0 8px rgba(255,200,100,0.6));
+  filter: drop-shadow(0 0 8px rgba(255,60,60,0.7));
 }
 .b1 { top: 10%; left: 15%; animation-delay: 0s; }
 .b2 { top: 20%; right: 12%; animation-delay: 1.5s; }
@@ -140,8 +158,9 @@ body::before {
 .intro-text {
   margin-top: 40px;
   color: var(--gold);
-  font-family: 'Sacramento', cursive;
-  font-size: 2.5rem;
+  font-family: 'Cinzel', serif;
+  font-size: 1.8rem;
+  letter-spacing: 4px;
   text-align: center;
   animation: pulseText 2.5s ease-in-out infinite;
   text-shadow: 0 0 20px rgba(201,169,106,0.5);
@@ -157,7 +176,9 @@ body::before {
   margin-top: 10px;
 }
 
-/* ============ TOP BAR ============ */
+/* ============================================================
+   TOP BAR + THEME TOGGLE
+   ============================================================ */
 #topbar {
   position: fixed; top: 0; left: 0; right: 0;
   display: flex; justify-content: space-between; align-items: center;
@@ -167,16 +188,37 @@ body::before {
   z-index: 50;
   border-bottom: 1px dashed rgba(15,76,74,0.25);
   transform: translateY(-100%);
-  transition: transform 0.8s ease 0.5s;
+  transition: transform 0.8s ease 0.5s, background 0.6s ease;
 }
+body.dark #topbar { background: rgba(10,10,10,0.85); border-color: rgba(201,169,106,0.25); }
 #topbar.visible { transform: translateY(0); }
 
 .brand {
-  font-family: 'Sacramento', cursive;
-  font-size: 1.8rem;
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
   color: var(--teal);
+  transition: color 0.6s ease;
 }
 .top-actions { display: flex; gap: 10px; align-items: center; }
+
+.icon-btn {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 2px solid var(--teal);
+  background: transparent;
+  color: var(--teal);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s ease;
+}
+.icon-btn:hover {
+  background: var(--teal);
+  color: var(--cream);
+  transform: translateY(-2px) scale(1.08);
+}
 
 .btn {
   font-family: 'Caveat', cursive;
@@ -198,105 +240,166 @@ body::before {
   box-shadow: 0 6px 14px var(--shadow);
 }
 
-/* ============ SCRAPBOOK CONTAINER ============ */
+/* ============================================================
+   SCRAPBOOK
+   ============================================================ */
 #scrapbook {
   padding: 90px 20px 60px;
-  max-width: 1300px;
+  max-width: 1400px;
   margin: 0 auto;
   opacity: 0;
   transition: opacity 1s ease 1s;
 }
 #scrapbook.visible { opacity: 1; }
 
-/* Book */
+/* ============================================================
+   3D BOOK — REALISTIC
+   ============================================================ */
+.book-scene {
+  perspective: 3000px;
+  perspective-origin: 50% 45%;
+  min-height: 700px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 0;
+}
+
 .book {
   position: relative;
-  perspective: 2500px;
-  min-height: 620px;
+  width: 1100px;
+  max-width: 95vw;
+  height: 680px;
+  transform-style: preserve-3d;
+  transform: rotateX(8deg);
+  transition: transform 1s ease;
 }
+.book:hover { transform: rotateX(4deg); }
 
-.spread {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  background: var(--teal-dark);
-  border-radius: 8px;
-  box-shadow:
-    0 30px 60px rgba(0,0,0,0.4),
-    0 0 0 6px var(--teal),
-    0 0 0 12px rgba(201,169,106,0.35);
-  min-height: 620px;
+/* صفحة الكتاب الواحدة */
+.book-page {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: var(--page-bg);
+  background-image: var(--page-bg-image);
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+  padding: 40px 34px;
   overflow: hidden;
-}
-.spread::before {
-  content: '';
-  position: absolute; top: 0; bottom: 0; left: 50%;
-  width: 40px; transform: translateX(-50%);
-  background: linear-gradient(90deg,
-    rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.05) 35%,
-    rgba(0,0,0,0.05) 65%, rgba(0,0,0,0.35) 100%);
-  z-index: 20; pointer-events: none;
+  backface-visibility: hidden;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 1.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.6s ease;
+  box-shadow: 0 0 40px rgba(0,0,0,0.15);
+  border: 1px solid rgba(0,0,0,0.08);
 }
 
-/* Page */
-.page {
-  position: relative;
-  padding: 45px 40px;
-  background:
-    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.5), transparent 60%),
-    var(--polaroid);
-  min-height: 620px;
-  overflow: hidden;
-  background-image:
-    linear-gradient(rgba(201,169,106,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201,169,106,0.05) 1px, transparent 1px);
-  background-size: 22px 22px;
-  transition: transform 0.8s cubic-bezier(0.4,0,0.2,1), opacity 0.6s ease;
+/* Right page (يمين) — نقطة الدوران يسارها */
+.book-page.right-page {
+  right: 0;
+  border-radius: 2px 8px 8px 2px;
+  border-left: none;
+  transform: rotateY(0deg);
 }
-.page.left { border-right: 1px solid rgba(0,0,0,0.08); }
-.page.right { border-left: 1px solid rgba(0,0,0,0.08); }
+.book-page.right-page.flipped {
+  transform: rotateY(-180deg);
+  box-shadow: -30px 20px 60px rgba(0,0,0,0.4);
+}
 
-/* Flipping animation */
-.spread.flipping-out .page {
-  transform: rotateY(-15deg) scale(0.96);
-  opacity: 0.3;
-}
-.spread.flipping-in .page {
-  transform: rotateY(15deg) scale(0.96);
+/* Left page (يسار) — نقطة الدوران يمينها */
+.book-page.left-page {
+  left: 0;
+  border-radius: 8px 2px 2px 8px;
+  border-right: none;
+  transform: rotateY(180deg);
   opacity: 0;
+  pointer-events: none;
+}
+.book-page.left-page.show {
+  transform: rotateY(0deg);
+  opacity: 1;
+  pointer-events: auto;
 }
 
-/* Page title */
+/* ظل عميق بين الصفحتين */
+.book::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 50px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg,
+    rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.05) 35%,
+    rgba(0,0,0,0.05) 65%, rgba(0,0,0,0.4) 100%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* غلاف الكتاب (خلفية) */
+.book-cover-bg {
+  position: absolute;
+  inset: -20px -24px;
+  background: var(--book-bg);
+  background-image: var(--book-bg-image);
+  background-size: cover;
+  background-position: center;
+  border-radius: 6px;
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.55),
+    inset 0 0 0 3px var(--gold),
+    inset 0 0 0 8px rgba(201,169,106,0.2);
+  z-index: -1;
+  transition: background 0.6s ease;
+}
+
+/* سماكة الكتاب (spine) */
+.book-cover-bg::after {
+  content: '';
+  position: absolute;
+  top: -20px; bottom: -20px; right: -22px;
+  width: 22px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.4), rgba(0,0,0,0.7));
+  border-radius: 0 6px 6px 0;
+  transform: skewY(-2deg);
+}
+
+/* ============================================================
+   PAGE CONTENT
+   ============================================================ */
 .page-title {
-  font-family: 'Sacramento', cursive;
-  font-size: 2.6rem;
-  color: var(--teal);
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 1.9rem;
+  color: var(--page-accent);
   text-align: center;
   margin-bottom: 6px;
-  position: relative;
+  letter-spacing: 3px;
+  transition: color 0.6s ease;
 }
 .page-sub {
   text-align: center;
   font-family: 'Caveat', cursive;
-  color: var(--soft-pink);
-  font-size: 1.2rem;
+  color: var(--page-sub);
+  font-size: 1.15rem;
   margin-bottom: 25px;
+  transition: color 0.6s ease;
 }
 
-/* ============ POLAROIDS ============ */
+/* Polaroids */
 .polaroid {
   position: absolute;
   background: var(--polaroid);
   padding: 10px 10px 42px;
   box-shadow: 0 10px 22px var(--shadow), 0 2px 4px rgba(0,0,0,0.15);
   cursor: pointer;
-  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s ease, z-index 0s;
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s ease;
   border: 1px solid rgba(0,0,0,0.06);
 }
 .polaroid:hover {
   transform: scale(1.08) rotate(0deg) !important;
   z-index: 30 !important;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
 .polaroid img {
   display: block; width: 100%; height: 100%;
@@ -313,20 +416,18 @@ body::before {
   padding: 0 6px;
   line-height: 1.1;
 }
+body.dark .polaroid .cap { color: #ccc; }
+.pol-a { width: 180px; height: 210px; }
+.pol-a img { height: 155px; }
+.pol-b { width: 155px; height: 185px; }
+.pol-b img { height: 130px; }
+.pol-c { width: 200px; height: 230px; }
+.pol-c img { height: 175px; }
 
-/* Photo sizes */
-.pol-a { width: 190px; height: 220px; }
-.pol-a img { height: 165px; }
-.pol-b { width: 165px; height: 195px; }
-.pol-b img { height: 140px; }
-.pol-c { width: 210px; height: 240px; }
-.pol-c img { height: 185px; }
-
-/* Tape */
 .tape {
   position: absolute;
   width: 70px; height: 22px;
-  background: rgba(244,194,194,0.7);
+  background: rgba(201,169,106,0.7);
   border: 1px dashed rgba(255,255,255,0.6);
   top: -12px; left: 50%;
   transform: translateX(-50%) rotate(-3deg);
@@ -336,7 +437,6 @@ body::before {
 .tape.tl { left: 12px; transform: rotate(-35deg); top: -8px; }
 .tape.tr { right: 12px; left: auto; transform: rotate(35deg); top: -8px; }
 
-/* Stickers */
 .sticker {
   position: absolute;
   font-size: 2.2rem;
@@ -347,41 +447,41 @@ body::before {
 .sticker.spin { animation: slowSpin 12s linear infinite; }
 @keyframes slowSpin { to { transform: rotate(360deg); } }
 
-/* Decorative label */
 .label {
   position: absolute;
-  font-family: 'Sacramento', cursive;
-  color: var(--teal);
-  background: rgba(244,194,194,0.5);
+  font-family: 'Cinzel', serif;
+  color: var(--page-accent);
+  background: rgba(201,169,106,0.25);
   padding: 4px 16px;
   border-radius: 2px;
   transform: rotate(-4deg);
-  font-size: 1.6rem;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
   box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  border: 1px dashed rgba(15,76,74,0.3);
+  border: 1px dashed var(--page-accent);
+  transition: color 0.6s ease;
 }
 
-/* ============ MUSIC PLAYER ============ */
+/* Music Player */
 .music-card {
   position: absolute;
   bottom: 30px; left: 30px;
-  width: 270px;
-  background: linear-gradient(145deg, #123f3d, #0a2a28);
+  width: 260px;
+  background: linear-gradient(145deg, #1a0505, #0a0a0a);
   border-radius: 14px;
   padding: 16px;
   color: #f7efe0;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.1);
-  border: 1px solid rgba(201,169,106,0.4);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+  border: 1px solid rgba(201,169,106,0.5);
   z-index: 10;
 }
 .music-card .mc-title {
-  font-family: 'Caveat', cursive;
-  font-size: 0.95rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
   color: var(--gold);
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 8px;
-  display: flex; align-items: center; gap: 6px;
 }
 .music-card .mc-song {
   font-family: 'Playfair Display', serif;
@@ -401,7 +501,7 @@ body::before {
   border-radius: 50%;
   border: none;
   background: var(--gold);
-  color: var(--teal-dark);
+  color: #0a0a0a;
   font-size: 1.1rem;
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
@@ -409,17 +509,10 @@ body::before {
   flex-shrink: 0;
 }
 .mc-play:hover { transform: scale(1.1); box-shadow: 0 0 18px rgba(201,169,106,0.7); }
-
-.waveform {
-  flex: 1;
-  display: flex; align-items: center; gap: 3px;
-  height: 34px;
-}
+.waveform { flex: 1; display: flex; align-items: center; gap: 3px; height: 34px; }
 .waveform span {
-  flex: 1;
-  background: rgba(201,169,106,0.4);
-  border-radius: 2px;
-  height: 20%;
+  flex: 1; background: rgba(201,169,106,0.4);
+  border-radius: 2px; height: 20%;
   transition: height 0.15s ease, background 0.3s;
 }
 .music-card.playing .waveform span {
@@ -434,112 +527,94 @@ body::before {
   50% { height: 95%; }
 }
 
-/* ============ MAP CARD ============ */
-.map-card {
-  position: absolute;
-  bottom: 40px; right: 30px;
-  width: 230px;
-  background: var(--polaroid);
-  border-radius: 8px;
-  padding: 10px;
-  box-shadow: 0 10px 22px var(--shadow);
-  transform: rotate(3deg);
-  z-index: 10;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-.map-card:hover { transform: rotate(0deg) scale(1.05); }
-.map-card .map-title {
-  font-family: 'Caveat', cursive;
-  font-size: 1.05rem;
-  color: var(--teal);
-  text-align: center;
-  margin-bottom: 6px;
-}
-.map-visual {
-  width: 100%; height: 130px;
-  border-radius: 5px;
-  background:
-    repeating-linear-gradient(45deg, #d8e8d8 0 12px, #cde0cd 12px 24px),
-    #d8e8d8;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(0,0,0,0.1);
-}
-.map-visual::before {
-  content: '';
-  position: absolute; inset: 0;
-  background:
-    linear-gradient(90deg, transparent 45%, #a8c8a8 45% 55%, transparent 55%),
-    linear-gradient(0deg, transparent 40%, #a8c8a8 40% 48%, transparent 48%),
-    radial-gradient(circle at 25% 70%, #9ec89e 0 8px, transparent 9px),
-    radial-gradient(circle at 70% 30%, #9ec89e 0 10px, transparent 11px);
-}
-.pin {
-  position: absolute;
-  font-size: 1.6rem;
-  top: 42%; left: 52%;
-  transform: translate(-50%,-100%);
-  filter: drop-shadow(0 3px 4px rgba(0,0,0,0.3));
-  animation: bouncePin 1.8s ease-in-out infinite;
-}
-@keyframes bouncePin {
-  0%,100% { transform: translate(-50%,-100%); }
-  50% { transform: translate(-50%,-115%); }
-}
-
-/* ============ VIDEO CARD ============ */
+/* Video Card */
 .video-card {
   position: absolute;
   bottom: 30px; right: 30px;
-  width: 250px;
-  background: #1a1a1a;
+  width: 240px;
+  background: #0a0a0a;
   border-radius: 10px;
   padding: 8px;
-  box-shadow: 0 12px 26px rgba(0,0,0,0.5);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.6);
   z-index: 10;
   cursor: pointer;
   transition: transform 0.3s ease;
+  border: 1px solid rgba(201,169,106,0.4);
 }
 .video-card:hover { transform: scale(1.05); }
 .video-thumb {
-  width: 100%; height: 140px;
+  width: 100%; height: 130px;
   border-radius: 6px;
-  background: linear-gradient(135deg, #2a2a2a, #444);
+  background: linear-gradient(135deg, #1a0505, #2a0a0a);
   display: flex; align-items: center; justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-.video-thumb::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05), transparent 70%);
+  position: relative; overflow: hidden;
 }
 .play-btn {
-  width: 52px; height: 52px;
+  width: 50px; height: 50px;
   border-radius: 50%;
-  background: rgba(244,194,194,0.9);
+  background: rgba(176,48,48,0.95);
   display: flex; align-items: center; justify-content: center;
-  color: var(--teal-dark);
-  font-size: 1.3rem;
-  box-shadow: 0 0 25px rgba(244,194,194,0.5);
+  color: #fff;
+  font-size: 1.2rem;
+  box-shadow: 0 0 25px rgba(176,48,48,0.7);
   transition: transform 0.3s;
   z-index: 2;
 }
 .video-card:hover .play-btn { transform: scale(1.15); }
 .video-card .vc-cap {
-  font-family: 'Caveat', cursive;
-  color: #f7efe0;
+  font-family: 'Cinzel', serif;
+  color: #c9a96a;
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
   padding: 8px 4px 2px;
+  text-transform: uppercase;
 }
 
-/* ============ MODAL ============ */
+/* ============================================================
+   NAV
+   ============================================================ */
+.book-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+.book-nav button {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  padding: 10px 26px;
+  border: 2px solid var(--teal);
+  background: transparent;
+  color: var(--teal);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.book-nav button:hover:not(:disabled) {
+  background: var(--teal);
+  color: var(--cream);
+  transform: translateY(-2px);
+}
+.book-nav button:disabled { opacity: 0.3; cursor: not-allowed; }
+.page-counter {
+  font-family: 'Cinzel', serif;
+  color: var(--teal);
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  min-width: 90px;
+  text-align: center;
+}
+
+/* ============================================================
+   MODALS
+   ============================================================ */
 .modal-overlay {
   position: fixed; inset: 0;
-  background: rgba(10, 20, 20, 0.75);
-  backdrop-filter: blur(6px);
+  background: rgba(10, 5, 5, 0.85);
+  backdrop-filter: blur(8px);
   display: flex; align-items: center; justify-content: center;
   z-index: 200;
   opacity: 0; visibility: hidden;
@@ -553,24 +628,22 @@ body::before {
   border-radius: 12px;
   max-width: 460px; width: 100%;
   padding: 30px 28px;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 8px rgba(201,169,106,0.2);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 0 4px var(--gold);
   transform: scale(0.85) rotate(-2deg);
   transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
   position: relative;
   text-align: center;
-  border: 2px dashed rgba(15,76,74,0.25);
+  border: 2px dashed rgba(201,169,106,0.4);
 }
 .modal-overlay.open .modal { transform: scale(1) rotate(0deg); }
-
 .modal .close {
   position: absolute; top: 10px; right: 14px;
   background: none; border: none;
-  font-size: 1.8rem; color: var(--teal);
+  font-size: 1.8rem; color: var(--page-accent);
   cursor: pointer; line-height: 1;
   transition: transform 0.3s;
 }
 .modal .close:hover { transform: rotate(90deg) scale(1.2); }
-
 .modal .m-img {
   width: 100%; height: 220px;
   object-fit: cover;
@@ -580,14 +653,15 @@ body::before {
   box-shadow: 0 8px 20px var(--shadow);
 }
 .modal h3 {
-  font-family: 'Sacramento', cursive;
-  font-size: 2.2rem;
-  color: var(--teal);
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+  color: var(--page-accent);
   margin-bottom: 6px;
+  letter-spacing: 2px;
 }
 .modal .date {
   font-family: 'Caveat', cursive;
-  color: var(--soft-pink);
+  color: var(--page-sub);
   font-size: 1.2rem;
   margin-bottom: 14px;
 }
@@ -595,178 +669,372 @@ body::before {
   font-family: 'Playfair Display', serif;
   font-size: 1rem;
   line-height: 1.7;
-  color: #444;
+  color: var(--ink);
   font-style: italic;
 }
 
-/* ============ NAV ARROWS ============ */
-.nav-arrow {
-  position: fixed;
-  top: 50%; transform: translateY(-50%);
-  width: 54px; height: 54px;
-  border-radius: 50%;
-  background: rgba(247,239,224,0.9);
-  border: 2px solid var(--teal);
-  color: var(--teal);
-  font-size: 1.4rem;
-  cursor: pointer;
+/* ============================================================
+   LOVE LETTER MODAL (❤️) with typewriter + teddy
+   ============================================================ */
+.love-overlay {
+  position: fixed; inset: 0;
+  background: radial-gradient(circle at 50% 40%, rgba(139,26,26,0.4), rgba(10,0,0,0.95));
+  backdrop-filter: blur(10px);
   display: flex; align-items: center; justify-content: center;
-  z-index: 60;
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 18px var(--shadow);
+  z-index: 250;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s;
+  padding: 20px;
+  overflow-y: auto;
 }
-.nav-arrow:hover { background: var(--teal); color: var(--cream); transform: translateY(-50%) scale(1.12); }
-.nav-arrow:disabled { opacity: 0.3; cursor: not-allowed; }
-#prevBtn { left: 20px; }
-#nextBtn { right: 20px; }
+.love-overlay.open { opacity: 1; visibility: visible; }
 
-/* ============ PAGE COUNTER ============ */
-.page-counter {
+.love-letter {
+  background: linear-gradient(160deg, #1a0505, #0a0a0a 60%, #1a0a0a);
+  max-width: 520px; width: 100%;
+  border-radius: 14px;
+  padding: 40px 32px 34px;
+  position: relative;
   text-align: center;
-  margin-top: 20px;
-  font-family: 'Caveat', cursive;
-  color: var(--teal);
-  font-size: 1.1rem;
+  box-shadow:
+    0 40px 100px rgba(0,0,0,0.8),
+    0 0 0 3px var(--gold),
+    0 0 0 8px rgba(201,169,106,0.15),
+    inset 0 0 60px rgba(139,26,26,0.15);
+  transform: scale(0.7) rotate(-6deg);
+  transition: transform 0.6s cubic-bezier(0.34,1.56,0.64,1);
+  overflow: hidden;
+  color: #e8e8e8;
+}
+.love-overlay.open .love-letter { transform: scale(1) rotate(0deg); }
+
+.love-letter::before {
+  content: '❤';
+  position: absolute;
+  top: -30px; right: -30px;
+  font-size: 10rem;
+  color: rgba(139,26,26,0.2);
+  transform: rotate(15deg);
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* ============ FLOATING HEART + HELP ============ */
+.love-letter .close-love {
+  position: absolute; top: 10px; right: 14px;
+  background: none; border: none;
+  font-size: 1.6rem; color: var(--gold);
+  cursor: pointer; line-height: 1;
+  transition: transform 0.3s;
+  z-index: 5;
+}
+.love-letter .close-love:hover { transform: rotate(90deg) scale(1.2); }
+
+/* Teddy */
+.teddy-container {
+  width: 160px; height: 160px;
+  margin: 0 auto 16px;
+  position: relative;
+  animation: teddyFloat 3s ease-in-out infinite;
+  z-index: 2;
+}
+@keyframes teddyFloat {
+  0%,100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-14px) rotate(2deg); }
+}
+.teddy { position: relative; width: 110px; height: 110px; margin: 20px auto 0; }
+.teddy .body {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 76px; height: 66px;
+  background: #6b4423;
+  border-radius: 50% 50% 45% 45%;
+  box-shadow: inset -8px -8px 16px rgba(0,0,0,0.4), inset 4px 4px 10px rgba(255,255,255,0.15);
+}
+.teddy .body::before {
+  content: ''; position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+  width: 38px; height: 34px;
+  background: #a67c4a;
+  border-radius: 50%;
+}
+.teddy .head {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 66px; height: 62px;
+  background: #6b4423;
+  border-radius: 50%;
+  box-shadow: inset -8px -8px 16px rgba(0,0,0,0.4), inset 4px 4px 10px rgba(255,255,255,0.15);
+  z-index: 3;
+}
+.teddy .ear {
+  position: absolute; width: 28px; height: 28px;
+  background: #6b4423; border-radius: 50%;
+  top: -5px; z-index: 2;
+  box-shadow: inset -4px -4px 8px rgba(0,0,0,0.3);
+}
+.teddy .ear.left { left: 2px; }
+.teddy .ear.right { right: 2px; }
+.teddy .ear::after {
+  content: ''; position: absolute; inset: 7px;
+  background: #a67c4a; border-radius: 50%;
+}
+.teddy .eye {
+  position: absolute; width: 9px; height: 9px;
+  background: #000; border-radius: 50%;
+  top: 24px; z-index: 4;
+  animation: blink 4s infinite;
+  box-shadow: 0 0 4px rgba(255,80,80,0.6);
+}
+.teddy .eye.left { left: 16px; }
+.teddy .eye.right { right: 16px; }
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+.teddy .nose {
+  position: absolute; width: 13px; height: 10px;
+  background: #2a0a0a; border-radius: 50%;
+  top: 36px; left: 50%; transform: translateX(-50%); z-index: 4;
+}
+.teddy .mouth {
+  position: absolute; width: 18px; height: 9px;
+  border: 2px solid #2a0a0a;
+  border-top: none;
+  border-radius: 0 0 50% 50%;
+  top: 42px; left: 50%; transform: translateX(-50%); z-index: 4;
+}
+.teddy .arm {
+  position: absolute; width: 24px; height: 44px;
+  background: #6b4423; border-radius: 50%;
+  top: 46px;
+  box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3);
+  z-index: 1;
+}
+.teddy .arm.left {
+  left: -4px; transform: rotate(20deg);
+  animation: waveLeft 1.5s ease-in-out infinite;
+  transform-origin: top center;
+}
+.teddy .arm.right {
+  right: -4px; transform: rotate(-20deg);
+  animation: waveRight 1.5s ease-in-out infinite;
+  transform-origin: top center;
+}
+@keyframes waveLeft {
+  0%,100% { transform: rotate(20deg); }
+  50% { transform: rotate(-30deg); }
+}
+@keyframes waveRight {
+  0%,100% { transform: rotate(-20deg); }
+  50% { transform: rotate(30deg); }
+}
+.teddy .foot {
+  position: absolute; width: 28px; height: 20px;
+  background: #6b4423; border-radius: 50%;
+  bottom: -8px;
+  box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3);
+  z-index: 2;
+}
+.teddy .foot.left { left: 6px; }
+.teddy .foot.right { right: 6px; }
+
+.teddy-heart {
+  position: absolute;
+  font-size: 1.4rem;
+  animation: heartFloat 2.2s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+.teddy-heart.h1 { top: 5px; left: -10px; animation-delay: 0s; }
+.teddy-heart.h2 { top: 0; right: -10px; animation-delay: 0.7s; }
+.teddy-heart.h3 { top: 50px; right: -28px; animation-delay: 1.4s; }
+.teddy-heart.h4 { top: 50px; left: -28px; animation-delay: 1.9s; }
+@keyframes heartFloat {
+  0% { transform: translateY(0) scale(1); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translateY(-60px) scale(1.5); opacity: 0; }
+}
+
+/* Love text with typewriter */
+.love-letter h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.9rem;
+  color: var(--gold);
+  margin-bottom: 8px;
+  letter-spacing: 4px;
+  position: relative;
+  z-index: 2;
+}
+.love-letter .love-divider {
+  width: 100px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 14px auto;
+  position: relative;
+  z-index: 2;
+}
+.love-letter .love-text {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 2;
+  color: #e8e8e8;
+  padding: 0 8px;
+  min-height: 180px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.love-letter .love-text .cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: var(--gold);
+  vertical-align: middle;
+  margin-right: 2px;
+  animation: cursorBlink 0.7s infinite;
+}
+@keyframes cursorBlink {
+  0%,50% { opacity: 1; }
+  51%,100% { opacity: 0; }
+}
+.love-letter .signature {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  color: var(--gold);
+  margin-top: 20px;
+  letter-spacing: 3px;
+  opacity: 0;
+  transition: opacity 1s ease;
+  position: relative;
+  z-index: 2;
+}
+.love-letter .signature.show { opacity: 1; }
+
+/* ============================================================
+   FLOATING BUTTONS
+   ============================================================ */
 #heartBtn {
   position: fixed;
   bottom: 24px; left: 24px;
-  width: 56px; height: 56px;
+  width: 60px; height: 60px;
   border-radius: 50%;
-  background: var(--pastel-pink);
-  border: none;
+  background: linear-gradient(145deg, #b03030, #8b1a1a);
+  border: 2px solid var(--gold);
   font-size: 1.6rem;
   cursor: pointer;
-  box-shadow: 0 8px 22px rgba(232,163,163,0.6);
+  box-shadow: 0 8px 22px rgba(139,26,26,0.7);
   z-index: 70;
   display: flex; align-items: center; justify-content: center;
-  transition: transform 0.3s, background 0.3s;
+  transition: transform 0.3s;
   animation: heartBeat 1.6s ease-in-out infinite;
 }
 @keyframes heartBeat {
   0%,100% { transform: scale(1); }
-  25% { transform: scale(1.12); }
+  25% { transform: scale(1.14); }
   40% { transform: scale(1); }
 }
-#heartBtn:hover { background: var(--soft-pink); transform: scale(1.15); }
-#heartBtn.muted { background: #cfcfcf; animation: none; opacity: 0.7; }
+#heartBtn:hover { transform: scale(1.18); box-shadow: 0 0 30px rgba(176,48,48,0.9); }
 
 #helpBtn {
   position: fixed;
   bottom: 24px; right: 24px;
-  width: 56px; height: 56px;
+  width: 60px; height: 60px;
   border-radius: 50%;
-  background: var(--teal);
-  color: var(--cream);
+  background: #0a0a0a;
+  color: var(--gold);
   border: 2px solid var(--gold);
   font-size: 1.5rem;
-  font-family: 'Caveat', cursive;
+  font-family: 'Cinzel', serif;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 8px 22px rgba(15,76,74,0.5);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.7);
   z-index: 70;
   display: flex; align-items: center; justify-content: center;
   transition: transform 0.3s, background 0.3s;
 }
-#helpBtn:hover { transform: scale(1.12); background: var(--teal-dark); }
+#helpBtn:hover { transform: scale(1.12); background: #1a0505; }
 
-/* ============ TOOLTIP ============ */
-.tooltip {
-  position: fixed;
-  background: var(--teal-dark);
-  color: var(--cream);
-  font-family: 'Caveat', cursive;
-  font-size: 1rem;
-  padding: 6px 14px;
-  border-radius: 16px;
-  pointer-events: none;
-  opacity: 0;
-  transform: translate(-50%, -100%) scale(0.8);
-  transition: opacity 0.25s, transform 0.25s;
-  z-index: 300;
-  white-space: nowrap;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
-  border: 1px solid var(--gold);
-}
-.tooltip.show { opacity: 1; transform: translate(-50%, -120%) scale(1); }
-
-/* ============ HELP PANEL ============ */
 #helpPanel {
   position: fixed;
-  bottom: 92px; right: 24px;
+  bottom: 96px; right: 24px;
   width: 260px;
-  background: var(--polaroid);
+  background: #141414;
+  color: #e8e8e8;
   border-radius: 12px;
   padding: 18px;
-  box-shadow: 0 16px 40px rgba(0,0,0,0.35);
-  border: 2px dashed var(--soft-pink);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.8);
+  border: 2px dashed var(--gold);
   z-index: 80;
   transform: translateY(20px) scale(0.9);
   opacity: 0; visibility: hidden;
   transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
-  font-family: 'Playfair Display', serif;
 }
 #helpPanel.open { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
 #helpPanel h4 {
-  font-family: 'Sacramento', cursive;
-  font-size: 1.6rem;
-  color: var(--teal);
-  margin-bottom: 10px;
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  color: var(--gold);
+  margin-bottom: 12px;
+  letter-spacing: 2px;
 }
 #helpPanel ul { list-style: none; }
 #helpPanel li {
   font-family: 'Caveat', cursive;
   font-size: 1.05rem;
-  color: #555;
-  padding: 5px 0;
-  border-bottom: 1px dotted rgba(0,0,0,0.1);
+  color: #ccc;
+  padding: 6px 0;
+  border-bottom: 1px dotted rgba(201,169,106,0.2);
 }
 #helpPanel li:last-child { border: none; }
 
-/* ============ RESPONSIVE ============ */
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1000px) {
+  .book { height: 640px; }
+  .book-page { padding: 30px 22px; }
+  .page-title { font-size: 1.5rem; }
+}
 @media (max-width: 900px) {
-  .spread {
-    grid-template-columns: 1fr;
-    min-height: auto;
+  .book-scene { perspective: none; padding: 20px 0; }
+  .book { height: auto; transform: none !important; width: 100%; }
+  .book::before { display: none; }
+  .book-cover-bg { inset: -8px; }
+  .book-cover-bg::after { display: none; }
+  .book-page {
+    position: relative;
+    width: 100% !important;
+    min-height: 560px;
+    padding: 30px 20px;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba(0,0,0,0.1) !important;
+    display: none;
+    margin-bottom: 20px;
   }
-  .spread::before { display: none; }
-  .page { min-height: 560px; padding: 35px 22px; border: none !important; }
-  .page.left { border-bottom: 2px dashed rgba(0,0,0,0.15); }
-  .page-title { font-size: 2rem; }
-  .nav-arrow { width: 44px; height: 44px; font-size: 1.1rem; }
-  #prevBtn { left: 8px; } #nextBtn { right: 8px; }
-  .pol-a { width: 140px; height: 165px; }
-  .pol-a img { height: 120px; }
-  .pol-b { width: 120px; height: 145px; }
-  .pol-b img { height: 100px; }
-  .pol-c { width: 155px; height: 180px; }
-  .pol-c img { height: 135px; }
-  .music-card, .map-card, .video-card { position: relative; bottom: auto; left: auto; right: auto; margin: 16px auto 0; transform: none !important; }
-  .music-card { width: 100%; }
-  .map-card { width: 220px; }
-  .video-card { width: 220px; }
-  .intro-frame { width: 220px; height: 300px; }
-  .intro-text { font-size: 1.9rem; }
-  .polaroid { position: relative !important; top: auto !important; left: auto !important; right: auto !important; bottom: auto !important; margin: 12px auto; transform: rotate(-2deg) !important; }
+  .book-page.active { display: block; }
+  .polaroid { position: relative !important; top: auto !important; left: auto !important; right: auto !important; bottom: auto !important; margin: 14px auto; transform: rotate(-2deg) !important; display: block; }
+  .music-card, .video-card { position: relative; bottom: auto; left: auto; right: auto; margin: 16px auto 0; transform: none !important; }
+  .music-card, .video-card { width: 100%; max-width: 280px; }
   .sticker { position: relative; display: inline-block; margin: 4px; }
+  .intro-frame { width: 220px; height: 300px; }
+  .intro-text { font-size: 1.4rem; }
 }
 @media (max-width: 480px) {
   #topbar { padding: 10px 12px; }
-  .brand { font-size: 1.4rem; }
-  .btn { font-size: 0.9rem; padding: 6px 12px; }
-  .page { padding: 28px 16px; min-height: 520px; }
-  .page-title { font-size: 1.7rem; }
-  .polaroid { transform: rotate(0deg) !important; }
+  .brand { font-size: 1rem; }
+  .btn, .icon-btn { font-size: 0.85rem; padding: 6px 12px; }
+  .icon-btn { width: 38px; height: 38px; font-size: 1rem; }
+  .page-title { font-size: 1.3rem; }
+  .book-nav { gap: 10px; }
+  .book-nav button { font-size: 0.7rem; padding: 6px 14px; letter-spacing: 1px; }
 }
 </style>
 </head>
 <body>
 
-<!-- ============ INTRO SCREEN ============ -->
+<!-- ============ INTRO ============ -->
 <div id="intro">
-  <div class="intro-frame" id="candleFrame" onclick="openBook()">
+  <div class="intro-frame" onclick="openBook()">
     <span class="butterfly b1">🦋</span>
     <span class="butterfly b2">🦋</span>
     <span class="butterfly b3">🦋</span>
@@ -777,123 +1045,51 @@ body::before {
       <div class="candle-body"></div>
     </div>
   </div>
-  <div class="intro-text">A love letter for you</div>
-  <div class="intro-hint">اضغط على الشمعة لفتح ألبوم الذكريات 🕯️</div>
+  <div class="intro-text">A LOVE LETTER</div>
+  <div class="intro-hint">اضغط على الشمعة لفتح الكتاب 🕯️</div>
 </div>
 
 <!-- ============ TOP BAR ============ -->
 <div id="topbar">
-  <div class="brand">❤️ Our Scrapbook</div>
+  <div class="brand">🖤 OUR STORY</div>
   <div class="top-actions">
-    <button class="btn" onclick="window.print()">⬇ Download</button>
+    <button class="icon-btn" id="themeBtn" title="الوضع الليلي/النهاري">🌙</button>
+    <button class="btn" onclick="window.print()">⬇ PDF</button>
   </div>
 </div>
 
 <!-- ============ SCRAPBOOK ============ -->
 <div id="scrapbook">
-  <div class="book">
-    <div class="spread" id="spread">
-
-      <!-- ===== LEFT PAGE ===== -->
-      <div class="page left" id="pageLeft">
-        <h2 class="page-title">Our Story</h2>
-        <p class="page-sub">— chapter one —</p>
-
-        <!-- Polaroid 1 -->
-        <div class="polaroid pol-a" style="top: 110px; left: 40px; transform: rotate(-6deg);"
-             data-title="أول لقاء" data-date="12 أبريل 2022"
-             data-text="كانت أول مرة رأيتك فيها في المقهى الصغير. طلبت قهوة وابتسمت، ووقتها فهمت أن هذه البداية.">
-          <div class="tape"></div>
-          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&q=70" alt="first meet">
-          <div class="cap">first cafe ☕</div>
-        </div>
-
-        <!-- Polaroid 2 -->
-        <div class="polaroid pol-b" style="top: 340px; left: 250px; transform: rotate(5deg);"
-             data-title="نزهة الغروب" data-date="20 مايو 2022"
-             data-text="مشينا على الشاطئ حتى غابت الشمس. لم نتكلم كثيرًا، لكن الصمت كان أجمل من أي كلام.">
-          <div class="tape tr"></div>
-          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&q=70" alt="sunset walk">
-          <div class="cap">sunset walk 🌅</div>
-        </div>
-
-        <!-- Stickers -->
-        <span class="sticker" style="top: 70px; right: 40px;">🌸</span>
-        <span class="sticker spin" style="top: 300px; left: 20px;">⭐</span>
-        <span class="sticker" style="bottom: 200px; right: 30px;">💌</span>
-        <span class="label" style="top: 250px; right: 25px;">Memories</span>
-      </div>
-
-      <!-- ===== RIGHT PAGE ===== -->
-      <div class="page right" id="pageRight">
-        <h2 class="page-title">Moments</h2>
-        <p class="page-sub">— our little universe —</p>
-
-        <!-- Polaroid 3 -->
-        <div class="polaroid pol-c" style="top: 100px; right: 50px; transform: rotate(4deg);"
-             data-title="رحلتنا الأولى" data-date="3 يوليو 2022"
-             data-text="حزمنا الحقيبة وذهبنا بلا خطة. كل طريق خاطئ كان مغامرة، وكل ضحكة كانت ذكرى.">
-          <div class="tape tl"></div>
-          <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&q=70" alt="trip">
-          <div class="cap">road trip 🚗</div>
-        </div>
-
-        <!-- Music card -->
-        <div class="music-card" id="musicCard">
-          <div class="mc-title">🎵 Our Song</div>
-          <div class="mc-song" id="mcSong">Perfect</div>
-          <div class="mc-artist" id="mcArtist">Ed Sheeran</div>
-          <div class="mc-controls">
-            <button class="mc-play" id="mcPlay">▶</button>
-            <div class="waveform" id="waveform"></div>
-          </div>
-          <!-- ضع رابط ملف الصوت هنا -->
-          <audio id="bgAudio" loop preload="none">
-            <source src="your-song.mp3" type="audio/mpeg">
-          </audio>
-        </div>
-
-        <!-- Video card -->
-        <div class="video-card" style="bottom: 180px; right: 40px;"
-             onclick="alert('ضع هنا رابط الفيديو الخاص بك 🎬')">
-          <div class="video-thumb">
-            <div class="play-btn">▶</div>
-          </div>
-          <div class="vc-cap">our video memories</div>
-        </div>
-
-        <!-- Stickers -->
-        <span class="sticker" style="top: 60px; left: 40px;">💋</span>
-        <span class="sticker spin" style="bottom: 60px; left: 30px;">✨</span>
-        <span class="label" style="top: 280px; left: 30px;">Lovers Club</span>
-      </div>
+  <div class="book-scene">
+    <div class="book" id="book">
+      <div class="book-cover-bg"></div>
+      <!-- الصفحات تُبنى بـ JS -->
     </div>
+  </div>
 
-    <!-- Page counter -->
-    <div class="page-counter" id="pageCounter">Page 1 / 3</div>
+  <div class="book-nav">
+    <button id="prevBtn" onclick="prevPage()" disabled>❮ PREV</button>
+    <div class="page-counter" id="pageCounter">1 / 3</div>
+    <button id="nextBtn" onclick="nextPage()">NEXT ❯</button>
   </div>
 </div>
 
-<!-- ============ NAV ARROWS ============ -->
-<button class="nav-arrow" id="prevBtn" onclick="prevPage()" disabled>❮</button>
-<button class="nav-arrow" id="nextBtn" onclick="nextPage()">❯</button>
-
 <!-- ============ FLOATING BUTTONS ============ -->
-<button id="heartBtn" title="تشغيل/إيقاف الموسيقى">❤️</button>
+<button id="heartBtn" title="رسالة حب">❤️</button>
 <button id="helpBtn" onclick="toggleHelp()">?</button>
 
-<!-- Help Panel -->
 <div id="helpPanel">
-  <h4>How to use</h4>
+  <h4>HOW TO USE</h4>
   <ul>
     <li>🖼️ اضغط على أي صورة لعرض تفاصيلها</li>
-    <li>⬅️ استخدم الأسهم للتنقل بين الصفحات</li>
-    <li>🎵 زر القلب لتشغيل الموسيقى</li>
-    <li>⬇️ زر Download لحفظ الصفحة</li>
+    <li>📖 اضغط PREV / NEXT لقلب الصفحات</li>
+    <li>🌙 زر أعلى اليمين للتبديل بين الليل والنهار</li>
+    <li>❤️ زر القلب لرسالة حب</li>
+    <li>⬇ PDF لحفظ الكتاب</li>
   </ul>
 </div>
 
-<!-- ============ MODAL ============ -->
+<!-- ============ MODAL (MEMORY) ============ -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
   <div class="modal" onclick="event.stopPropagation()">
     <button class="close" onclick="closeModal()">×</button>
@@ -904,16 +1100,46 @@ body::before {
   </div>
 </div>
 
-<!-- Tooltip -->
-<div class="tooltip" id="tooltip"></div>
+<!-- ============ LOVE LETTER MODAL ============ -->
+<div class="love-overlay" id="loveOverlay" onclick="closeLove(event)">
+  <div class="love-letter" onclick="event.stopPropagation()">
+    <button class="close-love" onclick="closeLove()">×</button>
+
+    <div class="teddy-container">
+      <span class="teddy-heart h1">💕</span>
+      <span class="teddy-heart h2">💖</span>
+      <span class="teddy-heart h3">💗</span>
+      <span class="teddy-heart h4">❤️</span>
+      <div class="teddy">
+        <div class="ear left"></div>
+        <div class="ear right"></div>
+        <div class="arm left"></div>
+        <div class="arm right"></div>
+        <div class="body"></div>
+        <div class="foot left"></div>
+        <div class="foot right"></div>
+        <div class="head">
+          <div class="eye left"></div>
+          <div class="eye right"></div>
+          <div class="nose"></div>
+          <div class="mouth"></div>
+        </div>
+      </div>
+    </div>
+
+    <h2>إلى حبيبي</h2>
+    <div class="love-divider"></div>
+    <div class="love-text" id="loveText"></div>
+    <div class="signature" id="loveSign">— FOREVER YOURS —</div>
+  </div>
+</div>
 
 <script>
 /* ============================================================
-   OPEN BOOK (Intro transition)
+   OPEN BOOK
    ============================================================ */
 function openBook() {
-  const intro = document.getElementById('intro');
-  intro.classList.add('hidden');
+  document.getElementById('intro').classList.add('hidden');
   setTimeout(() => {
     document.getElementById('topbar').classList.add('visible');
     document.getElementById('scrapbook').classList.add('visible');
@@ -921,241 +1147,285 @@ function openBook() {
 }
 
 /* ============================================================
-   POLAROID DATA (Pages content)
+   THEME TOGGLE (DAY / NIGHT)
    ============================================================ */
-const pages = [
-  // Page 1 - left
+const themeBtn = document.getElementById('themeBtn');
+themeBtn.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+  const isDark = document.body.classList.contains('dark');
+  themeBtn.textContent = isDark ? '☀️' : '🌙';
+});
+
+/* ============================================================
+   DATA — عدّل هنا الصور والذكريات
+   ضع روابط صور Pinterest الخاصة بك بعد تحميلها
+   ============================================================ */
+const IMG = {
+  // ⬇⬇⬇ ضع هنا روابط صورك من Pinterest بعد تحميلها ⬇⬇⬇
+  p1: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&q=70",
+  p2: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&q=70",
+  p3: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=500&q=70",
+  p4: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=500&q=70",
+  p5: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500&q=70",
+  p6: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=500&q=70",
+  p7: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=500&q=70"
+};
+
+const pagesData = [
   {
     left: {
-      title: "Our Story",
+      title: "OUR STORY",
       sub: "— chapter one —",
       photos: [
-        { cls: "pol-a", style: "top:110px;left:40px;transform:rotate(-6deg);",
-          img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&q=70",
-          cap: "first cafe ☕", title: "أول لقاء", date: "12 أبريل 2022",
+        { cls: "pol-a", style: "top:100px;left:30px;transform:rotate(-6deg);",
+          img: IMG.p1, cap: "first cafe", title: "أول لقاء", date: "12 أبريل 2022",
           text: "كانت أول مرة رأيتك فيها في المقهى الصغير. طلبت قهوة وابتسمت، ووقتها فهمت أن هذه البداية." },
-        { cls: "pol-b", style: "top:340px;left:250px;transform:rotate(5deg);",
-          img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&q=70",
-          cap: "sunset walk 🌅", title: "نزهة الغروب", date: "20 مايو 2022",
+        { cls: "pol-b", style: "top:330px;left:210px;transform:rotate(5deg);",
+          img: IMG.p2, cap: "sunset walk", title: "نزهة الغروب", date: "20 مايو 2022",
           text: "مشينا على الشاطئ حتى غابت الشمس. لم نتكلم كثيرًا، لكن الصمت كان أجمل من أي كلام." }
       ],
       stickers: [
-        { emoji: "🌸", style: "top:70px;right:40px;" },
-        { emoji: "⭐", style: "top:300px;left:20px;", spin: true },
-        { emoji: "💌", style: "bottom:200px;right:30px;" }
+        { emoji: "🌹", style: "top:60px;right:30px;" },
+        { emoji: "✨", style: "top:280px;left:10px;", spin: true },
+        { emoji: "🖤", style: "bottom:200px;right:20px;" }
       ],
-      label: { text: "Memories", style: "top:250px;right:25px;" }
+      label: { text: "MEMORIES", style: "top:240px;right:20px;" }
     },
     right: {
-      title: "Moments",
+      title: "MOMENTS",
       sub: "— our little universe —",
       photos: [
-        { cls: "pol-c", style: "top:100px;right:50px;transform:rotate(4deg);",
-          img: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&q=70",
-          cap: "road trip 🚗", title: "رحلتنا الأولى", date: "3 يوليو 2022",
+        { cls: "pol-c", style: "top:90px;right:40px;transform:rotate(4deg);",
+          img: IMG.p3, cap: "road trip", title: "رحلتنا الأولى", date: "3 يوليو 2022",
           text: "حزمنا الحقيبة وذهبنا بلا خطة. كل طريق خاطئ كان مغامرة، وكل ضحكة كانت ذكرى." }
       ],
       stickers: [
-        { emoji: "💋", style: "top:60px;left:40px;" },
-        { emoji: "✨", style: "bottom:60px;left:30px;", spin: true }
+        { emoji: "🥀", style: "top:50px;left:30px;" },
+        { emoji: "⭐", style: "bottom:60px;left:20px;", spin: true }
       ],
-      label: { text: "Lovers Club", style: "top:280px;left:30px;" }
+      label: { text: "LOVERS CLUB", style: "top:270px;left:20px;" },
+      extra: 'music'
     }
   },
-  // Page 2
   {
     left: {
-      title: "First Kiss",
+      title: "FIRST KISS",
       sub: "— the moment —",
       photos: [
-        { cls: "pol-b", style: "top:120px;left:60px;transform:rotate(-5deg);",
-          img: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&q=70",
-          cap: "that night 🌙", title: "أول قبلة", date: "14 أغسطس 2022",
+        { cls: "pol-b", style: "top:110px;left:50px;transform:rotate(-5deg);",
+          img: IMG.p4, cap: "that night", title: "أول قبلة", date: "14 أغسطس 2022",
           text: "تحت المطر، وبعد ضحكة طويلة، توقف العالم للحظة. أجمل لحظة في حياتي." },
-        { cls: "pol-a", style: "top:320px;right:60px;transform:rotate(7deg);",
-          img: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&q=70",
-          cap: "us 💕", title: "نحن", date: "دائمًا",
+        { cls: "pol-a", style: "top:330px;right:30px;transform:rotate(7deg);",
+          img: IMG.p5, cap: "us", title: "نحن", date: "دائمًا",
           text: "لا يوجد يوم محدد، لكن كل يوم معك هو ذكرى جديدة تستحق أن تُحفظ." }
       ],
       stickers: [
-        { emoji: "🌙", style: "top:60px;right:50px;" },
-        { emoji: "💖", style: "bottom:100px;left:30px;" }
+        { emoji: "🌙", style: "top:50px;right:40px;" },
+        { emoji: "🖤", style: "bottom:100px;left:20px;" }
       ],
-      label: { text: "Forever", style: "top:250px;left:40px;" }
+      label: { text: "FOREVER", style: "top:240px;left:30px;" }
     },
     right: {
-      title: "Dreams",
+      title: "DREAMS",
       sub: "— what's next —",
       photos: [
-        { cls: "pol-c", style: "top:130px;left:50px;transform:rotate(-3deg);",
-          img: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=400&q=70",
-          cap: "paris someday 🗼", title: "حلمنا", date: "قريبًا",
+        { cls: "pol-c", style: "top:120px;left:40px;transform:rotate(-3deg);",
+          img: IMG.p6, cap: "paris someday", title: "حلمنا", date: "قريبًا",
           text: "نتخيل أنفسنا هناك، نمشي على ضفاف السين، نتذوق الكرواسون، ونضحك كما نفعل دائمًا." },
-        { cls: "pol-a", style: "top:360px;right:40px;transform:rotate(6deg);",
-          img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400&q=70",
-          cap: "our future ✨", title: "مستقبلنا", date: "قادم",
+        { cls: "pol-a", style: "top:360px;right:30px;transform:rotate(6deg);",
+          img: IMG.p7, cap: "our future", title: "مستقبلنا", date: "قادم",
           text: "أحلام كثيرة تنتظرنا، وأنا سعيد لأنك ستكونين بجانبي في كل خطوة." }
       ],
       stickers: [
-        { emoji: "🗼", style: "top:70px;right:60px;" },
-        { emoji: "⭐", style: "bottom:120px;left:40px;", spin: true }
+        { emoji: "🗼", style: "top:60px;right:50px;" },
+        { emoji: "✨", style: "bottom:110px;left:30px;", spin: true }
       ],
-      label: { text: "Dream Big", style: "top:290px;right:40px;" }
+      label: { text: "DREAM BIG", style: "top:280px;right:30px;" }
     }
   },
-  // Page 3
   {
     left: {
-      title: "Forever",
+      title: "FOREVER",
       sub: "— to be continued —",
       photos: [
-        { cls: "pol-a", style: "top:140px;left:70px;transform:rotate(-4deg);",
-          img: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&q=70",
-          cap: "you & me ❤️", title: "أنت وأنا", date: "إلى الأبد",
+        { cls: "pol-a", style: "top:130px;left:60px;transform:rotate(-4deg);",
+          img: IMG.p1, cap: "you & me", title: "أنت وأنا", date: "إلى الأبد",
           text: "كل يوم معك هو هدية. شكرًا لأنك أنتِ. هذه ليست نهاية القصة، بل بدايتها." }
       ],
       stickers: [
-        { emoji: "🌹", style: "top:80px;right:50px;" },
-        { emoji: "💞", style: "bottom:150px;left:40px;" }
+        { emoji: "🌹", style: "top:70px;right:40px;" },
+        { emoji: "💞", style: "bottom:140px;left:30px;" }
       ],
-      label: { text: "The End?", style: "top:280px;left:50px;" }
+      label: { text: "THE END?", style: "top:270px;left:40px;" }
     },
     right: {
-      title: "To You",
+      title: "TO YOU",
       sub: "— a final note —",
       photos: [],
       stickers: [
-        { emoji: "💌", style: "top:100px;left:50%;transform:translateX(-50%);font-size:4rem;" }
+        { emoji: "💌", style: "top:110px;left:50%;transform:translateX(-50%);font-size:4rem;" }
       ],
-      label: { text: "I love you", style: "top:250px;left:50%;transform:translateX(-50%) rotate(-3deg);font-size:2.2rem;" },
+      label: { text: "I LOVE YOU", style: "top:270px;left:50%;transform:translateX(-50%) rotate(-3deg);font-size:1.5rem;" },
       note: "أحبك أكثر من الأمس، وأقل من الغد. شكرًا لأنك جزء من قصتي."
     }
   }
 ];
 
 let currentPage = 0;
+let animating = false;
 
 /* ============================================================
-   RENDER PAGE
+   BUILD BOOK
    ============================================================ */
-function renderPage(index, direction = 'next') {
-  const spread = document.getElementById('spread');
-  const pageLeft = document.getElementById('pageLeft');
-  const pageRight = document.getElementById('pageRight');
-  const p = pages[index];
+function buildBook() {
+  const book = document.getElementById('book');
 
-  // Fade out
-  spread.classList.add(direction === 'next' ? 'flipping-out' : 'flipping-in');
+  pagesData.forEach((spread, i) => {
+    // Right page
+    const r = document.createElement('div');
+    r.className = 'book-page right-page';
+    r.dataset.index = i;
+    r.innerHTML = buildContent(spread.right, 'right');
+    book.appendChild(r);
 
-  setTimeout(() => {
-    // Build left
-    pageLeft.innerHTML = `
-      <h2 class="page-title">${p.left.title}</h2>
-      <p class="page-sub">${p.left.sub}</p>
-      ${p.left.photos.map(ph => `
-        <div class="polaroid ${ph.cls}" style="${ph.style}"
-             data-title="${ph.title}" data-date="${ph.date}" data-text="${ph.text}">
-          <div class="tape"></div>
-          <img src="${ph.img}" alt="${ph.cap}">
-          <div class="cap">${ph.cap}</div>
-        </div>
-      `).join('')}
-      ${p.left.stickers.map(s => `<span class="sticker ${s.spin ? 'spin' : ''}" style="${s.style}">${s.emoji}</span>`).join('')}
-      ${p.left.label ? `<span class="label" style="${p.left.label.style}">${p.left.label.text}</span>` : ''}
+    // Left page
+    const l = document.createElement('div');
+    l.className = 'book-page left-page';
+    l.dataset.index = i;
+    l.innerHTML = buildContent(spread.left, 'left');
+    book.appendChild(l);
+  });
+
+  // Show first left page
+  document.querySelectorAll('.left-page')[0].classList.add('show');
+
+  // Hide pages after first right
+  document.querySelectorAll('.right-page').forEach((el, i) => {
+    if (i > 0) el.classList.add('flipped');
+  });
+
+  bindPolaroids();
+  initMusicCard();
+  updateNav();
+}
+
+function buildContent(data, side) {
+  let html = `
+    <h2 class="page-title">${data.title}</h2>
+    <p class="page-sub">${data.sub}</p>
+  `;
+  data.photos.forEach(ph => {
+    html += `
+      <div class="polaroid ${ph.cls}" style="${ph.style}"
+           data-title="${ph.title}" data-date="${ph.date}" data-text="${ph.text}">
+        <div class="tape"></div>
+        <img src="${ph.img}" alt="${ph.cap}">
+        <div class="cap">${ph.cap}</div>
+      </div>
     `;
-
-    // Build right
-    let rightExtra = '';
-    if (index === 0) {
-      rightExtra = `
-        <div class="music-card" id="musicCard">
-          <div class="mc-title">🎵 Our Song</div>
-          <div class="mc-song">Perfect</div>
-          <div class="mc-artist">Ed Sheeran</div>
-          <div class="mc-controls">
-            <button class="mc-play" id="mcPlay">▶</button>
-            <div class="waveform" id="waveform"></div>
-          </div>
-          <audio id="bgAudio" loop preload="none">
-            <source src="your-song.mp3" type="audio/mpeg">
-          </audio>
+  });
+  data.stickers.forEach(s => {
+    html += `<span class="sticker ${s.spin ? 'spin' : ''}" style="${s.style}">${s.emoji}</span>`;
+  });
+  if (data.label) {
+    html += `<span class="label" style="${data.label.style}">${data.label.text}</span>`;
+  }
+  if (data.note) {
+    html += `<p style="font-family:'Caveat',cursive;font-size:1.5rem;color:var(--page-text);text-align:center;margin-top:370px;line-height:1.8;padding:0 20px;">${data.note}</p>`;
+  }
+  if (side === 'right' && data.extra === 'music') {
+    html += `
+      <div class="music-card" id="musicCard">
+        <div class="mc-title">🎵 OUR SONG</div>
+        <div class="mc-song">Perfect</div>
+        <div class="mc-artist">Ed Sheeran</div>
+        <div class="mc-controls">
+          <button class="mc-play" id="mcPlay">▶</button>
+          <div class="waveform" id="waveform"></div>
         </div>
-        <div class="video-card" style="bottom:180px;right:40px;" onclick="alert('ضع رابط الفيديو الخاص بك هنا 🎬')">
-          <div class="video-thumb"><div class="play-btn">▶</div></div>
-          <div class="vc-cap">our video memories</div>
-        </div>
-      `;
-    }
-    if (index === 2) {
-      rightExtra = `
-        <p style="font-family:'Caveat',cursive;font-size:1.6rem;color:#555;text-align:center;margin-top:380px;line-height:1.7;padding:0 20px;">
-          ${p.right.note || ''}
-        </p>
-      `;
-    }
-
-    pageRight.innerHTML = `
-      <h2 class="page-title">${p.right.title}</h2>
-      <p class="page-sub">${p.right.sub}</p>
-      ${p.right.photos.map(ph => `
-        <div class="polaroid ${ph.cls}" style="${ph.style}"
-             data-title="${ph.title}" data-date="${ph.date}" data-text="${ph.text}">
-          <div class="tape"></div>
-          <img src="${ph.img}" alt="${ph.cap}">
-          <div class="cap">${ph.cap}</div>
-        </div>
-      `).join('')}
-      ${p.right.stickers.map(s => `<span class="sticker ${s.spin ? 'spin' : ''}" style="${s.style}">${s.emoji}</span>`).join('')}
-      ${p.right.label ? `<span class="label" style="${p.right.label.style}">${p.right.label.text}</span>` : ''}
-      ${rightExtra}
+        <audio id="bgAudio" loop preload="none">
+          <source src="your-song.mp3" type="audio/mpeg">
+        </audio>
+      </div>
     `;
-
-    // Update controls
-    document.getElementById('prevBtn').disabled = index === 0;
-    document.getElementById('nextBtn').disabled = index === pages.length - 1;
-    document.getElementById('pageCounter').textContent = `Page ${index + 1} / ${pages.length}`;
-
-    // Fade in
-    spread.classList.remove('flipping-out', 'flipping-in');
-    spread.classList.add(direction === 'next' ? 'flipping-in' : 'flipping-out');
-    setTimeout(() => spread.classList.remove('flipping-in', 'flipping-out'), 50);
-
-    // Rebind events
-    bindPolaroids();
-    if (index === 0) initMusicCard();
-  }, 500);
+  }
+  return html;
 }
 
 /* ============================================================
-   PAGE NAVIGATION
+   3D PAGE FLIP
    ============================================================ */
 function nextPage() {
-  if (currentPage < pages.length - 1) {
+  if (animating || currentPage >= pagesData.length - 1) return;
+  animating = true;
+
+  const rightPages = document.querySelectorAll('.right-page');
+  const leftPages = document.querySelectorAll('.left-page');
+
+  const curRight = rightPages[currentPage];
+  const nextLeft = leftPages[currentPage + 1];
+
+  curRight.classList.add('flipped');
+
+  setTimeout(() => {
+    nextLeft.classList.add('show');
     currentPage++;
-    renderPage(currentPage, 'next');
-  }
-}
-function prevPage() {
-  if (currentPage > 0) {
-    currentPage--;
-    renderPage(currentPage, 'prev');
-  }
+    updateNav();
+    setTimeout(() => { animating = false; }, 700);
+  }, 550);
 }
 
-/* Keyboard navigation */
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowRight') nextPage();
-  if (e.key === 'ArrowLeft') prevPage();
-});
+function prevPage() {
+  if (animating || currentPage <= 0) return;
+  animating = true;
+
+  const rightPages = document.querySelectorAll('.right-page');
+  const leftPages = document.querySelectorAll('.left-page');
+
+  const curLeft = leftPages[currentPage];
+  const prevRight = rightPages[currentPage - 1];
+
+  curLeft.classList.remove('show');
+
+  setTimeout(() => {
+    prevRight.classList.remove('flipped');
+    currentPage--;
+    updateNav();
+    setTimeout(() => { animating = false; }, 700);
+  }, 550);
+}
+
+function updateNav() {
+  document.getElementById('prevBtn').disabled = currentPage === 0;
+  document.getElementById('nextBtn').disabled = currentPage === pagesData.length - 1;
+  document.getElementById('pageCounter').textContent =
+    `${currentPage + 1} / ${pagesData.length}`;
+}
 
 /* ============================================================
-   POLAROID CLICK -> MODAL
+   MOBILE
+   ============================================================ */
+function handleMobile() {
+  const pages = document.querySelectorAll('.book-page');
+  if (window.innerWidth <= 900) {
+    pages.forEach(el => el.classList.remove('active'));
+    const rightPages = document.querySelectorAll('.right-page');
+    const leftPages = document.querySelectorAll('.left-page');
+    if (leftPages[currentPage]) leftPages[currentPage].classList.add('active');
+    if (rightPages[currentPage]) rightPages[currentPage].classList.add('active');
+  } else {
+    pages.forEach(el => el.classList.remove('active'));
+  }
+}
+window.addEventListener('resize', handleMobile);
+
+/* ============================================================
+   POLAROID MODAL
    ============================================================ */
 function bindPolaroids() {
   document.querySelectorAll('.polaroid').forEach(pol => {
     pol.addEventListener('click', () => {
-      const img = pol.querySelector('img').src;
-      document.getElementById('mImg').src = img;
+      document.getElementById('mImg').src = pol.querySelector('img').src;
       document.getElementById('mTitle').textContent = pol.dataset.title || '';
       document.getElementById('mDate').textContent = pol.dataset.date || '';
       document.getElementById('mText').textContent = pol.dataset.text || '';
@@ -1170,17 +1440,16 @@ function closeModal(e) {
 }
 
 /* ============================================================
-   MUSIC CARD
+   MUSIC
    ============================================================ */
 function initMusicCard() {
   const card = document.getElementById('musicCard');
+  if (!card) return;
   const playBtn = document.getElementById('mcPlay');
   const audio = document.getElementById('bgAudio');
   const waveform = document.getElementById('waveform');
+  if (!waveform) return;
 
-  if (!card) return;
-
-  // Build waveform bars
   waveform.innerHTML = '';
   for (let i = 0; i < 22; i++) {
     const bar = document.createElement('span');
@@ -1193,22 +1462,19 @@ function initMusicCard() {
     toggleAudio();
   });
 
-  // Sync with heart button
   window.__toggleAudio = () => {
     if (!audio) return;
     if (audio.paused) {
       audio.play().then(() => {
         card.classList.add('playing');
         playBtn.textContent = '❚❚';
-        document.getElementById('heartBtn').classList.remove('muted');
       }).catch(() => {
-        alert('⚠️ ضع ملف الصوت your-song.mp3 في نفس المجلد لتشغيل الموسيقى.');
+        alert('⚠️ ضع ملف الصوت your-song.mp3 بجانب الملف.');
       });
     } else {
       audio.pause();
       card.classList.remove('playing');
       playBtn.textContent = '▶';
-      document.getElementById('heartBtn').classList.add('muted');
     }
   };
 }
@@ -1218,52 +1484,69 @@ function toggleAudio() {
 }
 
 /* ============================================================
-   HEART BUTTON (global audio toggle)
+   LOVE LETTER — Typewriter effect
    ============================================================ */
+const LOVE_MESSAGE = "كل يوم معك هو هدية من السماء، وكل لحظة نتشاركها هي ذكرى أحفظها في قلبي. أحبك أكثر من الأمس، وأقل من الغد. أنت أجمل شيء حدث في حياتي، وسأبقى أحبك حتى آخر نفس. 🖤";
+
+let typewriterTimer = null;
+
+function startTypewriter() {
+  const target = document.getElementById('loveText');
+  const sign = document.getElementById('loveSign');
+  target.innerHTML = '';
+  sign.classList.remove('show');
+
+  let i = 0;
+  const cursor = '<span class="cursor"></span>';
+
+  function type() {
+    if (i < LOVE_MESSAGE.length) {
+      target.innerHTML = LOVE_MESSAGE.substring(0, i + 1) + cursor;
+      i++;
+      // سرعة متغيرة: بعض الحروف أسرع
+      const delay = LOVE_MESSAGE[i - 1] === ' ' ? 30 : 55;
+      typewriterTimer = setTimeout(type, delay);
+    } else {
+      target.innerHTML = LOVE_MESSAGE;
+      sign.classList.add('show');
+    }
+  }
+  type();
+}
+
 document.getElementById('heartBtn').addEventListener('click', () => {
-  toggleAudio();
+  document.getElementById('loveOverlay').classList.add('open');
+  setTimeout(startTypewriter, 700);
 });
 
+function closeLove(e) {
+  if (e && e.target !== e.currentTarget && e.type === 'click') return;
+  document.getElementById('loveOverlay').classList.remove('open');
+  if (typewriterTimer) clearTimeout(typewriterTimer);
+}
+
 /* ============================================================
-   HELP PANEL
+   HELP
    ============================================================ */
 function toggleHelp() {
   document.getElementById('helpPanel').classList.toggle('open');
 }
 
 /* ============================================================
-   TOOLTIP
+   KEYBOARD
    ============================================================ */
-const tooltip = document.getElementById('tooltip');
-document.addEventListener('mousemove', (e) => {
-  const target = e.target.closest('.polaroid, .music-card, .map-card, .video-card, .nav-arrow, #heartBtn, #helpBtn');
-  if (target) {
-    let text = '';
-    if (target.classList.contains('polaroid')) text = 'اضغط لعرض التفاصيل 💌';
-    else if (target.classList.contains('music-card')) text = 'تشغيل الموسيقى 🎵';
-    else if (target.classList.contains('video-card')) text = 'تشغيل الفيديو 🎬';
-    else if (target.id === 'heartBtn') text = 'الموسيقى 🎶';
-    else if (target.id === 'helpBtn') text = 'مساعدة ❓';
-    else if (target.classList.contains('nav-arrow')) text = 'تنقل بين الصفحات';
-    tooltip.textContent = text;
-    tooltip.style.left = e.clientX + 'px';
-    tooltip.style.top = (e.clientY - 10) + 'px';
-    tooltip.classList.add('show');
-  } else {
-    tooltip.classList.remove('show');
-  }
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight') nextPage();
+  if (e.key === 'ArrowLeft') prevPage();
+  if (e.key === 'Escape') { closeModal(); closeLove(); }
 });
 
 /* ============================================================
    INIT
    ============================================================ */
 window.addEventListener('load', () => {
-  // Initial render (page 0)
-  bindPolaroids();
-  initMusicCard();
-
-  // Build initial page counter
-  document.getElementById('pageCounter').textContent = `Page 1 / ${pages.length}`;
+  buildBook();
+  handleMobile();
 });
 </script>
 </body>
