@@ -2,397 +2,2030 @@
 <html lang="ar" dir="ltr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>for you, with love</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#16080d">
+<title>For You, With Love</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,700&family=Caveat:wght@500;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --plum:#3a1f2b;
-    --plum-dark:#2a1620;
-    --teal:#20424a;
-    --teal-dark:#173139;
-    --cream:#f4ead7;
-    --paper:#faf5e9;
-    --gold:#e7b366;
-    --pink:#e79fc4;
-    --ink:#233;
-    --shadow:0 20px 45px rgba(0,0,0,.35);
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;height:100%;}
-  body{
-    font-family:'Poppins',sans-serif;
-    background:var(--cream);
-    color:var(--ink);
-    overflow:hidden;
-    -webkit-font-smoothing:antialiased;
-  }
-  .screen{
-    position:fixed; inset:0;
-    display:flex; align-items:center; justify-content:center;
-    transition:opacity .6s ease, transform .6s ease;
-  }
-  .screen.hidden{opacity:0; pointer-events:none; transform:scale(1.03);}
+:root{
+  --cream:#f4ead7;
+  --paper:#fbf5e8;
+  --paper-dark:#e9dbc0;
+  --plum:#4b2030;
+  --plum-dark:#26121b;
+  --teal:#244850;
+  --gold:#dca95f;
+  --pink:#e99bc1;
+  --ink:#30252a;
+  --shadow:0 24px 60px rgba(0,0,0,.42);
+}
 
-  /* ---------- corner controls ---------- */
-  .corner-btn{
-    position:fixed; z-index:50;
-    border:none; cursor:pointer;
-    font-family:'Poppins',sans-serif; font-weight:600; font-size:.85rem;
-    transition:transform .2s ease;
-  }
-  .corner-btn:hover{transform:translateY(-2px);}
-  #downloadBtn{
-    top:22px; left:22px;
-    background:var(--paper); color:var(--plum);
-    padding:10px 18px; border-radius:30px; box-shadow:0 6px 16px rgba(0,0,0,.15);
-    display:none;
-  }
-  #helpBtn{
-    bottom:22px; right:22px;
-    background:var(--teal-dark); color:var(--cream);
-    padding:10px 20px; border-radius:30px; box-shadow:0 6px 16px rgba(0,0,0,.25);
-  }
-  #heartBtn{
-    bottom:22px; left:22px;
-    width:52px; height:52px; border-radius:50%;
-    background:var(--plum); color:var(--pink);
-    display:flex; align-items:center; justify-content:center;
-    font-size:1.3rem; box-shadow:0 6px 16px rgba(0,0,0,.3);
-  }
-  #heartBtn.liked{color:#ff6fa5;}
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
 
-  /* ================= SCREEN 1 — candle intro ================= */
-  #screen-intro{
-    background:
-      repeating-linear-gradient(90deg, rgba(0,0,0,.02) 0 2px, transparent 2px 5px),
-      var(--cream);
-    cursor:pointer;
-  }
-  .candle-frame{
-    width:min(46vw,420px); height:min(70vh,620px);
-    background:radial-gradient(circle at 50% 35%, var(--plum) 0%, var(--plum-dark) 75%);
-    border-radius:50%;
-    display:flex; align-items:flex-end; justify-content:center;
-    position:relative;
-    box-shadow:inset 0 0 60px rgba(0,0,0,.5);
-  }
-  .butterfly{
-    position:absolute; top:26%; left:30%;
-    font-size:2.4rem; color:var(--pink);
-    animation:flutter 3s ease-in-out infinite;
-  }
-  @keyframes flutter{0%,100%{transform:rotate(-6deg) translateY(0);}50%{transform:rotate(6deg) translateY(-8px);}}
-  .candle{ position:relative; width:44px; height:190px; margin-bottom:40px;
-    background:linear-gradient(90deg,#d8cdb8,#efe8d8 40%,#d8cdb8);
-    border-radius:6px 6px 2px 2px;
-  }
-  .flame{
-    position:absolute; left:50%; top:-52px; transform:translateX(-50%);
-    width:26px; height:52px;
-    background:radial-gradient(ellipse at 50% 70%, #fff6d0 0%, var(--gold) 45%, #c9701f 85%);
-    border-radius:50% 50% 50% 50% / 65% 65% 35% 35%;
-    animation:flicker 1.6s ease-in-out infinite;
-    filter:drop-shadow(0 0 14px rgba(231,179,102,.8));
-  }
-  @keyframes flicker{0%,100%{transform:translateX(-50%) scale(1,1);}50%{transform:translateX(-50%) scale(.92,1.06) rotate(2deg);}}
-  .intro-hint{position:absolute; bottom:8%; color:var(--plum); font-family:'Caveat',cursive; font-size:1.4rem;}
+html,
+body{
+  width:100%;
+  height:100%;
+  margin:0;
+}
 
-  /* ================= SCREEN 2 — letter cover ================= */
-  #screen-cover{
-    background:
-      linear-gradient(160deg, var(--teal) 0%, var(--teal-dark) 100%);
-    cursor:pointer;
-  }
-  .letter-card{
-    width:min(70vw,460px); aspect-ratio:4/5;
-    background:var(--paper);
-    box-shadow:var(--shadow);
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    position:relative; transform:rotate(-1deg);
-    padding:30px;
-    text-align:center;
-  }
-  .letter-card .rule{width:70%; border:none; border-top:1px solid #999; margin:8px 0;}
-  .letter-card .tag{font-family:'Caveat',cursive; font-size:1.1rem; letter-spacing:2px; color:#555;}
-  .letter-card h1{
-    font-family:'Playfair Display',serif; font-style:italic; font-weight:700;
-    font-size:3.4rem; margin:14px 0; color:var(--plum-dark);
-  }
-  .letter-card .sign{font-family:'Caveat',cursive; font-size:1.3rem; color:#444;}
-  .stamp{position:absolute; top:22px; right:22px; font-size:1.6rem;}
-  .stamp.br{top:auto; bottom:22px; right:22px;}
-  .stamp.bl{top:auto; bottom:22px; left:22px;}
+body{
+  overflow:hidden;
+  background:#10070b;
+  color:var(--ink);
+  font-family:Poppins,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  touch-action:none;
+}
 
-  /* ================= SCREEN 3 — scrapbook ================= */
-  #screen-book{
-    background:var(--cream);
-    align-items:flex-start; justify-content:center;
-    padding:70px 20px 20px; overflow-y:auto;
+button{
+  font:inherit;
+}
+
+img{
+  display:block;
+}
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.intro{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at center,#42202d 0,#211019 42%,#0c0508 100%);
+  transition:opacity .55s ease,visibility .55s ease;
+}
+
+.intro.hide{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.intro-inner{
+  text-align:center;
+  width:min(90vw,450px);
+}
+
+.candle-frame{
+  width:min(60vw,310px);
+  height:min(65vh,430px);
+  margin:auto;
+  border-radius:50% 50% 22% 22%;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  background:
+    linear-gradient(rgba(45,12,25,.15),rgba(0,0,0,.55)),
+    url("assets/intro.jpg") center/cover,
+    #321523;
+  box-shadow:
+    inset 0 0 60px rgba(0,0,0,.55),
+    0 25px 70px rgba(0,0,0,.45);
+}
+
+.butterfly{
+  position:absolute;
+  top:18%;
+  left:23%;
+  font-size:2.3rem;
+  animation:flutter 3s ease-in-out infinite;
+}
+
+@keyframes flutter{
+  0%,100%{
+    transform:translate(0,0) rotate(-6deg);
   }
+  50%{
+    transform:translate(8px,-10px) rotate(7deg);
+  }
+}
+
+.candle{
+  width:45px;
+  height:185px;
+  margin-bottom:35px;
+  position:relative;
+  border-radius:6px 6px 3px 3px;
+  background:linear-gradient(
+    90deg,
+    #c9bda9,
+    #fff4dc 42%,
+    #d4c6ae
+  );
+}
+
+.flame{
+  position:absolute;
+  left:50%;
+  top:-54px;
+  width:27px;
+  height:52px;
+  transform:translateX(-50%);
+  border-radius:50% 50% 50% 50% / 65% 65% 35% 35%;
+  background:radial-gradient(
+    ellipse at 50% 72%,
+    #fff7d5 0 25%,
+    #e7b366 47%,
+    #b95122 90%
+  );
+  box-shadow:0 0 22px rgba(231,179,102,.65);
+  animation:flicker 1.5s ease-in-out infinite;
+}
+
+@keyframes flicker{
+  0%,100%{
+    transform:translateX(-50%) scale(1);
+  }
+  50%{
+    transform:translateX(-50%) scale(.9,1.08) rotate(2deg);
+  }
+}
+
+.intro-label{
+  margin-top:28px;
+  color:#e8c98d;
+  letter-spacing:4px;
+  font-size:.75rem;
+}
+
+.intro-title{
+  color:#fff4dd;
+  font-family:"Playfair Display",serif;
+  font-style:italic;
+  font-size:clamp(35px,10vw,64px);
+  margin:5px 0 18px;
+}
+
+.open-btn{
+  border:1px solid rgba(231,179,102,.55);
+  color:#fff0cf;
+  background:rgba(255,255,255,.06);
+  border-radius:999px;
+  padding:12px 28px;
+  cursor:pointer;
+}
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+#main{
+  position:fixed;
+  inset:0;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .5s ease;
+}
+
+#main.show{
+  opacity:1;
+  visibility:visible;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+  position:absolute;
+  z-index:50;
+  top:18px;
+  left:20px;
+  right:20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  pointer-events:none;
+  color:#f4d79e;
+}
+
+.brand{
+  font-family:"Playfair Display",serif;
+  font-size:15px;
+  letter-spacing:2px;
+}
+
+.counter{
+  font-family:Caveat,cursive;
+  font-size:24px;
+}
+
+/* =====================================================
+   BOOK STAGE
+===================================================== */
+
+.stage{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  perspective:1600px;
+}
+
+.book{
+  position:relative;
+  width:min(94vw,1050px);
+  height:min(74vh,680px);
+  min-height:410px;
+  transform-style:preserve-3d;
+}
+
+/* base behind book */
+
+.book-base{
+  position:absolute;
+  inset:8px -7px -10px;
+  border-radius:12px;
+  background:#211016;
+  box-shadow:
+    0 30px 60px rgba(0,0,0,.55),
+    inset 0 0 0 2px rgba(220,170,90,.13);
+  transform:translateZ(-10px);
+}
+
+/* =====================================================
+   SPREAD
+   Every spread contains 2 pages.
+===================================================== */
+
+.spread{
+  position:absolute;
+  inset:0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border-radius:10px;
+  overflow:hidden;
+  background:var(--paper);
+  box-shadow:var(--shadow);
+  opacity:0;
+  pointer-events:none;
+  z-index:1;
+}
+
+.spread.active{
+  opacity:1;
+  pointer-events:auto;
+  z-index:10;
+}
+
+.page{
+  position:relative;
+  overflow:hidden;
+  background-color:var(--paper);
+  background-position:center;
+  background-size:cover;
+  color:var(--ink);
+  isolation:isolate;
+}
+
+.page:first-child{
+  border-right:1px solid rgba(60,30,20,.18);
+}
+
+.page:last-child{
+  border-left:1px solid rgba(60,30,20,.12);
+}
+
+.page::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.12),
+      transparent 22%,
+      transparent 78%,
+      rgba(0,0,0,.08)
+    );
+  pointer-events:none;
+}
+
+.page-inner{
+  position:absolute;
+  inset:0;
+  padding:clamp(18px,4vw,44px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.page-script{
+  font-family:Caveat,cursive;
+  color:#8c263d;
+  font-size:clamp(22px,4vw,38px);
+}
+
+.page-title{
+  margin:2px 0 6px;
+  font-family:"Playfair Display",serif;
+  color:#5b1d2d;
+  font-size:clamp(24px,4vw,42px);
+}
+
+.page-sub{
+  font-size:clamp(11px,1.7vw,16px);
+  color:#735f55;
+  margin:2px 0 10px;
+}
+
+.page-photo{
+  width:min(68%,285px);
+  max-height:45%;
+  object-fit:cover;
+  aspect-ratio:4/3;
+  padding:7px;
+  background:#fffdf5;
+  box-shadow:0 8px 20px rgba(0,0,0,.22);
+  transform:rotate(-2deg);
+}
+
+.page:nth-child(even) .page-photo{
+  transform:rotate(2deg);
+}
+
+.page-text{
+  max-width:430px;
+  margin:13px auto 4px;
+  line-height:1.8;
+  font-size:clamp(11px,1.6vw,15px);
+}
+
+.page-video-btn{
+  border:0;
+  background:#7d1c31;
+  color:#fff8e9;
+  padding:8px 17px;
+  border-radius:999px;
+  margin-top:9px;
+  cursor:pointer;
+  font-size:12px;
+}
+
+.page-number{
+  position:absolute;
+  bottom:13px;
+  color:#806e5e;
+  font-family:Caveat,cursive;
+  font-size:18px;
+}
+
+/* =====================================================
+   FLOWERS
+===================================================== */
+
+.flowers{
+  position:absolute;
+  inset:0;
+  z-index:5;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.flower{
+  position:absolute;
+  font-size:26px;
+  opacity:0;
+  transform:translateY(35px) scale(.25);
+}
+
+.spread.active .flower{
+  animation:bloom .7s ease forwards;
+}
+
+.flower:nth-child(1){
+  top:7%;
+  left:7%;
+  animation-delay:.03s;
+}
+
+.flower:nth-child(2){
+  top:10%;
+  right:8%;
+  animation-delay:.12s;
+}
+
+.flower:nth-child(3){
+  bottom:8%;
+  left:11%;
+  animation-delay:.21s;
+}
+
+.flower:nth-child(4){
+  bottom:9%;
+  right:10%;
+  animation-delay:.3s;
+}
+
+.flower:nth-child(5){
+  top:4%;
+  left:47%;
+  animation-delay:.4s;
+}
+
+@keyframes bloom{
+  0%{
+    opacity:0;
+    transform:translateY(35px) scale(.2) rotate(-25deg);
+  }
+  70%{
+    opacity:1;
+    transform:translateY(-3px) scale(1.12) rotate(8deg);
+  }
+  100%{
+    opacity:.85;
+    transform:translateY(0) scale(1) rotate(0);
+  }
+}
+
+/* =====================================================
+   TURNING PAGE
+   Only ONE element is animated.
+===================================================== */
+
+.turn-page{
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:50%;
+  z-index:100;
+  display:none;
+  pointer-events:none;
+  transform-style:preserve-3d;
+}
+
+.turn-page.next{
+  right:0;
+  transform-origin:left center;
+}
+
+.turn-page.prev{
+  left:0;
+  transform-origin:right center;
+}
+
+.turn-page.active-next{
+  display:block;
+  animation:pageNext .65s cubic-bezier(.22,.72,.2,1) forwards;
+}
+
+.turn-page.active-prev{
+  display:block;
+  animation:pagePrev .65s cubic-bezier(.22,.72,.2,1) forwards;
+}
+
+.turn-surface{
+  position:absolute;
+  inset:0;
+  background-color:var(--paper);
+  background-size:cover;
+  background-position:center;
+  box-shadow:0 0 28px rgba(0,0,0,.3);
+}
+
+.turn-surface::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.02),
+      transparent 40%,
+      rgba(0,0,0,.23)
+    );
+}
+
+@keyframes pageNext{
+  from{
+    transform:rotateY(0);
+  }
+  to{
+    transform:rotateY(-180deg);
+  }
+}
+
+@keyframes pagePrev{
+  from{
+    transform:rotateY(0);
+  }
+  to{
+    transform:rotateY(180deg);
+  }
+}
+
+/* =====================================================
+   CONTROLS
+===================================================== */
+
+.controls{
+  position:absolute;
+  z-index:150;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:10px;
+}
+
+.control{
+  width:48px;
+  height:48px;
+  border:1px solid rgba(228,181,102,.5);
+  border-radius:50%;
+  background:rgba(24,8,14,.9);
+  color:#f4d59a;
+  cursor:pointer;
+  font-size:23px;
+}
+
+.control.main{
+  width:58px;
+  height:58px;
+  background:#7d1c31;
+}
+
+.control:active{
+  transform:scale(.92);
+}
+
+.control:disabled{
+  opacity:.25;
+}
+
+/* =====================================================
+   MUSIC
+===================================================== */
+
+.music{
+  position:absolute;
+  z-index:150;
+  bottom:20px;
+  left:20px;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  border:1px solid rgba(228,181,102,.45);
+  background:rgba(24,8,14,.9);
+  color:#f4d59a;
+  cursor:pointer;
+}
+
+/* =====================================================
+   HEART
+===================================================== */
+
+.heart{
+  position:absolute;
+  z-index:150;
+  bottom:20px;
+  right:20px;
+  width:52px;
+  height:52px;
+  border:0;
+  border-radius:50%;
+  background:#7d1c31;
+  color:#f4a4c6;
+  font-size:22px;
+  cursor:pointer;
+}
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:500;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:rgba(0,0,0,.78);
+}
+
+.modal.open{
+  display:flex;
+}
+
+.modal-box{
+  width:min(92vw,600px);
+  max-height:90vh;
+  overflow:auto;
+  background:var(--paper);
+  border-radius:14px;
+  padding:22px;
+  text-align:center;
+  color:var(--ink);
+  box-shadow:0 25px 70px rgba(0,0,0,.6);
+}
+
+.modal-box h2{
+  font-family:"Playfair Display",serif;
+  color:#6d1c31;
+}
+
+.modal-video{
+  width:100%;
+  max-height:65vh;
+  background:#000;
+  border-radius:8px;
+}
+
+.modal-close,
+.modal-action{
+  border:0;
+  border-radius:999px;
+  padding:9px 17px;
+  cursor:pointer;
+}
+
+.modal-close{
+  background:#ddd0bb;
+  color:#42202b;
+  margin-top:12px;
+}
+
+.modal-action{
+  background:#7d1c31;
+  color:white;
+  margin:5px;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:700px){
+
   .book{
-    width:min(90vw,900px);
-    background:linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
-    border-radius:6px; box-shadow:var(--shadow);
-    display:grid; grid-template-columns:1fr 1fr; gap:14px;
-    padding:22px; position:relative;
-  }
-  @media (max-width:640px){.book{grid-template-columns:1fr;}}
-  .polaroid{
-    background:#fff; padding:8px 8px 24px; border-radius:2px;
-    box-shadow:0 8px 18px rgba(0,0,0,.35);
-    cursor:pointer; transition:transform .2s ease;
-  }
-  .polaroid:hover{transform:translateY(-4px) rotate(-1deg);}
-  .polaroid .ph{
-    width:100%; aspect-ratio:4/3; border-radius:2px;
-    display:flex; align-items:center; justify-content:center; font-size:1.8rem;
-  }
-  .ph1{background:linear-gradient(135deg,#e79fc4,#c96fa0);}
-  .ph2{background:linear-gradient(135deg,#e7b366,#c98b3c);}
-  .ph3{background:linear-gradient(135deg,#8fb9c9,#4d7f92);}
-  .ph4{background:linear-gradient(135deg,#b7a6d9,#7c63ad);}
-  .polaroid .cap{font-family:'Caveat',cursive; font-size:.95rem; text-align:center; color:#444; margin-top:6px;}
-  .vinyl{
-    width:120px; height:120px; border-radius:50%;
-    background:repeating-radial-gradient(circle, #111 0 3px, #222 3px 6px);
-    display:flex; align-items:center; justify-content:center;
-    position:absolute; bottom:16px; left:16px; box-shadow:0 8px 20px rgba(0,0,0,.4);
-  }
-  .vinyl::after{content:'';width:36px; height:36px; border-radius:50%; background:var(--cream);}
-  .note{
-    grid-column:1/-1; background:var(--paper); border-radius:4px; padding:26px 28px;
-    box-shadow:0 8px 20px rgba(0,0,0,.25); position:relative;
-  }
-  .note .from-for{font-size:.8rem; letter-spacing:1px; color:#777; margin-bottom:6px;}
-  .note .from-for b{color:var(--plum-dark);}
-  .note p{font-size:1.02rem; line-height:1.6; color:#333; margin:10px 0;}
-  .note button{
-    margin-top:10px; background:var(--plum-dark); color:var(--cream);
-    border:none; padding:10px 22px; border-radius:30px; cursor:pointer; font-weight:600;
-  }
-  .bouquet-btn{
-    grid-column:1/-1; justify-self:center; background:none; border:1px dashed var(--cream);
-    color:var(--cream); padding:8px 18px; border-radius:20px; cursor:pointer; font-family:'Caveat',cursive; font-size:1.1rem;
+    width:95vw;
+    height:67vh;
+    min-height:385px;
   }
 
-  /* ---------- floating widgets ---------- */
-  #widgets{
-    position:fixed; bottom:90px; left:22px; z-index:40;
-    width:270px; display:flex; flex-direction:column; gap:10px;
-    transform:translateY(20px); opacity:0; pointer-events:none; transition:all .5s ease;
+  .page-inner{
+    padding:15px 11px;
   }
-  #widgets.show{transform:translateY(0); opacity:1; pointer-events:auto;}
-  .widget{background:var(--paper); border-radius:14px; padding:12px 14px; box-shadow:var(--shadow); font-size:.85rem;}
-  .map-card{height:120px; border-radius:10px; overflow:hidden; position:relative;
-    background:linear-gradient(135deg,#dfe7d8,#c7d3bd);
-  }
-  .map-card .pin{position:absolute; width:26px; height:26px; border-radius:50% 50% 50% 0; background:var(--plum); transform:rotate(-45deg); cursor:pointer;}
-  .map-card .pin::after{content:'♥'; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; transform:rotate(45deg); color:var(--pink); font-size:.7rem;}
-  .audio-widget{display:flex; align-items:center; gap:10px;}
-  .play-circle{
-    width:34px; height:34px; border-radius:50%; background:var(--plum-dark); color:var(--cream);
-    display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;
-  }
-  .wave{flex:1; display:flex; align-items:center; gap:2px; height:20px;}
-  .wave span{width:3px; background:#c9b98f; border-radius:2px;}
-  .music-widget{background:#111; color:#eee; border-radius:14px;}
-  .music-widget .top{display:flex; justify-content:space-between; font-size:.8rem; margin-bottom:8px;}
-  .music-widget .bar{height:4px; background:#444; border-radius:2px; overflow:hidden; margin-bottom:8px;}
-  .music-widget .bar i{display:block; height:100%; width:22%; background:var(--pink);}
-  .music-widget .controls{display:flex; align-items:center; justify-content:space-between; font-size:.75rem; color:#aaa;}
 
-  /* ---------- modal ---------- */
-  .modal-overlay{
-    position:fixed; inset:0; background:rgba(20,15,20,.55); backdrop-filter:blur(3px);
-    display:flex; align-items:center; justify-content:center; z-index:80;
-    opacity:0; pointer-events:none; transition:opacity .3s ease;
+  .page-photo{
+    width:78%;
+    max-height:40%;
   }
-  .modal-overlay.show{opacity:1; pointer-events:auto;}
-  .modal-card{
-    background:var(--paper); border-radius:12px; padding:26px; width:min(90vw,320px);
-    text-align:center; box-shadow:var(--shadow); transform:scale(.92); transition:transform .3s ease;
-  }
-  .modal-overlay.show .modal-card{transform:scale(1);}
-  .modal-card .memph{width:100%; aspect-ratio:4/3; border-radius:6px; margin-bottom:12px; display:flex; align-items:center; justify-content:center; font-size:2rem;}
-  .modal-card h3{font-family:'Playfair Display',serif; margin:6px 0 2px;}
-  .modal-card .meta{font-size:.8rem; color:#888;}
-  .modal-close{margin-top:14px; background:none; border:1px solid #ccc; padding:8px 18px; border-radius:20px; cursor:pointer;}
-  .bouquet-modal .bloom{font-size:4rem; display:block; margin:14px 0;}
 
-  .tooltip-box{
-    position:fixed; bottom:80px; right:22px; background:var(--paper); color:var(--ink);
-    padding:14px 16px; border-radius:10px; box-shadow:var(--shadow); font-size:.85rem; max-width:230px;
-    opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:60;
+  .page-text{
+    line-height:1.6;
   }
-  .tooltip-box.show{opacity:1;}
+
+  .page-video-btn{
+    font-size:10px;
+    padding:7px 12px;
+  }
+
+  .brand{
+    font-size:12px;
+  }
+
+  .counter{
+    font-size:20px;
+  }
+
+  .controls{
+    bottom:13px;
+  }
+
+  .music{
+    bottom:14px;
+    left:12px;
+  }
+
+  .heart{
+    bottom:14px;
+    right:12px;
+  }
+}
+
+@media(max-width:430px){
+
+  .book{
+    height:64vh;
+    min-height:365px;
+  }
+
+  .page-photo{
+    width:82%;
+    max-height:34%;
+  }
+
+  .page-title{
+    font-size:21px;
+  }
+
+  .page-sub{
+    font-size:10px;
+  }
+
+  .page-text{
+    font-size:10px;
+  }
+
+  .flower{
+    font-size:21px;
+  }
+}
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms!important;
+    transition-duration:.01ms!important;
+  }
+
+}
 </style>
 </head>
+
 <body>
 
-  <button id="downloadBtn">Download</button>
-  <button id="heartBtn" onclick="this.classList.toggle('liked')">♥</button>
-  <button id="helpBtn" onclick="toggleHelp()">Help</button>
-  <div class="tooltip-box" id="helpTip">Tap the candle to begin, then tap the letter, then explore the note, photos and widgets. This is a template — replace the placeholders with your own photos, words and song.</div>
+<!-- =====================================================
+     INTRO
+===================================================== -->
 
-  <!-- SCREEN 1: intro -->
-  <section class="screen" id="screen-intro" onclick="goTo('screen-cover'); document.getElementById('downloadBtn').style.display='block';">
+<section class="intro" id="intro">
+
+  <div class="intro-inner">
+
     <div class="candle-frame">
+
       <div class="butterfly">🦋</div>
-      <div class="candle"><div class="flame"></div></div>
-    </div>
-    <div class="intro-hint">tap the candle to begin ✧</div>
-  </section>
 
-  <!-- SCREEN 2: letter cover -->
-  <section class="screen hidden" id="screen-cover" onclick="openBook(event)">
-    <div class="letter-card">
-      <span class="stamp">★</span><span class="stamp br">💋</span><span class="stamp bl">★</span>
-      <div class="tag">— a love letter —</div>
-      <h1>for you,</h1>
-      <hr class="rule">
-      <div class="sign">with love, you.</div>
-    </div>
-  </section>
+      <div class="candle">
+        <div class="flame"></div>
+      </div>
 
-  <!-- SCREEN 3: scrapbook -->
-  <section class="screen hidden" id="screen-book">
-    <div class="book">
-      <div class="vinyl"></div>
-      <div class="polaroid" onclick="openMemory('June 3','That rainy walk','Saigon','🌧️','ph1')">
-        <div class="ph ph1">📷</div><div class="cap">us, laughing</div>
-      </div>
-      <div class="polaroid" onclick="openMemory('May 18','Late night talks','home','🌙','ph2')">
-        <div class="ph ph2">📷</div><div class="cap">golden hour</div>
-      </div>
-      <div class="note">
-        <div class="from-for">FROM <b>You</b> &nbsp;·&nbsp; FOR <b>My Love</b></div>
-        <p id="noteText">My love, I built this little world for you — photos of us, a song, a voice, and flowers. Open every piece slowly, I am in the details.</p>
-        <button onclick="expandNote()">Tap here to view more</button>
-      </div>
-      <div class="polaroid" onclick="openMemory('July 2','Cold hands, warm hearts','the old bridge','🌉','ph3')">
-        <div class="ph ph3">📷</div><div class="cap">cold hands, warm hearts</div>
-      </div>
-      <div class="polaroid" onclick="openMemory('Aug 9','These memories make me smile','downtown','✨','ph4')">
-        <div class="ph ph4">📷</div><div class="cap">that night out</div>
-      </div>
-      <button class="bouquet-btn" onclick="openBouquet()">🌷 tap for a bouquet</button>
     </div>
-  </section>
 
-  <!-- floating widgets -->
-  <div id="widgets">
-    <div class="widget">
-      <div class="map-card">
-        <div class="pin" style="top:45%; left:55%;" onclick="openMemory('June 3','That rainy walk','Saigon','🌧️','ph1')"></div>
-      </div>
+    <div class="intro-label">
+      A PRIVATE MEMORY BOOK
     </div>
-    <div class="widget audio-widget" onclick="toggleAudio(this)">
-      <div class="play-circle">▶</div>
-      <div>
-        <div style="font-weight:600;">A note just for you</div>
-        <div style="font-size:.75rem; color:#888;">tap to listen · 0:15</div>
-      </div>
+
+    <div class="intro-title">
+      for you, with love
     </div>
-    <div class="widget music-widget">
-      <div class="top"><span>Our Song</span><span>0:23 / 3:40</span></div>
-      <div class="bar"><i></i></div>
-      <div class="controls"><span>♥ favorite</span><span onclick="this.parentElement.parentElement.querySelector('.bar i').style.width='60%'" style="cursor:pointer;">▶ play</span></div>
-    </div>
+
+    <button class="open-btn" id="openBtn">
+      Open Our Story
+    </button>
+
   </div>
 
-  <!-- modal: memory -->
-  <div class="modal-overlay" id="memModal">
-    <div class="modal-card">
-      <div class="memph" id="memPh">📷</div>
-      <div class="meta" id="memDate">DATE</div>
-      <h3 id="memTitle">Title</h3>
-      <div class="meta" id="memLoc">Location</div>
-      <button class="modal-close" onclick="closeModal('memModal')">close</button>
+</section>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main id="main">
+
+  <header class="header">
+
+    <div class="brand">
+      ♡ OUR STORY
     </div>
+
+    <div class="counter" id="counter">
+      01 / 10
+    </div>
+
+  </header>
+
+
+  <section class="stage">
+
+    <div class="book" id="book">
+
+      <div class="book-base"></div>
+
+      <div id="spreads"></div>
+
+      <!-- Animated paper -->
+      <div class="turn-page next" id="turnNext">
+        <div class="turn-surface" id="turnNextSurface"></div>
+      </div>
+
+      <div class="turn-page prev" id="turnPrev">
+        <div class="turn-surface" id="turnPrevSurface"></div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- Navigation -->
+
+  <div class="controls">
+
+    <button
+      class="control"
+      id="prevBtn">
+      ‹
+    </button>
+
+    <button
+      class="control main"
+      id="nextBtn">
+      ›
+    </button>
+
   </div>
 
-  <!-- modal: bouquet -->
-  <div class="modal-overlay" id="bouquetModal">
-    <div class="modal-card bouquet-modal" style="background:var(--plum-dark); color:var(--cream);">
-      <div class="meta" style="color:#cbb;">FROM YOU</div>
-      <h3 style="color:var(--cream);">My Love's Bouquet</h3>
-      <span class="bloom">💐</span>
-      <button class="modal-close" style="border-color:#665; color:var(--cream);" onclick="closeModal('bouquetModal')">close</button>
-    </div>
+
+  <!-- Music -->
+
+  <button
+    class="music"
+    id="musicBtn"
+    title="Music">
+    ♪
+  </button>
+
+
+  <!-- Heart -->
+
+  <button
+    class="heart"
+    id="heartBtn">
+    ♥
+  </button>
+
+</main>
+
+
+<!-- =====================================================
+     VIDEO MODAL
+===================================================== -->
+
+<div class="modal" id="videoModal">
+
+  <div class="modal-box">
+
+    <h2 id="videoTitle">
+      Our Memory
+    </h2>
+
+    <video
+      class="modal-video"
+      id="videoPlayer"
+      controls
+      playsinline
+      preload="none">
+    </video>
+
+    <br>
+
+    <button
+      class="modal-close"
+      id="closeVideo">
+      Close
+    </button>
+
   </div>
+
+</div>
+
+
+<!-- =====================================================
+     LOVE MODAL
+===================================================== -->
+
+<div class="modal" id="loveModal">
+
+  <div class="modal-box">
+
+    <div style="font-size:55px;color:#9c2341;">
+      ♥
+    </div>
+
+    <h2>
+      A Little Message
+    </h2>
+
+    <p id="loveMessage"></p>
+
+    <button
+      class="modal-action"
+      id="loveMusicBtn">
+      ♪ Music
+    </button>
+
+    <button
+      class="modal-action"
+      id="loveVideoBtn">
+      ▶ Video
+    </button>
+
+    <br>
+
+    <button
+      class="modal-close"
+      id="closeLove">
+      Close
+    </button>
+
+  </div>
+
+</div>
+
 
 <script>
-function goTo(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));
-  document.getElementById(id).classList.remove('hidden');
-}
-function openBook(e){
-  e.stopPropagation();
-  goTo('screen-book');
-  setTimeout(()=>document.getElementById('widgets').classList.add('show'), 400);
-}
-function expandNote(){
-  document.getElementById('noteText').textContent =
-    "My love, I built this little world for you — photos of us, a song, a voice, and flowers. Open every piece slowly, I am in the details. Every polaroid is a moment I never want to forget, and every song is the sound of you. Happy anniversary, my love.";
-}
-function openMemory(date,title,loc,emoji,phclass){
-  document.getElementById('memPh').textContent = emoji;
-  document.getElementById('memPh').className = 'memph '+phclass;
-  document.getElementById('memDate').textContent = date.toUpperCase();
-  document.getElementById('memTitle').textContent = title;
-  document.getElementById('memLoc').textContent = loc;
-  document.getElementById('memModal').classList.add('show');
-}
-function openBouquet(){document.getElementById('bouquetModal').classList.add('show');}
-function closeModal(id){document.getElementById(id).classList.remove('show');}
-function toggleHelp(){document.getElementById('helpTip').classList.toggle('show');}
-function toggleAudio(el){
-  const c = el.querySelector('.play-circle');
-  c.textContent = c.textContent==='▶' ? '❚❚' : '▶';
-}
-// build waveform bars
-document.addEventListener('DOMContentLoaded',()=>{
-  const wave = document.createElement('div'); wave.className='wave';
-  for(let i=0;i<24;i++){
-    const bar=document.createElement('span');
-    bar.style.height = (6+Math.random()*14)+'px';
-    wave.appendChild(bar);
+"use strict";
+
+/* =========================================================
+   YOUR FILES
+   =========================================================
+
+   ضع الملفات بهذا الشكل:
+
+   assets/
+   ├── intro.jpg
+   │
+   ├── bg1.jpg
+   ├── bg2.jpg
+   ├── ...
+   ├── bg10.jpg
+   │
+   ├── photo1.jpg
+   ├── photo2.jpg
+   ├── ...
+   ├── photo10.jpg
+   │
+   ├── video1.mp4
+   ├── video2.mp4
+   ├── ...
+   ├── video10.mp4
+   │
+   └── song.mp3
+
+   تقدر تغيّر أسماء الملفات من هنا فقط.
+========================================================= */
+
+const PAGES = [
+
+  {
+    title:"The Beginning",
+    subtitle:"Where our story started",
+    text:"A small beginning that became one of the memories I want to keep forever.",
+    background:"assets/bg1.jpg",
+    photo:"assets/photo1.jpg",
+    video:"assets/video1.mp4"
+  },
+
+  {
+    title:"Our First Memory",
+    subtitle:"One moment, many feelings",
+    text:"Some moments are short, but somehow they stay with us for a very long time.",
+    background:"assets/bg2.jpg",
+    photo:"assets/photo2.jpg",
+    video:"assets/video2.mp4"
+  },
+
+  {
+    title:"Your Smile",
+    subtitle:"My favorite little thing",
+    text:"A simple smile can make an ordinary moment feel completely different.",
+    background:"assets/bg3.jpg",
+    photo:"assets/photo3.jpg",
+    video:"assets/video3.mp4"
+  },
+
+  {
+    title:"A Special Day",
+    subtitle:"A memory worth keeping",
+    text:"This page is for one of those days that deserves a place in our little book.",
+    background:"assets/bg4.jpg",
+    photo:"assets/photo4.jpg",
+    video:"assets/video4.mp4"
+  },
+
+  {
+    title:"Little Details",
+    subtitle:"The things we remember",
+    text:"Sometimes the smallest details become the memories that matter most.",
+    background:"assets/bg5.jpg",
+    photo:"assets/photo5.jpg",
+    video:"assets/video5.mp4"
+  },
+
+  {
+    title:"Beautiful Day",
+    subtitle:"A day I want to remember",
+    text:"Another little chapter, another memory saved inside this book.",
+    background:"assets/bg6.jpg",
+    photo:"assets/photo6.jpg",
+    video:"assets/video6.mp4"
+  },
+
+  {
+    title:"Together",
+    subtitle:"Page after page",
+    text:"Every page adds another small part to the story.",
+    background:"assets/bg7.jpg",
+    photo:"assets/photo7.jpg",
+    video:"assets/video7.mp4"
+  },
+
+  {
+    title:"Another Chapter",
+    subtitle:"Still our story",
+    text:"The best memories are the ones that make you smile when you remember them.",
+    background:"assets/bg8.jpg",
+    photo:"assets/photo8.jpg",
+    video:"assets/video8.mp4"
+  },
+
+  {
+    title:"Almost The End",
+    subtitle:"But not really",
+    text:"We reached another page, but a story doesn't have to end here.",
+    background:"assets/bg9.jpg",
+    photo:"assets/photo9.jpg",
+    video:"assets/video9.mp4"
+  },
+
+  {
+    title:"To Be Continued",
+    subtitle:"The last page for now",
+    text:"This may be page ten, but it doesn't have to be the last memory.",
+    background:"assets/bg10.jpg",
+    photo:"assets/photo10.jpg",
+    video:"assets/video10.mp4"
   }
-  document.querySelector('.audio-widget').insertBefore(wave, document.querySelector('.audio-widget').children[1]);
-});
-document.getElementById('downloadBtn').addEventListener('click',()=>alert('Hook this up to export a PDF/image of the page, or link a real download.'));
+
+];
+
+
+/* =========================================================
+   MUSIC
+========================================================= */
+
+const SONG = "assets/song.mp3";
+
+let audio = null;
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let spreadIndex = 0;
+
+let busy = false;
+
+let currentVideoIndex = -1;
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const intro =
+  document.getElementById("intro");
+
+const main =
+  document.getElementById("main");
+
+const spreads =
+  document.getElementById("spreads");
+
+const book =
+  document.getElementById("book");
+
+const counter =
+  document.getElementById("counter");
+
+const prevBtn =
+  document.getElementById("prevBtn");
+
+const nextBtn =
+  document.getElementById("nextBtn");
+
+const turnNext =
+  document.getElementById("turnNext");
+
+const turnPrev =
+  document.getElementById("turnPrev");
+
+const turnNextSurface =
+  document.getElementById("turnNextSurface");
+
+const turnPrevSurface =
+  document.getElementById("turnPrevSurface");
+
+const videoModal =
+  document.getElementById("videoModal");
+
+const videoPlayer =
+  document.getElementById("videoPlayer");
+
+const videoTitle =
+  document.getElementById("videoTitle");
+
+const loveModal =
+  document.getElementById("loveModal");
+
+const loveMessage =
+  document.getElementById("loveMessage");
+
+
+/* =========================================================
+   BUILD BOOK
+========================================================= */
+
+function buildBook(){
+
+  spreads.innerHTML = "";
+
+  /*
+    10 pages = 5 spreads.
+    Every spread contains exactly 2 pages.
+  */
+
+  for(let i=0;i<PAGES.length;i+=2){
+
+    const spread =
+      document.createElement("div");
+
+    spread.className = "spread";
+
+    spread.dataset.spread =
+      String(i / 2);
+
+
+    spread.appendChild(
+      createPage(PAGES[i],i)
+    );
+
+    spread.appendChild(
+      createPage(PAGES[i+1],i+1)
+    );
+
+
+    spreads.appendChild(spread);
+
+  }
+
+  showSpread(0);
+
+}
+
+
+/* =========================================================
+   CREATE PAGE
+========================================================= */
+
+function createPage(data,index){
+
+  const page =
+    document.createElement("article");
+
+  page.className = "page";
+
+
+  /*
+    Background image.
+    أنت فقط تغيّر bg1.jpg ... bg10.jpg
+  */
+
+  page.style.backgroundImage =
+    `linear-gradient(
+      rgba(255,249,236,.34),
+      rgba(255,249,236,.34)
+    ),url("${data.background}")`;
+
+
+  const inner =
+    document.createElement("div");
+
+  inner.className = "page-inner";
+
+
+  const script =
+    document.createElement("div");
+
+  script.className = "page-script";
+
+  script.textContent =
+    `Chapter ${index + 1}`;
+
+
+  const title =
+    document.createElement("h2");
+
+  title.className = "page-title";
+
+  title.textContent =
+    data.title;
+
+
+  const subtitle =
+    document.createElement("div");
+
+  subtitle.className = "page-sub";
+
+  subtitle.textContent =
+    data.subtitle;
+
+
+  /*
+    الصورة لا يتم تحميلها كلها دفعة واحدة.
+    الصفحات الأولى eager والباقي lazy.
+  */
+
+  const img =
+    document.createElement("img");
+
+  img.className = "page-photo";
+
+  img.src = data.photo;
+
+  img.alt = "";
+
+  img.decoding = "async";
+
+  img.loading =
+    index < 4 ? "eager" : "lazy";
+
+  img.onerror = function(){
+
+    this.style.display = "none";
+
+  };
+
+
+  const text =
+    document.createElement("p");
+
+  text.className = "page-text";
+
+  text.textContent =
+    data.text;
+
+
+  inner.appendChild(script);
+  inner.appendChild(title);
+  inner.appendChild(subtitle);
+  inner.appendChild(img);
+  inner.appendChild(text);
+
+
+  /*
+    Video button.
+    الفيديو نفسه لا يتم تحميله هنا.
+  */
+
+  if(data.video){
+
+    const videoButton =
+      document.createElement("button");
+
+    videoButton.className =
+      "page-video-btn";
+
+    videoButton.textContent =
+      "▶ Watch This Memory";
+
+    videoButton.addEventListener(
+      "click",
+      function(e){
+
+        e.stopPropagation();
+
+        openVideo(index);
+
+      }
+    );
+
+    inner.appendChild(videoButton);
+
+  }
+
+
+  const number =
+    document.createElement("span");
+
+  number.className =
+    "page-number";
+
+  number.textContent =
+    String(index + 1).padStart(2,"0");
+
+
+  inner.appendChild(number);
+
+  page.appendChild(inner);
+
+
+  /*
+    Flowers
+  */
+
+  const flowers =
+    document.createElement("div");
+
+  flowers.className =
+    "flowers";
+
+
+  for(let i=0;i<5;i++){
+
+    const flower =
+      document.createElement("span");
+
+    flower.className =
+      "flower";
+
+    flower.textContent =
+      i % 2 === 0 ? "🌸" : "🌷";
+
+    flowers.appendChild(flower);
+
+  }
+
+  page.appendChild(flowers);
+
+
+  return page;
+
+}
+
+
+/* =========================================================
+   SHOW SPREAD
+========================================================= */
+
+function showSpread(index){
+
+  const all =
+    document.querySelectorAll(".spread");
+
+  all.forEach((item,i)=>{
+
+    item.classList.toggle(
+      "active",
+      i === index
+    );
+
+  });
+
+
+  spreadIndex = index;
+
+  const firstPage =
+    index * 2 + 1;
+
+  counter.textContent =
+    `${String(firstPage).padStart(2,"0")}–${String(firstPage+1).padStart(2,"0")} / 10`;
+
+
+  prevBtn.disabled =
+    index === 0;
+
+  nextBtn.disabled =
+    index === 4;
+
+
+  /*
+    Preload ONLY the next/previous photos.
+    No videos are loaded.
+  */
+
+  preloadNearPages(index);
+
+}
+
+
+/* =========================================================
+   SMART IMAGE PRELOAD
+========================================================= */
+
+function preloadNearPages(index){
+
+  const indexes = [
+
+    index * 2,
+
+    index * 2 + 1,
+
+    index * 2 + 2,
+
+    index * 2 + 3,
+
+    index * 2 - 1
+
+  ];
+
+
+  indexes.forEach(i=>{
+
+    if(
+      i < 0 ||
+      i >= PAGES.length
+    ) return;
+
+
+    const image =
+      new Image();
+
+    image.decoding =
+      "async";
+
+    image.src =
+      PAGES[i].background;
+
+  });
+
+}
+
+
+/* =========================================================
+   NEXT PAGE
+========================================================= */
+
+function nextSpread(){
+
+  if(busy || spreadIndex >= 4)
+    return;
+
+
+  busy = true;
+
+
+  /*
+    Current right page.
+  */
+
+  const currentRight =
+    PAGES[spreadIndex * 2 + 1];
+
+
+  turnNextSurface.style.backgroundImage =
+    `url("${currentRight.background}")`;
+
+
+  turnNext.classList.remove(
+    "active-next"
+  );
+
+
+  /*
+    Restart animation.
+  */
+
+  void turnNext.offsetWidth;
+
+
+  turnNext.classList.add(
+    "active-next"
+  );
+
+
+  /*
+    Change spread halfway through
+    the animation.
+  */
+
+  setTimeout(()=>{
+
+    showSpread(
+      spreadIndex + 1
+    );
+
+  },320);
+
+
+  setTimeout(()=>{
+
+    turnNext.classList.remove(
+      "active-next"
+    );
+
+    busy = false;
+
+  },680);
+
+}
+
+
+/* =========================================================
+   PREVIOUS PAGE
+========================================================= */
+
+function previousSpread(){
+
+  if(busy || spreadIndex <= 0)
+    return;
+
+
+  busy = true;
+
+
+  const currentLeft =
+    PAGES[spreadIndex * 2];
+
+
+  turnPrevSurface.style.backgroundImage =
+    `url("${currentLeft.background}")`;
+
+
+  turnPrev.classList.remove(
+    "active-prev"
+  );
+
+
+  void turnPrev.offsetWidth;
+
+
+  turnPrev.classList.add(
+    "active-prev"
+  );
+
+
+  setTimeout(()=>{
+
+    showSpread(
+      spreadIndex - 1
+    );
+
+  },320);
+
+
+  setTimeout(()=>{
+
+    turnPrev.classList.remove(
+      "active-prev"
+    );
+
+    busy = false;
+
+  },680);
+
+}
+
+
+nextBtn.addEventListener(
+  "click",
+  nextSpread
+);
+
+prevBtn.addEventListener(
+  "click",
+  previousSpread
+);
+
+
+/* =========================================================
+   SWIPE
+========================================================= */
+
+let startX = 0;
+let startY = 0;
+
+book.addEventListener(
+  "touchstart",
+  function(e){
+
+    if(busy) return;
+
+    const t =
+      e.changedTouches[0];
+
+    startX = t.clientX;
+    startY = t.clientY;
+
+  },
+  {passive:true}
+);
+
+
+book.addEventListener(
+  "touchend",
+  function(e){
+
+    if(busy) return;
+
+    const t =
+      e.changedTouches[0];
+
+    const dx =
+      t.clientX - startX;
+
+    const dy =
+      t.clientY - startY;
+
+
+    /*
+      Ignore small movement.
+    */
+
+    if(Math.abs(dx) < 45)
+      return;
+
+
+    /*
+      Ignore vertical movement.
+    */
+
+    if(Math.abs(dy) > Math.abs(dx))
+      return;
+
+
+    /*
+      Swipe left = next
+      Swipe right = previous
+    */
+
+    if(dx < 0){
+
+      nextSpread();
+
+    }else{
+
+      previousSpread();
+
+    }
+
+  },
+  {passive:true}
+);
+
+
+/* =========================================================
+   KEYBOARD
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  function(e){
+
+    if(e.key === "ArrowLeft")
+      nextSpread();
+
+    if(e.key === "ArrowRight")
+      previousSpread();
+
+    if(e.key === "Escape"){
+      closeVideo();
+      closeLove();
+    }
+
+  }
+);
+
+
+/* =========================================================
+   VIDEO
+========================================================= */
+
+function openVideo(index){
+
+  const data =
+    PAGES[index];
+
+  if(!data || !data.video)
+    return;
+
+
+  currentVideoIndex =
+    index;
+
+
+  videoTitle.textContent =
+    data.title;
+
+
+  /*
+    الفيديو يتم تحميله فقط عند الضغط.
+  */
+
+  videoPlayer.pause();
+
+  videoPlayer.removeAttribute(
+    "src"
+  );
+
+  videoPlayer.load();
+
+
+  videoPlayer.src =
+    data.video;
+
+
+  videoModal.classList.add(
+    "open"
+  );
+
+
+  videoPlayer.play().catch(
+    ()=>{}
+  );
+
+}
+
+
+function closeVideo(){
+
+  videoPlayer.pause();
+
+  videoPlayer.removeAttribute(
+    "src"
+  );
+
+  videoPlayer.load();
+
+  videoModal.classList.remove(
+    "open"
+  );
+
+}
+
+
+document.getElementById(
+  "closeVideo"
+).addEventListener(
+  "click",
+  closeVideo
+);
+
+
+videoModal.addEventListener(
+  "click",
+  function(e){
+
+    if(e.target === videoModal)
+      closeVideo();
+
+  }
+);
+
+
+/* =========================================================
+   MUSIC
+========================================================= */
+
+function initAudio(){
+
+  if(audio)
+    return;
+
+
+  audio =
+    new Audio(SONG);
+
+  audio.loop = true;
+
+  audio.preload = "none";
+
+}
+
+
+async function toggleMusic(){
+
+  initAudio();
+
+
+  if(audio.paused){
+
+    try{
+
+      await audio.play();
+
+      document.getElementById(
+        "musicBtn"
+      ).textContent = "❚❚";
+
+    }catch(e){
+
+      console.log(
+        "Music could not start:",
+        e
+      );
+
+    }
+
+  }else{
+
+    audio.pause();
+
+    document.getElementById(
+      "musicBtn"
+    ).textContent = "♪";
+
+  }
+
+}
+
+
+document.getElementById(
+  "musicBtn"
+).addEventListener(
+  "click",
+  toggleMusic
+);
+
+
+/* =========================================================
+   INTRO OPEN
+========================================================= */
+
+document.getElementById(
+  "openBtn"
+).addEventListener(
+  "click",
+  function(){
+
+    intro.classList.add("hide");
+
+    main.classList.add("show");
+
+    /*
+      We do NOT autoplay music here.
+      User can press ♪.
+    */
+
+  }
+);
+
+
+/* =========================================================
+   HEART MESSAGE
+========================================================= */
+
+const MESSAGE =
+`There are so many little things I could say.
+
+So I made this tiny book instead.
+
+Ten pages.
+Ten memories.
+Ten little places for photos, videos and moments.
+
+Every page can hold something special.
+
+And when you reach the last page,
+the story does not really have to end. ♥`;
+
+
+let typingTimer = null;
+
+
+document.getElementById(
+  "heartBtn"
+).addEventListener(
+  "click",
+  function(){
+
+    loveModal.classList.add(
+      "open"
+    );
+
+
+    loveMessage.textContent =
+      "";
+
+
+    clearInterval(
+      typingTimer
+    );
+
+
+    let i = 0;
+
+
+    typingTimer =
+      setInterval(()=>{
+
+        loveMessage.textContent =
+          MESSAGE.slice(0,i++);
+
+
+        if(
+          i > MESSAGE.length
+        ){
+
+          clearInterval(
+            typingTimer
+          );
+
+        }
+
+      },15);
+
+  }
+);
+
+
+/* =========================================================
+   LOVE MODAL MUSIC
+========================================================= */
+
+document.getElementById(
+  "loveMusicBtn"
+).addEventListener(
+  "click",
+  toggleMusic
+);
+
+
+/* =========================================================
+   LOVE MODAL VIDEO
+========================================================= */
+
+document.getElementById(
+  "loveVideoBtn"
+).addEventListener(
+  "click",
+  function(){
+
+    closeLove();
+
+    /*
+      يفتح فيديو الصفحة الحالية.
+    */
+
+    const index =
+      spreadIndex * 2;
+
+    openVideo(index);
+
+  }
+);
+
+
+function closeLove(){
+
+  loveModal.classList.remove(
+    "open"
+  );
+
+}
+
+
+document.getElementById(
+  "closeLove"
+).addEventListener(
+  "click",
+  closeLove
+);
+
+
+loveModal.addEventListener(
+  "click",
+  function(e){
+
+    if(e.target === loveModal)
+      closeLove();
+
+  }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+buildBook();
+
 </script>
 
-<!--
-================================================================
-PROJECT STRUCTURE (this build ships as a single self-contained
-file; if you want to grow it into a full project, split it like
-this and update the <link>/<script> tags accordingly):
-
-love-letter-site/
-├── index.html            → page structure only (this file, HTML part)
-├── /css
-│   └── style.css         → everything inside the <style> block
-├── /js
-│   └── main.js           → everything inside the <script> block
-├── /assets
-│   ├── /photos           → your real photos (replace .ph1–.ph4 placeholders)
-│   ├── /audio
-│   │   └── note.mp3      → the real "note just for you" voice memo
-│   └── /music
-│       └── song.mp3      → your real song, or a licensed embed
-└── README.md             → how to customize text, photos, song, map pin
-
-Sections implemented in this file:
-1. #screen-intro   – candle + butterfly opening scene
-2. #screen-cover   – "a love letter for you" title card
-3. #screen-book    – scrapbook: polaroids, note, vinyl, bouquet button
-4. #widgets        – floating map / voice-note / music player
-5. #memModal, #bouquetModal – popup cards
-6. downloadBtn / heartBtn / helpBtn – persistent corner controls
-================================================================
--->
 </body>
 </html>
+
