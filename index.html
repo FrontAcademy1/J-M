@@ -1,1736 +1,398 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="ltr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#17080c">
-
-<title>Our Love Book</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>for you, with love</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Caveat:wght@500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,700&family=Caveat:wght@500;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#12070a;
-  --paper:#f4ead7;
-  --paper2:#eadbc0;
-  --ink:#30171a;
-  --red:#8d1725;
-  --red2:#b52b3d;
-  --gold:#c99a4b;
-  --white:#fff9ef;
-}
-
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-}
-
-html,body{
-  width:100%;
-  height:100%;
-  margin:0;
-}
-
-body{
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 45%,#3a1019 0,#1d080e 38%,#090306 100%);
-  color:white;
-  font-family:Cairo,sans-serif;
-  touch-action:none;
-}
-
-button{
-  font:inherit;
-}
-
-#app{
-  width:100%;
-  height:100%;
-  position:relative;
-  overflow:hidden;
-}
-
-/* ---------------- INTRO ---------------- */
-
-.intro{
-  position:absolute;
-  inset:0;
-  z-index:100;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:#100509;
-  transition:opacity .7s ease,visibility .7s ease;
-}
-
-.intro.hide{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-}
-
-.intro-box{
-  width:min(90vw,500px);
-  text-align:center;
-}
-
-.intro-frame{
-  position:relative;
-  width:230px;
-  height:300px;
-  margin:auto;
-  border:1px solid rgba(220,175,90,.5);
-  border-radius:120px 120px 20px 20px;
-  overflow:hidden;
-  background:
-    linear-gradient(rgba(80,10,20,.2),rgba(0,0,0,.6)),
-    url("assets/intro.jpg") center/cover;
-  box-shadow:0 20px 70px rgba(0,0,0,.65);
-}
-
-.candle{
-  position:absolute;
-  left:50%;
-  bottom:35px;
-  transform:translateX(-50%);
-  width:35px;
-  height:100px;
-  background:linear-gradient(90deg,#d6b36a,#fff2c2,#c99a4b);
-  border-radius:5px 5px 3px 3px;
-}
-
-.flame{
-  position:absolute;
-  left:50%;
-  top:-42px;
-  width:24px;
-  height:40px;
-  transform:translateX(-50%);
-  border-radius:60% 40% 60% 40%;
-  background:#ffca58;
-  box-shadow:0 0 25px #ff9f22;
-  animation:flame 1.2s ease-in-out infinite alternate;
-}
-
-@keyframes flame{
-  from{transform:translateX(-50%) scale(.9) rotate(-3deg)}
-  to{transform:translateX(-50%) scale(1.08) rotate(4deg)}
-}
-
-.intro-small{
-  margin-top:30px;
-  color:#d7b96f;
-  letter-spacing:5px;
-  font-size:12px;
-}
-
-.intro-title{
-  font-family:"Playfair Display",serif;
-  font-size:clamp(34px,9vw,65px);
-  margin:8px 0 20px;
-}
-
-.enter{
-  border:1px solid rgba(216,166,76,.65);
-  background:rgba(255,255,255,.05);
-  color:#fff2ce;
-  padding:13px 32px;
-  border-radius:999px;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.enter:active{
-  transform:scale(.95);
-}
-
-/* ---------------- TOP ---------------- */
-
-.top{
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  z-index:20;
-  height:70px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:0 22px;
-  pointer-events:none;
-}
-
-.logo{
-  font-family:"Playfair Display",serif;
-  letter-spacing:2px;
-  color:#f3d798;
-  font-size:16px;
-}
-
-.page-counter{
-  font-family:"Caveat",cursive;
-  font-size:23px;
-  color:#f8dfaa;
-}
-
-/* ---------------- BOOK ---------------- */
-
-.stage{
-  width:100%;
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  perspective:1800px;
-}
-
-.book{
-  position:relative;
-  width:min(92vw,1000px);
-  height:min(76vh,650px);
-  min-height:420px;
-  transform-style:preserve-3d;
-}
-
-.book-shadow{
-  position:absolute;
-  left:4%;
-  right:4%;
-  bottom:-25px;
-  height:35px;
-  background:rgba(0,0,0,.45);
-  border-radius:50%;
-}
-
-.spread{
-  position:absolute;
-  inset:0;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:
-    0 20px 55px rgba(0,0,0,.55),
-    0 2px 0 rgba(255,255,255,.15) inset;
-  background:#211;
-  opacity:0;
-  pointer-events:none;
-}
-
-.spread.active{
-  opacity:1;
-  pointer-events:auto;
-}
-
-.page{
-  position:relative;
-  overflow:hidden;
-  background-color:var(--paper);
-  color:var(--ink);
-  background-size:cover;
-  background-position:center;
-  isolation:isolate;
-}
-
-.page.left{
-  border-right:1px solid rgba(50,20,15,.25);
-}
-
-.page.right{
-  border-left:1px solid rgba(50,20,15,.15);
-}
-
-.page::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:-1;
-  background:
-    linear-gradient(90deg,rgba(255,255,255,.18),transparent 15%,transparent 85%,rgba(0,0,0,.08));
-  pointer-events:none;
-}
-
-.page-content{
-  position:absolute;
-  inset:0;
-  padding:clamp(22px,4vw,45px);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
-
-.page-number{
-  position:absolute;
-  bottom:16px;
-  color:#876e4d;
-  font-family:"Caveat",cursive;
-  font-size:19px;
-}
-
-.page h2{
-  font-family:"Playfair Display",serif;
-  color:#641521;
-  font-size:clamp(25px,4vw,42px);
-  margin:0 0 8px;
-}
-
-.page p{
-  max-width:430px;
-  line-height:1.9;
-  font-size:clamp(13px,1.8vw,17px);
-  margin:7px 0;
-}
-
-.script{
-  font-family:"Caveat",cursive;
-  color:#8d1725;
-  font-size:clamp(24px,4vw,38px);
-}
-
-.photo{
-  width:min(70%,270px);
-  aspect-ratio:4/5;
-  object-fit:cover;
-  padding:8px;
-  background:#fffaf0;
-  box-shadow:0 8px 20px rgba(0,0,0,.25);
-  transform:rotate(-2deg);
-  margin:15px 0;
-}
-
-.right .photo{
-  transform:rotate(2deg);
-}
-
-/* ---------------- PAGE VIDEO ---------------- */
-
-.page-video{
-  width:min(85%,360px);
-  max-height:230px;
-  object-fit:cover;
-  border-radius:8px;
-  margin-top:15px;
-  box-shadow:0 8px 22px rgba(0,0,0,.25);
-  background:#000;
-}
-
-/* ---------------- FLOWERS ---------------- */
-
-.flowers{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  overflow:hidden;
-  z-index:4;
-}
-
-.flower{
-  position:absolute;
-  font-size:27px;
-  opacity:0;
-  transform:translateY(40px) scale(.3) rotate(0);
-}
-
-.spread.active .flower{
-  animation:flowerAppear .9s ease forwards;
-}
-
-.flower:nth-child(1){left:8%;top:8%;animation-delay:.05s}
-.flower:nth-child(2){right:9%;top:13%;animation-delay:.15s}
-.flower:nth-child(3){left:13%;bottom:10%;animation-delay:.25s}
-.flower:nth-child(4){right:12%;bottom:8%;animation-delay:.35s}
-.flower:nth-child(5){left:48%;top:5%;animation-delay:.45s}
-
-@keyframes flowerAppear{
-  0%{
-    opacity:0;
-    transform:translateY(35px) scale(.2) rotate(-30deg);
+  :root{
+    --plum:#3a1f2b;
+    --plum-dark:#2a1620;
+    --teal:#20424a;
+    --teal-dark:#173139;
+    --cream:#f4ead7;
+    --paper:#faf5e9;
+    --gold:#e7b366;
+    --pink:#e79fc4;
+    --ink:#233;
+    --shadow:0 20px 45px rgba(0,0,0,.35);
   }
-  70%{
-    opacity:1;
-    transform:translateY(-4px) scale(1.15) rotate(10deg);
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;}
+  body{
+    font-family:'Poppins',sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
   }
-  100%{
-    opacity:.9;
-    transform:translateY(0) scale(1) rotate(0);
+  .screen{
+    position:fixed; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    transition:opacity .6s ease, transform .6s ease;
   }
-}
+  .screen.hidden{opacity:0; pointer-events:none; transform:scale(1.03);}
 
-/* ---------------- TURN ANIMATION ---------------- */
+  /* ---------- corner controls ---------- */
+  .corner-btn{
+    position:fixed; z-index:50;
+    border:none; cursor:pointer;
+    font-family:'Poppins',sans-serif; font-weight:600; font-size:.85rem;
+    transition:transform .2s ease;
+  }
+  .corner-btn:hover{transform:translateY(-2px);}
+  #downloadBtn{
+    top:22px; left:22px;
+    background:var(--paper); color:var(--plum);
+    padding:10px 18px; border-radius:30px; box-shadow:0 6px 16px rgba(0,0,0,.15);
+    display:none;
+  }
+  #helpBtn{
+    bottom:22px; right:22px;
+    background:var(--teal-dark); color:var(--cream);
+    padding:10px 20px; border-radius:30px; box-shadow:0 6px 16px rgba(0,0,0,.25);
+  }
+  #heartBtn{
+    bottom:22px; left:22px;
+    width:52px; height:52px; border-radius:50%;
+    background:var(--plum); color:var(--pink);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.3rem; box-shadow:0 6px 16px rgba(0,0,0,.3);
+  }
+  #heartBtn.liked{color:#ff6fa5;}
 
-.turn-layer{
-  position:absolute;
-  top:0;
-  bottom:0;
-  width:50%;
-  z-index:30;
-  pointer-events:none;
-  transform-style:preserve-3d;
-  display:none;
-}
+  /* ================= SCREEN 1 — candle intro ================= */
+  #screen-intro{
+    background:
+      repeating-linear-gradient(90deg, rgba(0,0,0,.02) 0 2px, transparent 2px 5px),
+      var(--cream);
+    cursor:pointer;
+  }
+  .candle-frame{
+    width:min(46vw,420px); height:min(70vh,620px);
+    background:radial-gradient(circle at 50% 35%, var(--plum) 0%, var(--plum-dark) 75%);
+    border-radius:50%;
+    display:flex; align-items:flex-end; justify-content:center;
+    position:relative;
+    box-shadow:inset 0 0 60px rgba(0,0,0,.5);
+  }
+  .butterfly{
+    position:absolute; top:26%; left:30%;
+    font-size:2.4rem; color:var(--pink);
+    animation:flutter 3s ease-in-out infinite;
+  }
+  @keyframes flutter{0%,100%{transform:rotate(-6deg) translateY(0);}50%{transform:rotate(6deg) translateY(-8px);}}
+  .candle{ position:relative; width:44px; height:190px; margin-bottom:40px;
+    background:linear-gradient(90deg,#d8cdb8,#efe8d8 40%,#d8cdb8);
+    border-radius:6px 6px 2px 2px;
+  }
+  .flame{
+    position:absolute; left:50%; top:-52px; transform:translateX(-50%);
+    width:26px; height:52px;
+    background:radial-gradient(ellipse at 50% 70%, #fff6d0 0%, var(--gold) 45%, #c9701f 85%);
+    border-radius:50% 50% 50% 50% / 65% 65% 35% 35%;
+    animation:flicker 1.6s ease-in-out infinite;
+    filter:drop-shadow(0 0 14px rgba(231,179,102,.8));
+  }
+  @keyframes flicker{0%,100%{transform:translateX(-50%) scale(1,1);}50%{transform:translateX(-50%) scale(.92,1.06) rotate(2deg);}}
+  .intro-hint{position:absolute; bottom:8%; color:var(--plum); font-family:'Caveat',cursive; font-size:1.4rem;}
 
-.turn-layer.right{
-  right:0;
-  transform-origin:left center;
-}
+  /* ================= SCREEN 2 — letter cover ================= */
+  #screen-cover{
+    background:
+      linear-gradient(160deg, var(--teal) 0%, var(--teal-dark) 100%);
+    cursor:pointer;
+  }
+  .letter-card{
+    width:min(70vw,460px); aspect-ratio:4/5;
+    background:var(--paper);
+    box-shadow:var(--shadow);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    position:relative; transform:rotate(-1deg);
+    padding:30px;
+    text-align:center;
+  }
+  .letter-card .rule{width:70%; border:none; border-top:1px solid #999; margin:8px 0;}
+  .letter-card .tag{font-family:'Caveat',cursive; font-size:1.1rem; letter-spacing:2px; color:#555;}
+  .letter-card h1{
+    font-family:'Playfair Display',serif; font-style:italic; font-weight:700;
+    font-size:3.4rem; margin:14px 0; color:var(--plum-dark);
+  }
+  .letter-card .sign{font-family:'Caveat',cursive; font-size:1.3rem; color:#444;}
+  .stamp{position:absolute; top:22px; right:22px; font-size:1.6rem;}
+  .stamp.br{top:auto; bottom:22px; right:22px;}
+  .stamp.bl{top:auto; bottom:22px; left:22px;}
 
-.turn-layer.left{
-  left:0;
-  transform-origin:right center;
-}
-
-.turn-layer.go-next{
-  display:block;
-  animation:turnNext .62s cubic-bezier(.22,.72,.2,1) forwards;
-}
-
-.turn-layer.go-prev{
-  display:block;
-  animation:turnPrev .62s cubic-bezier(.22,.72,.2,1) forwards;
-}
-
-@keyframes turnNext{
-  from{transform:rotateY(0deg)}
-  to{transform:rotateY(-180deg)}
-}
-
-@keyframes turnPrev{
-  from{transform:rotateY(0deg)}
-  to{transform:rotateY(180deg)}
-}
-
-.turn-paper{
-  position:absolute;
-  inset:0;
-  background:var(--paper);
-  box-shadow:0 0 25px rgba(0,0,0,.3);
-  overflow:hidden;
-  background-size:cover;
-  background-position:center;
-}
-
-.turn-paper::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    90deg,
-    rgba(0,0,0,.02),
-    transparent 45%,
-    rgba(0,0,0,.28)
-  );
-}
-
-/* ---------------- CONTROLS ---------------- */
-
-.controls{
-  position:absolute;
-  z-index:50;
-  left:50%;
-  bottom:22px;
-  transform:translateX(-50%);
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.ctrl{
-  width:47px;
-  height:47px;
-  border:1px solid rgba(220,180,100,.55);
-  background:rgba(20,5,9,.8);
-  color:#f5d99b;
-  border-radius:50%;
-  cursor:pointer;
-  display:grid;
-  place-items:center;
-  font-size:19px;
-}
-
-.ctrl.big{
-  width:57px;
-  height:57px;
-  background:#801525;
-}
-
-.ctrl:active{
-  transform:scale(.9);
-}
-
-.ctrl:disabled{
-  opacity:.3;
-}
-
-/* ---------------- HEART ---------------- */
-
-.heart-button{
-  position:absolute;
-  z-index:60;
-  right:24px;
-  bottom:25px;
-  width:55px;
-  height:55px;
-  border:0;
-  border-radius:50%;
-  background:#8d1725;
-  color:white;
-  font-size:23px;
-  box-shadow:0 8px 25px rgba(100,0,20,.4);
-  cursor:pointer;
-}
-
-/* ---------------- MODAL ---------------- */
-
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:200;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:rgba(0,0,0,.75);
-}
-
-.modal.open{
-  display:flex;
-}
-
-.modal-box{
-  width:min(92vw,600px);
-  max-height:88vh;
-  overflow:auto;
-  background:var(--paper);
-  color:var(--ink);
-  border-radius:15px;
-  padding:25px;
-  text-align:center;
-  position:relative;
-  box-shadow:0 20px 70px #000;
-}
-
-.close{
-  position:absolute;
-  top:10px;
-  left:12px;
-  border:0;
-  background:none;
-  font-size:25px;
-  color:#641521;
-  cursor:pointer;
-}
-
-.modal-box h2{
-  font-family:"Playfair Display",serif;
-  color:#751727;
-}
-
-.modal-video{
-  width:100%;
-  max-height:55vh;
-  background:#000;
-  border-radius:10px;
-}
-
-.modal-actions{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin-top:15px;
-  flex-wrap:wrap;
-}
-
-.action{
-  border:0;
-  border-radius:999px;
-  padding:10px 18px;
-  background:#7d1625;
-  color:#fff;
-  cursor:pointer;
-}
-
-/* ---------------- MOBILE ---------------- */
-
-@media(max-width:650px){
-
+  /* ================= SCREEN 3 — scrapbook ================= */
+  #screen-book{
+    background:var(--cream);
+    align-items:flex-start; justify-content:center;
+    padding:70px 20px 20px; overflow-y:auto;
+  }
   .book{
-    width:94vw;
-    height:68vh;
-    min-height:390px;
+    width:min(90vw,900px);
+    background:linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    border-radius:6px; box-shadow:var(--shadow);
+    display:grid; grid-template-columns:1fr 1fr; gap:14px;
+    padding:22px; position:relative;
+  }
+  @media (max-width:640px){.book{grid-template-columns:1fr;}}
+  .polaroid{
+    background:#fff; padding:8px 8px 24px; border-radius:2px;
+    box-shadow:0 8px 18px rgba(0,0,0,.35);
+    cursor:pointer; transition:transform .2s ease;
+  }
+  .polaroid:hover{transform:translateY(-4px) rotate(-1deg);}
+  .polaroid .ph{
+    width:100%; aspect-ratio:4/3; border-radius:2px;
+    display:flex; align-items:center; justify-content:center; font-size:1.8rem;
+  }
+  .ph1{background:linear-gradient(135deg,#e79fc4,#c96fa0);}
+  .ph2{background:linear-gradient(135deg,#e7b366,#c98b3c);}
+  .ph3{background:linear-gradient(135deg,#8fb9c9,#4d7f92);}
+  .ph4{background:linear-gradient(135deg,#b7a6d9,#7c63ad);}
+  .polaroid .cap{font-family:'Caveat',cursive; font-size:.95rem; text-align:center; color:#444; margin-top:6px;}
+  .vinyl{
+    width:120px; height:120px; border-radius:50%;
+    background:repeating-radial-gradient(circle, #111 0 3px, #222 3px 6px);
+    display:flex; align-items:center; justify-content:center;
+    position:absolute; bottom:16px; left:16px; box-shadow:0 8px 20px rgba(0,0,0,.4);
+  }
+  .vinyl::after{content:'';width:36px; height:36px; border-radius:50%; background:var(--cream);}
+  .note{
+    grid-column:1/-1; background:var(--paper); border-radius:4px; padding:26px 28px;
+    box-shadow:0 8px 20px rgba(0,0,0,.25); position:relative;
+  }
+  .note .from-for{font-size:.8rem; letter-spacing:1px; color:#777; margin-bottom:6px;}
+  .note .from-for b{color:var(--plum-dark);}
+  .note p{font-size:1.02rem; line-height:1.6; color:#333; margin:10px 0;}
+  .note button{
+    margin-top:10px; background:var(--plum-dark); color:var(--cream);
+    border:none; padding:10px 22px; border-radius:30px; cursor:pointer; font-weight:600;
+  }
+  .bouquet-btn{
+    grid-column:1/-1; justify-self:center; background:none; border:1px dashed var(--cream);
+    color:var(--cream); padding:8px 18px; border-radius:20px; cursor:pointer; font-family:'Caveat',cursive; font-size:1.1rem;
   }
 
-  .page-content{
-    padding:18px 14px;
+  /* ---------- floating widgets ---------- */
+  #widgets{
+    position:fixed; bottom:90px; left:22px; z-index:40;
+    width:270px; display:flex; flex-direction:column; gap:10px;
+    transform:translateY(20px); opacity:0; pointer-events:none; transition:all .5s ease;
   }
-
-  .page h2{
-    font-size:23px;
+  #widgets.show{transform:translateY(0); opacity:1; pointer-events:auto;}
+  .widget{background:var(--paper); border-radius:14px; padding:12px 14px; box-shadow:var(--shadow); font-size:.85rem;}
+  .map-card{height:120px; border-radius:10px; overflow:hidden; position:relative;
+    background:linear-gradient(135deg,#dfe7d8,#c7d3bd);
   }
-
-  .page p{
-    font-size:12px;
-    line-height:1.7;
+  .map-card .pin{position:absolute; width:26px; height:26px; border-radius:50% 50% 50% 0; background:var(--plum); transform:rotate(-45deg); cursor:pointer;}
+  .map-card .pin::after{content:'♥'; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; transform:rotate(45deg); color:var(--pink); font-size:.7rem;}
+  .audio-widget{display:flex; align-items:center; gap:10px;}
+  .play-circle{
+    width:34px; height:34px; border-radius:50%; background:var(--plum-dark); color:var(--cream);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;
   }
+  .wave{flex:1; display:flex; align-items:center; gap:2px; height:20px;}
+  .wave span{width:3px; background:#c9b98f; border-radius:2px;}
+  .music-widget{background:#111; color:#eee; border-radius:14px;}
+  .music-widget .top{display:flex; justify-content:space-between; font-size:.8rem; margin-bottom:8px;}
+  .music-widget .bar{height:4px; background:#444; border-radius:2px; overflow:hidden; margin-bottom:8px;}
+  .music-widget .bar i{display:block; height:100%; width:22%; background:var(--pink);}
+  .music-widget .controls{display:flex; align-items:center; justify-content:space-between; font-size:.75rem; color:#aaa;}
 
-  .photo{
-    width:76%;
-    max-height:210px;
+  /* ---------- modal ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(20,15,20,.55); backdrop-filter:blur(3px);
+    display:flex; align-items:center; justify-content:center; z-index:80;
+    opacity:0; pointer-events:none; transition:opacity .3s ease;
   }
-
-  .page-video{
-    max-height:150px;
+  .modal-overlay.show{opacity:1; pointer-events:auto;}
+  .modal-card{
+    background:var(--paper); border-radius:12px; padding:26px; width:min(90vw,320px);
+    text-align:center; box-shadow:var(--shadow); transform:scale(.92); transition:transform .3s ease;
   }
+  .modal-overlay.show .modal-card{transform:scale(1);}
+  .modal-card .memph{width:100%; aspect-ratio:4/3; border-radius:6px; margin-bottom:12px; display:flex; align-items:center; justify-content:center; font-size:2rem;}
+  .modal-card h3{font-family:'Playfair Display',serif; margin:6px 0 2px;}
+  .modal-card .meta{font-size:.8rem; color:#888;}
+  .modal-close{margin-top:14px; background:none; border:1px solid #ccc; padding:8px 18px; border-radius:20px; cursor:pointer;}
+  .bouquet-modal .bloom{font-size:4rem; display:block; margin:14px 0;}
 
-  .controls{
-    bottom:16px;
+  .tooltip-box{
+    position:fixed; bottom:80px; right:22px; background:var(--paper); color:var(--ink);
+    padding:14px 16px; border-radius:10px; box-shadow:var(--shadow); font-size:.85rem; max-width:230px;
+    opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:60;
   }
-
-  .heart-button{
-    right:13px;
-    bottom:18px;
-  }
-
-  .logo{
-    font-size:13px;
-  }
-
-  .page-counter{
-    font-size:19px;
-  }
-}
-
-/* Very small phones */
-
-@media(max-height:650px){
-  .book{
-    height:65vh;
-  }
-
-  .controls{
-    bottom:8px;
-  }
-
-  .heart-button{
-    bottom:10px;
-  }
-}
-
-/* Reduced motion */
-
-@media(prefers-reduced-motion:reduce){
-  *,
-  *::before,
-  *::after{
-    animation-duration:.01ms!important;
-    transition-duration:.01ms!important;
-  }
-}
+  .tooltip-box.show{opacity:1;}
 </style>
 </head>
-
 <body>
 
-<div id="app">
+  <button id="downloadBtn">Download</button>
+  <button id="heartBtn" onclick="this.classList.toggle('liked')">♥</button>
+  <button id="helpBtn" onclick="toggleHelp()">Help</button>
+  <div class="tooltip-box" id="helpTip">Tap the candle to begin, then tap the letter, then explore the note, photos and widgets. This is a template — replace the placeholders with your own photos, words and song.</div>
 
-  <!-- INTRO -->
-  <section class="intro" id="intro">
-
-    <div class="intro-box">
-
-      <div class="intro-frame">
-        <div class="candle">
-          <div class="flame"></div>
-        </div>
-      </div>
-
-      <div class="intro-small">A PRIVATE MEMORY BOOK</div>
-
-      <div class="intro-title">
-        Our Love Book
-      </div>
-
-      <button class="enter" id="enterBtn">
-        Open Our Story
-      </button>
-
+  <!-- SCREEN 1: intro -->
+  <section class="screen" id="screen-intro" onclick="goTo('screen-cover'); document.getElementById('downloadBtn').style.display='block';">
+    <div class="candle-frame">
+      <div class="butterfly">🦋</div>
+      <div class="candle"><div class="flame"></div></div>
     </div>
-
+    <div class="intro-hint">tap the candle to begin ✧</div>
   </section>
 
-
-  <!-- TOP -->
-  <header class="top">
-    <div class="logo">♡ OUR STORY</div>
-    <div class="page-counter" id="counter">01 / 10</div>
-  </header>
-
-
-  <!-- BOOK -->
-  <main class="stage">
-
-    <div class="book" id="book">
-
-      <div class="book-shadow"></div>
-
-      <!--
-        الـ 5 spreads يتم إنشاؤهم من JavaScript
-        وكل spread يحتوي صفحتين.
-      -->
-
-      <div id="spreads"></div>
-
-      <!-- الصفحة التي تتحرك أثناء التقليب -->
-      <div class="turn-layer right" id="turnRight">
-        <div class="turn-paper" id="turnPaperRight"></div>
-      </div>
-
-      <div class="turn-layer left" id="turnLeft">
-        <div class="turn-paper" id="turnPaperLeft"></div>
-      </div>
-
+  <!-- SCREEN 2: letter cover -->
+  <section class="screen hidden" id="screen-cover" onclick="openBook(event)">
+    <div class="letter-card">
+      <span class="stamp">★</span><span class="stamp br">💋</span><span class="stamp bl">★</span>
+      <div class="tag">— a love letter —</div>
+      <h1>for you,</h1>
+      <hr class="rule">
+      <div class="sign">with love, you.</div>
     </div>
+  </section>
 
-  </main>
+  <!-- SCREEN 3: scrapbook -->
+  <section class="screen hidden" id="screen-book">
+    <div class="book">
+      <div class="vinyl"></div>
+      <div class="polaroid" onclick="openMemory('June 3','That rainy walk','Saigon','🌧️','ph1')">
+        <div class="ph ph1">📷</div><div class="cap">us, laughing</div>
+      </div>
+      <div class="polaroid" onclick="openMemory('May 18','Late night talks','home','🌙','ph2')">
+        <div class="ph ph2">📷</div><div class="cap">golden hour</div>
+      </div>
+      <div class="note">
+        <div class="from-for">FROM <b>You</b> &nbsp;·&nbsp; FOR <b>My Love</b></div>
+        <p id="noteText">My love, I built this little world for you — photos of us, a song, a voice, and flowers. Open every piece slowly, I am in the details.</p>
+        <button onclick="expandNote()">Tap here to view more</button>
+      </div>
+      <div class="polaroid" onclick="openMemory('July 2','Cold hands, warm hearts','the old bridge','🌉','ph3')">
+        <div class="ph ph3">📷</div><div class="cap">cold hands, warm hearts</div>
+      </div>
+      <div class="polaroid" onclick="openMemory('Aug 9','These memories make me smile','downtown','✨','ph4')">
+        <div class="ph ph4">📷</div><div class="cap">that night out</div>
+      </div>
+      <button class="bouquet-btn" onclick="openBouquet()">🌷 tap for a bouquet</button>
+    </div>
+  </section>
 
-
-  <!-- CONTROLS -->
-  <div class="controls">
-
-    <button class="ctrl" id="prevBtn" aria-label="Previous">
-      ‹
-    </button>
-
-    <button class="ctrl big" id="nextBtn" aria-label="Next">
-      ›
-    </button>
-
+  <!-- floating widgets -->
+  <div id="widgets">
+    <div class="widget">
+      <div class="map-card">
+        <div class="pin" style="top:45%; left:55%;" onclick="openMemory('June 3','That rainy walk','Saigon','🌧️','ph1')"></div>
+      </div>
+    </div>
+    <div class="widget audio-widget" onclick="toggleAudio(this)">
+      <div class="play-circle">▶</div>
+      <div>
+        <div style="font-weight:600;">A note just for you</div>
+        <div style="font-size:.75rem; color:#888;">tap to listen · 0:15</div>
+      </div>
+    </div>
+    <div class="widget music-widget">
+      <div class="top"><span>Our Song</span><span>0:23 / 3:40</span></div>
+      <div class="bar"><i></i></div>
+      <div class="controls"><span>♥ favorite</span><span onclick="this.parentElement.parentElement.querySelector('.bar i').style.width='60%'" style="cursor:pointer;">▶ play</span></div>
+    </div>
   </div>
 
-
-  <!-- LOVE BUTTON -->
-  <button class="heart-button" id="loveBtn">
-    ♥
-  </button>
-
-
-  <!-- MEMORY MODAL -->
-  <div class="modal" id="memoryModal">
-
-    <div class="modal-box">
-
-      <button class="close" data-close="memoryModal">×</button>
-
-      <h2 id="memoryTitle">Memory</h2>
-
-      <p id="memoryText"></p>
-
-      <div class="modal-actions">
-
-        <button class="action" id="memoryVideoBtn">
-          ▶ تشغيل الفيديو
-        </button>
-
-        <button class="action" id="memoryMusicBtn">
-          ♪ تشغيل الموسيقى
-        </button>
-
-      </div>
-
+  <!-- modal: memory -->
+  <div class="modal-overlay" id="memModal">
+    <div class="modal-card">
+      <div class="memph" id="memPh">📷</div>
+      <div class="meta" id="memDate">DATE</div>
+      <h3 id="memTitle">Title</h3>
+      <div class="meta" id="memLoc">Location</div>
+      <button class="modal-close" onclick="closeModal('memModal')">close</button>
     </div>
-
   </div>
 
-
-  <!-- VIDEO MODAL -->
-  <div class="modal" id="videoModal">
-
-    <div class="modal-box">
-
-      <button class="close" data-close="videoModal">×</button>
-
-      <h2>Our Video</h2>
-
-      <video
-        id="mainVideo"
-        class="modal-video"
-        controls
-        playsinline
-        preload="none">
-      </video>
-
+  <!-- modal: bouquet -->
+  <div class="modal-overlay" id="bouquetModal">
+    <div class="modal-card bouquet-modal" style="background:var(--plum-dark); color:var(--cream);">
+      <div class="meta" style="color:#cbb;">FROM YOU</div>
+      <h3 style="color:var(--cream);">My Love's Bouquet</h3>
+      <span class="bloom">💐</span>
+      <button class="modal-close" style="border-color:#665; color:var(--cream);" onclick="closeModal('bouquetModal')">close</button>
     </div>
-
   </div>
-
-
-  <!-- LOVE MODAL -->
-  <div class="modal" id="loveModal">
-
-    <div class="modal-box">
-
-      <button class="close" data-close="loveModal">×</button>
-
-      <div style="font-size:55px;color:#9b182a">♥</div>
-
-      <h2>رسالة صغيرة</h2>
-
-      <p id="loveText"></p>
-
-      <div class="modal-actions">
-
-        <button class="action" id="loveMusic">
-          ♪ الموسيقى
-        </button>
-
-        <button class="action" id="loveVideo">
-          ▶ الفيديو
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
 
 <script>
-"use strict";
-
-/* =========================================================
-   1 — ملفاتك
-   =========================================================
-
-   ضع ملفاتك داخل:
-
-   assets/
-      intro.jpg
-
-      bg1.jpg
-      bg2.jpg
-      ...
-      bg10.jpg
-
-      photo1.jpg
-      photo2.jpg
-      ...
-      photo10.jpg
-
-      video1.mp4
-      video2.mp4
-      ...
-      video10.mp4
-
-      song.mp3
-
-   لو مش عايز فيديو في صفحة معينة:
-   video: ""
-
-   ========================================================= */
-
-const PAGES = [
-
-  {
-    title:"البداية",
-    sub:"كل حكاية جميلة تبدأ بلحظة",
-    text:"هنا بدأت حكايتنا الصغيرة، ومن هنا يبدأ كتاب ذكرياتنا.",
-    background:"assets/bg1.jpg",
-    photo:"assets/photo1.jpg",
-    video:"assets/video1.mp4",
-    script:"Chapter One"
-  },
-
-  {
-    title:"أول ذكرى",
-    sub:"لحظة لن أنساها",
-    text:"صورة واحدة ممكن ترجع لنا ألف إحساس وذكرى.",
-    background:"assets/bg2.jpg",
-    photo:"assets/photo2.jpg",
-    video:"assets/video2.mp4",
-    script:"Our First Memory"
-  },
-
-  {
-    title:"ضحكتنا",
-    sub:"أجمل الأصوات",
-    text:"الضحكة اللي بتخلّي اليوم العادي يتحول لذكرى جميلة.",
-    background:"assets/bg3.jpg",
-    photo:"assets/photo3.jpg",
-    video:"assets/video3.mp4",
-    script:"Your Smile"
-  },
-
-  {
-    title:"لحظة مميزة",
-    sub:"فصل جديد من الحكاية",
-    text:"كل صفحة هنا شايلة جزء صغير من قصتنا.",
-    background:"assets/bg4.jpg",
-    photo:"assets/photo4.jpg",
-    video:"assets/video4.mp4",
-    script:"A Special Moment"
-  },
-
-  {
-    title:"ذكريات",
-    sub:"تفاصيل صغيرة",
-    text:"أحياناً أبسط التفاصيل هي اللي بتفضل في الذاكرة.",
-    background:"assets/bg5.jpg",
-    photo:"assets/photo5.jpg",
-    video:"assets/video5.mp4",
-    script:"Memories"
-  },
-
-  {
-    title:"يوم جميل",
-    sub:"احتفظ بهذا اليوم",
-    text:"يوم مرّ بسرعة، لكن ذكراه تستحق أن تبقى هنا.",
-    background:"assets/bg6.jpg",
-    photo:"assets/photo6.jpg",
-    video:"assets/video6.mp4",
-    script:"Beautiful Day"
-  },
-
-  {
-    title:"معاً",
-    sub:"صفحة وراء صفحة",
-    text:"كل صفحة جديدة تضيف تفصيلاً آخر للحكاية.",
-    background:"assets/bg7.jpg",
-    photo:"assets/photo7.jpg",
-    video:"assets/video7.mp4",
-    script:"Together"
-  },
-
-  {
-    title:"لحظة أخرى",
-    sub:"Still in our story",
-    text:"الذكريات الحلوة لا تحتاج إلى وقت طويل حتى تصبح مهمة.",
-    background:"assets/bg8.jpg",
-    photo:"assets/photo8.jpg",
-    video:"assets/video8.mp4",
-    script:"Another Chapter"
-  },
-
-  {
-    title:"قبل النهاية",
-    sub:"لم تنتهِ الحكاية",
-    text:"وصلنا لصفحة متقدمة، لكن أجمل شيء أن القصة مستمرة.",
-    background:"assets/bg9.jpg",
-    photo:"assets/photo9.jpg",
-    video:"assets/video9.mp4",
-    script:"Almost There"
-  },
-
-  {
-    title:"النهاية؟",
-    sub:"أو بداية جديدة",
-    text:"آخر صفحة في الكتاب، لكنها ليست آخر ذكرى.",
-    background:"assets/bg10.jpg",
-    photo:"assets/photo10.jpg",
-    video:"assets/video10.mp4",
-    script:"To Be Continued"
-  }
-
-];
-
-
-/* =========================================================
-   SETTINGS
-   ========================================================= */
-
-const SONG_FILE = "assets/song.mp3";
-
-const FLOWER = "🌸";
-
-
-/* =========================================================
-   ELEMENTS
-   ========================================================= */
-
-const spreadsContainer = document.getElementById("spreads");
-
-const counter = document.getElementById("counter");
-
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-
-const turnRight = document.getElementById("turnRight");
-const turnLeft = document.getElementById("turnLeft");
-
-const turnPaperRight =
-  document.getElementById("turnPaperRight");
-
-const turnPaperLeft =
-  document.getElementById("turnPaperLeft");
-
-const intro = document.getElementById("intro");
-
-const enterBtn = document.getElementById("enterBtn");
-
-const loveBtn = document.getElementById("loveBtn");
-
-const memoryModal =
-  document.getElementById("memoryModal");
-
-const videoModal =
-  document.getElementById("videoModal");
-
-const loveModal =
-  document.getElementById("loveModal");
-
-const memoryTitle =
-  document.getElementById("memoryTitle");
-
-const memoryText =
-  document.getElementById("memoryText");
-
-const mainVideo =
-  document.getElementById("mainVideo");
-
-const memoryVideoBtn =
-  document.getElementById("memoryVideoBtn");
-
-const memoryMusicBtn =
-  document.getElementById("memoryMusicBtn");
-
-const loveMusic =
-  document.getElementById("loveMusic");
-
-const loveVideo =
-  document.getElementById("loveVideo");
-
-const loveText =
-  document.getElementById("loveText");
-
-
-/* =========================================================
-   STATE
-   ========================================================= */
-
-let currentPage = 0;
-
-let isTurning = false;
-
-let currentVideo = "";
-
-let audio = null;
-
-
-/* =========================================================
-   CREATE SPREADS
-   ========================================================= */
-
-function createPage(page, index){
-
-  const side = index % 2 === 0 ? "left" : "right";
-
-  const article = document.createElement("article");
-
-  article.className = `page ${side}`;
-
-  article.dataset.index = index;
-
-  article.style.backgroundImage =
-    `linear-gradient(rgba(255,248,232,.35),rgba(255,248,232,.35)),url("${page.background}")`;
-
-  const content = document.createElement("div");
-
-  content.className = "page-content";
-
-  content.innerHTML = `
-
-    <div class="script">
-      ${escapeHTML(page.script)}
-    </div>
-
-    <h2>
-      ${escapeHTML(page.title)}
-    </h2>
-
-    <p>
-      ${escapeHTML(page.sub)}
-    </p>
-
-    <img
-      class="photo"
-      src="${page.photo}"
-      alt=""
-      loading="${index < 2 ? "eager" : "lazy"}"
-      decoding="async"
-      onerror="this.style.display='none'"
-    >
-
-    <p>
-      ${escapeHTML(page.text)}
-    </p>
-
-    ${
-      page.video
-      ?
-      `
-      <button
-        class="action page-video-button"
-        data-page-video="${index}">
-        ▶ شاهد ذكرى الصفحة
-      </button>
-      `
-      :
-      ""
-    }
-
-    <span class="page-number">
-      ${String(index + 1).padStart(2,"0")}
-    </span>
-
-  `;
-
-  article.appendChild(content);
-
-  /* flowers */
-
-  const flowers = document.createElement("div");
-
-  flowers.className = "flowers";
-
-  for(let i=0;i<5;i++){
-
-    const f = document.createElement("span");
-
-    f.className = "flower";
-
-    f.textContent = FLOWER;
-
-    flowers.appendChild(f);
-
-  }
-
-  article.appendChild(flowers);
-
-  return article;
-
+function goTo(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
 }
-
-
-function buildBook(){
-
-  spreadsContainer.innerHTML = "";
-
-  for(let i=0;i<10;i+=2){
-
-    const spread = document.createElement("section");
-
-    spread.className = "spread";
-
-    spread.dataset.spread = i / 2;
-
-    spread.appendChild(createPage(PAGES[i],i));
-
-    spread.appendChild(createPage(PAGES[i+1],i+1));
-
-    spreadsContainer.appendChild(spread);
-
-  }
-
-  showSpread(0);
-
+function openBook(e){
+  e.stopPropagation();
+  goTo('screen-book');
+  setTimeout(()=>document.getElementById('widgets').classList.add('show'), 400);
 }
-
-
-/* =========================================================
-   SHOW SPREAD
-   ========================================================= */
-
-function showSpread(spreadIndex){
-
-  const spreads =
-    document.querySelectorAll(".spread");
-
-  spreads.forEach((spread,i)=>{
-
-    spread.classList.toggle(
-      "active",
-      i === spreadIndex
-    );
-
-  });
-
-  currentPage = spreadIndex * 2;
-
-  updateUI();
-
-  /*
-    تحميل الفيديو فقط للصفحتين الموجودتين
-    حتى لا نحمل 10 فيديوهات مرة واحدة.
-  */
-
-  prepareCurrentSpread(spreadIndex);
-
+function expandNote(){
+  document.getElementById('noteText').textContent =
+    "My love, I built this little world for you — photos of us, a song, a voice, and flowers. Open every piece slowly, I am in the details. Every polaroid is a moment I never want to forget, and every song is the sound of you. Happy anniversary, my love.";
 }
-
-
-/* =========================================================
-   VIDEO LAZY SETUP
-   ========================================================= */
-
-function prepareCurrentSpread(spreadIndex){
-
-  const start = spreadIndex * 2;
-
-  const end = start + 1;
-
-  for(let i=start;i<=end;i++){
-
-    const videoButton =
-      document.querySelector(
-        `[data-page-video="${i}"]`
-      );
-
-    if(videoButton){
-
-      videoButton.onclick = function(e){
-
-        e.stopPropagation();
-
-        openPageVideo(i);
-
-      };
-
-    }
-
-  }
-
+function openMemory(date,title,loc,emoji,phclass){
+  document.getElementById('memPh').textContent = emoji;
+  document.getElementById('memPh').className = 'memph '+phclass;
+  document.getElementById('memDate').textContent = date.toUpperCase();
+  document.getElementById('memTitle').textContent = title;
+  document.getElementById('memLoc').textContent = loc;
+  document.getElementById('memModal').classList.add('show');
 }
-
-
-/* =========================================================
-   PAGE VIDEO
-   ========================================================= */
-
-function openPageVideo(index){
-
-  const page = PAGES[index];
-
-  if(!page || !page.video) return;
-
-  currentVideo = page.video;
-
-  mainVideo.pause();
-
-  mainVideo.removeAttribute("src");
-
-  /*
-    src بيتحط وقت الفتح فقط.
-    ده يقلل تحميل الفيديوهات أثناء تقليب الكتاب.
-  */
-
-  mainVideo.src = currentVideo;
-
-  videoModal.classList.add("open");
-
-  mainVideo.play().catch(()=>{});
-
+function openBouquet(){document.getElementById('bouquetModal').classList.add('show');}
+function closeModal(id){document.getElementById(id).classList.remove('show');}
+function toggleHelp(){document.getElementById('helpTip').classList.toggle('show');}
+function toggleAudio(el){
+  const c = el.querySelector('.play-circle');
+  c.textContent = c.textContent==='▶' ? '❚❚' : '▶';
 }
-
-
-/* =========================================================
-   PAGE TURN
-   ========================================================= */
-
-function nextPage(){
-
-  if(isTurning) return;
-
-  if(currentPage >= 8){
-
-    /*
-      الصفحة الأخيرة
-      لا يوجد انتقال بعد صفحة 10.
-    */
-
-    return;
-
+// build waveform bars
+document.addEventListener('DOMContentLoaded',()=>{
+  const wave = document.createElement('div'); wave.className='wave';
+  for(let i=0;i<24;i++){
+    const bar=document.createElement('span');
+    bar.style.height = (6+Math.random()*14)+'px';
+    wave.appendChild(bar);
   }
-
-  isTurning = true;
-
-  const oldSpread =
-    currentPage / 2;
-
-  const nextSpread =
-    oldSpread + 1;
-
-  /*
-    الورقة التي ستتحرك تأخذ صورة
-    الصفحة اليمنى الحالية.
-  */
-
-  const rightPage =
-    PAGES[currentPage + 1];
-
-  turnPaperRight.style.backgroundImage =
-    `url("${rightPage.background}")`;
-
-  turnRight.classList.remove("go-next");
-
-  /*
-    force reflow
-  */
-
-  void turnRight.offsetWidth;
-
-  turnRight.classList.add("go-next");
-
-  setTimeout(()=>{
-
-    showSpread(nextSpread);
-
-  },300);
-
-  setTimeout(()=>{
-
-    turnRight.classList.remove("go-next");
-
-    isTurning = false;
-
-  },650);
-
-}
-
-
-function prevPage(){
-
-  if(isTurning) return;
-
-  if(currentPage <= 0){
-
-    return;
-
-  }
-
-  isTurning = true;
-
-  const oldSpread =
-    currentPage / 2;
-
-  const prevSpread =
-    oldSpread - 1;
-
-  const leftPage =
-    PAGES[currentPage];
-
-  turnPaperLeft.style.backgroundImage =
-    `url("${leftPage.background}")`;
-
-  turnLeft.classList.remove("go-prev");
-
-  void turnLeft.offsetWidth;
-
-  turnLeft.classList.add("go-prev");
-
-  setTimeout(()=>{
-
-    showSpread(prevSpread);
-
-  },300);
-
-  setTimeout(()=>{
-
-    turnLeft.classList.remove("go-prev");
-
-    isTurning = false;
-
-  },650);
-
-}
-
-
-/* =========================================================
-   UI
-   ========================================================= */
-
-function updateUI(){
-
-  counter.textContent =
-    `${String(currentPage+1).padStart(2,"0")} / 10`;
-
-  prevBtn.disabled =
-    currentPage === 0;
-
-  nextBtn.disabled =
-    currentPage >= 8;
-
-}
-
-
-/* =========================================================
-   BUTTONS
-   ========================================================= */
-
-nextBtn.addEventListener(
-  "click",
-  nextPage
-);
-
-prevBtn.addEventListener(
-  "click",
-  prevPage
-);
-
-
-/* =========================================================
-   KEYBOARD
-   ========================================================= */
-
-document.addEventListener(
-  "keydown",
-  e=>{
-
-    if(e.key === "ArrowLeft"){
-
-      nextPage();
-
-    }
-
-    if(e.key === "ArrowRight"){
-
-      prevPage();
-
-    }
-
-    if(e.key === "Escape"){
-
-      closeAllModals();
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   SWIPE
-   ========================================================= */
-
-let startX = 0;
-let startY = 0;
-
-const book =
-  document.getElementById("book");
-
-book.addEventListener(
-  "touchstart",
-  e=>{
-
-    if(isTurning) return;
-
-    const touch = e.changedTouches[0];
-
-    startX = touch.clientX;
-    startY = touch.clientY;
-
-  },
-  {passive:true}
-);
-
-
-book.addEventListener(
-  "touchend",
-  e=>{
-
-    if(isTurning) return;
-
-    const touch = e.changedTouches[0];
-
-    const dx =
-      touch.clientX - startX;
-
-    const dy =
-      touch.clientY - startY;
-
-    /*
-      تجاهل السحب الرأسي.
-    */
-
-    if(Math.abs(dx) < 45) return;
-
-    if(Math.abs(dx) < Math.abs(dy)) return;
-
-    /*
-      RTL:
-      السحب لليسار = الصفحة التالية
-      السحب لليمين = السابقة
-    */
-
-    if(dx < 0){
-
-      nextPage();
-
-    }else{
-
-      prevPage();
-
-    }
-
-  },
-  {passive:true}
-);
-
-
-/* =========================================================
-   ENTER
-   ========================================================= */
-
-enterBtn.addEventListener(
-  "click",
-  ()=>{
-
-    intro.classList.add("hide");
-
-    /*
-      تشغيل الموسيقى بعد تفاعل المستخدم
-      يسمح للمتصفح بتشغيلها بدون مشكلة autoplay.
-    */
-
-    startMusic();
-
-  }
-);
-
-
-/* =========================================================
-   MUSIC
-   ========================================================= */
-
-function startMusic(){
-
-  if(!audio){
-
-    audio = new Audio(SONG_FILE);
-
-    audio.loop = true;
-
-    audio.preload = "none";
-
-  }
-
-  audio.play().catch(()=>{});
-
-}
-
-
-function toggleMusic(){
-
-  if(!audio){
-
-    startMusic();
-
-    return;
-
-  }
-
-  if(audio.paused){
-
-    audio.play().catch(()=>{});
-
-  }else{
-
-    audio.pause();
-
-  }
-
-}
-
-
-memoryMusicBtn.addEventListener(
-  "click",
-  toggleMusic
-);
-
-loveMusic.addEventListener(
-  "click",
-  toggleMusic
-);
-
-
-/* =========================================================
-   MEMORY BUTTON
-   ========================================================= */
-
-memoryVideoBtn.addEventListener(
-  "click",
-  ()=>{
-
-    closeModal(memoryModal);
-
-    openPageVideo(currentPage);
-
-  }
-);
-
-
-/* =========================================================
-   LOVE MESSAGE
-   ========================================================= */
-
-const LOVE_MESSAGE =
-`في حاجات كتير ممكن تتقال،
-لكن بعض الذكريات أجمل لما تفضل مكتوبة في مكان خاص.
-
-الكتاب ده مجرد صفحات،
-لكن كل صفحة فيه شايلة لحظة وذكرى جميلة.
-
-وكل ما نقلب صفحة،
-بنفتكر إن الحكايات الحلوة بتتكوّن من تفاصيل صغيرة.`;
-
-let typingTimer = null;
-
-loveBtn.addEventListener(
-  "click",
-  ()=>{
-
-    loveModal.classList.add("open");
-
-    loveText.textContent = "";
-
-    clearInterval(typingTimer);
-
-    let i = 0;
-
-    typingTimer = setInterval(()=>{
-
-      loveText.textContent =
-        LOVE_MESSAGE.slice(0,i++);
-
-      if(i > LOVE_MESSAGE.length){
-
-        clearInterval(typingTimer);
-
-      }
-
-    },18);
-
-  }
-);
-
-
-loveVideo.addEventListener(
-  "click",
-  ()=>{
-
-    closeModal(loveModal);
-
-    /*
-      فيديو عام اختاره المستخدم
-    */
-
-    const firstAvailable =
-      PAGES.find(p=>p.video);
-
-    if(firstAvailable){
-
-      const index =
-        PAGES.indexOf(firstAvailable);
-
-      openPageVideo(index);
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   MODALS
-   ========================================================= */
-
-document.querySelectorAll("[data-close]").forEach(btn=>{
-
-  btn.addEventListener(
-    "click",
-    ()=>{
-
-      const id =
-        btn.dataset.close;
-
-      closeModal(
-        document.getElementById(id)
-      );
-
-    }
-  );
-
+  document.querySelector('.audio-widget').insertBefore(wave, document.querySelector('.audio-widget').children[1]);
 });
-
-
-function closeModal(modal){
-
-  modal.classList.remove("open");
-
-}
-
-
-function closeAllModals(){
-
-  document
-    .querySelectorAll(".modal")
-    .forEach(m=>m.classList.remove("open"));
-
-  mainVideo.pause();
-
-}
-
-
-/*
-  الضغط خارج المودال يغلقه.
-*/
-
-document.querySelectorAll(".modal").forEach(modal=>{
-
-  modal.addEventListener(
-    "click",
-    e=>{
-
-      if(e.target === modal){
-
-        closeModal(modal);
-
-      }
-
-    }
-  );
-
-});
-
-
-/* =========================================================
-   ESCAPE HTML
-   ========================================================= */
-
-function escapeHTML(value){
-
-  return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-
-}
-
-
-/* =========================================================
-   START
-   ========================================================= */
-
-buildBook();
-
+document.getElementById('downloadBtn').addEventListener('click',()=>alert('Hook this up to export a PDF/image of the page, or link a real download.'));
 </script>
 
+<!--
+================================================================
+PROJECT STRUCTURE (this build ships as a single self-contained
+file; if you want to grow it into a full project, split it like
+this and update the <link>/<script> tags accordingly):
+
+love-letter-site/
+├── index.html            → page structure only (this file, HTML part)
+├── /css
+│   └── style.css         → everything inside the <style> block
+├── /js
+│   └── main.js           → everything inside the <script> block
+├── /assets
+│   ├── /photos           → your real photos (replace .ph1–.ph4 placeholders)
+│   ├── /audio
+│   │   └── note.mp3      → the real "note just for you" voice memo
+│   └── /music
+│       └── song.mp3      → your real song, or a licensed embed
+└── README.md             → how to customize text, photos, song, map pin
+
+Sections implemented in this file:
+1. #screen-intro   – candle + butterfly opening scene
+2. #screen-cover   – "a love letter for you" title card
+3. #screen-book    – scrapbook: polaroids, note, vinyl, bouquet button
+4. #widgets        – floating map / voice-note / music player
+5. #memModal, #bouquetModal – popup cards
+6. downloadBtn / heartBtn / helpBtn – persistent corner controls
+================================================================
+-->
 </body>
 </html>
