@@ -2,21 +2,33 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jana's Birthday Invitation</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Jana Waleed — Birthday Invitation</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<!-- Canvas Confetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap');
-
 :root{
-  --cream:#fff8ed;
-  --paper:#f8ead7;
-  --gold:#c99b4a;
-  --gold-light:#efd28c;
-  --rose:#d99ca5;
-  --rose-dark:#a96b76;
-  --brown:#4c3028;
-  --white:#fffdf9;
+  --cream:#fff9ef;
+  --paper:#f4e4cd;
+  --paper2:#ead1ad;
+  --gold:#c89b45;
+  --gold2:#f2d58e;
+  --rose:#c98792;
+  --rose2:#9f626d;
+  --brown:#4b3027;
+  --muted:#806957;
+  --white:#fffdf8;
 }
 
 *{
@@ -30,153 +42,167 @@ html{
 }
 
 body{
-  min-height:100vh;
-  background:
-    radial-gradient(circle at 20% 20%,rgba(239,210,140,.18),transparent 25%),
-    radial-gradient(circle at 80% 70%,rgba(217,156,165,.16),transparent 25%),
-    var(--cream);
-  color:var(--brown);
   font-family:'Montserrat',sans-serif;
+  color:var(--brown);
+  background:
+    radial-gradient(circle at 10% 10%,rgba(242,213,142,.18),transparent 25%),
+    radial-gradient(circle at 90% 70%,rgba(201,135,146,.15),transparent 25%),
+    var(--cream);
   overflow-x:hidden;
 }
 
-/* =========================
-   INTRO / ENVELOPE
-========================= */
+/* =========================================
+   LOADING / ENVELOPE
+========================================= */
 
-.intro{
+#intro{
   position:fixed;
   inset:0;
-  z-index:9999;
+  z-index:99999;
   display:flex;
   justify-content:center;
   align-items:center;
-  overflow:hidden;
   background:
-    radial-gradient(circle at center,rgba(255,255,255,.8),transparent 35%),
-    linear-gradient(135deg,#ead7bb,#fff8ed,#e6cfae);
+    radial-gradient(circle at center,rgba(255,255,255,.85),transparent 35%),
+    linear-gradient(135deg,#e6d0ad,#fff8eb,#dfc49c);
   transition:1.4s ease;
+  overflow:hidden;
 }
 
-.intro.hide{
+#intro.hide{
   opacity:0;
   visibility:hidden;
   pointer-events:none;
 }
 
 .intro-content{
-  width:min(900px,92vw);
+  width:min(850px,94vw);
   text-align:center;
-  position:relative;
 }
 
-/* floating particles */
-
-.particle{
-  position:absolute;
-  width:5px;
-  height:5px;
-  border-radius:50%;
-  background:var(--gold-light);
-  box-shadow:0 0 15px var(--gold);
-  animation:float 5s infinite ease-in-out;
+.intro-title{
+  font-family:'Cinzel',serif;
+  font-size:12px;
+  letter-spacing:6px;
+  color:#76543b;
+  margin-bottom:35px;
 }
 
-.p1{left:5%;top:20%;animation-delay:0s}
-.p2{left:15%;top:75%;animation-delay:1s}
-.p3{right:8%;top:25%;animation-delay:2s}
-.p4{right:17%;bottom:10%;animation-delay:1.5s}
-.p5{left:45%;top:5%;animation-delay:2.5s}
-.p6{right:40%;bottom:7%;animation-delay:.5s}
-
-@keyframes float{
-  0%,100%{transform:translateY(0) scale(1);opacity:.4}
-  50%{transform:translateY(-30px) scale(1.5);opacity:1}
-}
-
-.envelope-wrapper{
-  position:relative;
-  width:min(650px,88vw);
+.envelope-scene{
+  width:min(650px,92vw);
   height:420px;
   margin:auto;
   perspective:1400px;
+  position:relative;
 }
-
-/* envelope body */
 
 .envelope{
   position:absolute;
+  left:0;
+  bottom:25px;
   width:100%;
   height:300px;
-  bottom:0;
-  left:0;
   border-radius:8px;
   background:
-    linear-gradient(145deg,#fffaf0,#ead8bb);
+    linear-gradient(145deg,#fff9ed,#e7ceb0);
   box-shadow:
-    0 35px 70px rgba(89,55,33,.25),
-    inset 0 0 30px rgba(255,255,255,.6);
-  overflow:visible;
+    0 35px 80px rgba(69,43,27,.28),
+    inset 0 0 30px rgba(255,255,255,.55);
 }
 
-/* paper texture */
-
-.envelope::after{
+/* Paper grain */
+.envelope:after{
   content:"";
   position:absolute;
   inset:0;
-  opacity:.16;
   pointer-events:none;
+  opacity:.15;
   background-image:
-    radial-gradient(#8f6c4c 0.6px,transparent .6px);
+    radial-gradient(#75583d .6px,transparent .6px);
   background-size:8px 8px;
 }
 
-/* envelope front */
+/* Inner letter */
+.letter{
+  position:absolute;
+  z-index:2;
+  left:6%;
+  bottom:15px;
+  width:88%;
+  height:275px;
+  background:
+    linear-gradient(135deg,#fffef9,#f8ead5);
+  border:1px solid rgba(200,155,69,.3);
+  box-shadow:0 12px 35px rgba(69,43,27,.16);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  transition:1.3s cubic-bezier(.65,.05,.36,1);
+}
 
-.envelope-front{
+.envelope.open .letter{
+  transform:translateY(-175px);
+}
+
+.letter-content{
+  text-align:center;
+}
+
+.letter-small{
+  font-family:'Cinzel',serif;
+  font-size:11px;
+  letter-spacing:4px;
+  color:var(--gold);
+}
+
+.letter-name{
+  font-family:'Great Vibes',cursive;
+  color:var(--rose2);
+  font-size:70px;
+  margin:5px 0;
+}
+
+/* Front folds */
+.front{
   position:absolute;
   inset:0;
-  z-index:4;
+  z-index:5;
   overflow:hidden;
 }
 
-.envelope-front::before,
-.envelope-front::after{
-  content:"";
+.front-left,
+.front-right{
   position:absolute;
-  width:55%;
+  bottom:0;
+  width:60%;
   height:100%;
-  background:linear-gradient(145deg,#f6e8d0,#dfc39d);
+  background:linear-gradient(145deg,#f5e4c9,#dfc19a);
 }
 
-.envelope-front::before{
+.front-left{
   left:0;
   clip-path:polygon(0 0,100% 100%,0 100%);
 }
 
-.envelope-front::after{
+.front-right{
   right:0;
   clip-path:polygon(100% 0,100% 100%,0 100%);
 }
 
-/* flap */
-
+/* Top flap */
 .flap{
   position:absolute;
-  z-index:7;
-  left:0;
+  z-index:8;
   top:0;
+  left:0;
   width:100%;
-  height:230px;
-  transform-origin:top center;
-  transform:rotateX(0deg);
+  height:235px;
   clip-path:polygon(0 0,100% 0,50% 100%);
-  background:
-    linear-gradient(135deg,#fff8ea,#e2c8a1);
-  box-shadow:0 8px 20px rgba(80,45,25,.12);
+  background:linear-gradient(135deg,#fff8e9,#e2c59d);
+  transform-origin:top center;
   transition:1.2s cubic-bezier(.65,.05,.36,1);
   backface-visibility:hidden;
+  box-shadow:0 8px 20px rgba(68,42,25,.13);
 }
 
 .envelope.open .flap{
@@ -184,226 +210,226 @@ body{
   z-index:1;
 }
 
-/* inner letter */
-
-.letter{
+/* Floral emboss */
+.floral{
   position:absolute;
-  z-index:3;
-  width:88%;
-  height:285px;
-  left:6%;
-  bottom:15px;
-  background:
-    linear-gradient(135deg,#fffdf7,#f7ecda);
-  border:1px solid rgba(201,155,74,.3);
-  box-shadow:0 15px 30px rgba(90,50,25,.15);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  transition:1.2s cubic-bezier(.65,.05,.36,1);
+  inset:0;
+  z-index:6;
+  pointer-events:none;
+  opacity:.35;
 }
 
-.envelope.open .letter{
-  transform:translateY(-175px);
+.floral i{
+  position:absolute;
+  color:#b99b73;
+  font-size:34px;
 }
 
-/* decorative letter */
+.f1{left:35px;top:40px}
+.f2{right:35px;top:70px}
+.f3{left:60px;bottom:40px}
+.f4{right:70px;bottom:45px}
 
-.letter-content{
-  text-align:center;
-}
-
-.small-title{
-  font-family:'Cinzel',serif;
-  font-size:12px;
-  letter-spacing:5px;
-  color:var(--gold);
-}
-
-.letter-name{
-  font-family:'Great Vibes',cursive;
-  font-size:60px;
-  color:var(--rose-dark);
-  margin:8px 0;
-}
-
-/* wax seal */
-
+/* Seal */
 .seal{
   position:absolute;
-  z-index:10;
+  z-index:20;
+  width:108px;
+  height:108px;
   left:50%;
   top:50%;
   transform:translate(-50%,-50%);
-  width:105px;
-  height:105px;
   border-radius:50%;
-  border:5px solid #d8ae5d;
-  background:
-    radial-gradient(circle at 30% 25%,#f3d891,#a97827 55%,#7e5419);
-  box-shadow:
-    0 12px 25px rgba(81,49,16,.35),
-    inset 0 3px 5px rgba(255,255,255,.5),
-    0 0 35px rgba(239,210,140,.55);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#fff8df;
   cursor:pointer;
-  transition:.4s ease;
-  user-select:none;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#fff6d9;
+  background:
+    radial-gradient(circle at 30% 25%,#f2d991,#b17b27 58%,#754c13);
+  border:5px solid #d6ad5c;
+  box-shadow:
+    0 12px 30px rgba(70,42,12,.4),
+    inset 0 3px 6px rgba(255,255,255,.5),
+    0 0 45px rgba(240,210,135,.55);
+  transition:.4s;
 }
 
 .seal:hover{
   transform:translate(-50%,-50%) scale(1.08);
-  box-shadow:
-    0 15px 30px rgba(81,49,16,.35),
-    0 0 55px rgba(239,210,140,.9);
 }
 
-.seal::before{
+.seal:before{
   content:"";
   position:absolute;
-  inset:7px;
-  border:1px solid rgba(255,245,205,.65);
+  inset:8px;
+  border:1px solid rgba(255,245,205,.7);
   border-radius:50%;
 }
 
 .seal span{
   font-family:'Cinzel',serif;
+  font-size:20px;
   font-weight:600;
-  font-size:21px;
   letter-spacing:2px;
-  text-shadow:0 2px 3px rgba(90,50,10,.4);
+  text-shadow:0 2px 3px #76521b;
 }
 
-.open-text{
+.open-label{
   margin-top:25px;
   font-family:'Cinzel',serif;
   letter-spacing:4px;
-  font-size:12px;
-  color:#76533a;
-  animation:pulseText 2s infinite;
+  font-size:11px;
+  color:#76543b;
+  animation:pulse 2s infinite;
 }
 
-@keyframes pulseText{
+@keyframes pulse{
   0%,100%{opacity:.45}
   50%{opacity:1}
 }
 
-/* =========================
+/* =========================================
    MAIN PAGE
-========================= */
+========================================= */
 
-.page{
+#site{
   opacity:0;
   visibility:hidden;
   transition:1.5s ease;
 }
 
-.page.visible{
+#site.visible{
   opacity:1;
   visibility:visible;
 }
 
-/* hero */
+/* Music */
+.music-btn{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:9000;
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  border:1px solid rgba(200,155,69,.5);
+  background:rgba(255,250,239,.94);
+  color:var(--gold);
+  box-shadow:0 10px 30px rgba(70,42,25,.18);
+  cursor:pointer;
+  font-size:19px;
+  transition:.3s;
+}
+
+.music-btn:hover{
+  transform:scale(1.08);
+}
+
+/* =========================================
+   HERO
+========================================= */
 
 .hero{
   min-height:100vh;
+  padding:80px 20px;
   display:flex;
   justify-content:center;
   align-items:center;
-  text-align:center;
-  padding:80px 20px;
   position:relative;
   overflow:hidden;
 }
 
-.hero::before{
-  content:"";
+.hero-glow{
   position:absolute;
-  width:500px;
-  height:500px;
+  width:550px;
+  height:550px;
   border-radius:50%;
-  background:rgba(239,210,140,.15);
-  filter:blur(60px);
+  background:rgba(242,213,142,.14);
+  filter:blur(70px);
 }
 
-.frame{
-  width:min(900px,95vw);
-  min-height:620px;
-  padding:90px 30px;
+.hero-frame{
+  width:min(920px,95vw);
+  min-height:650px;
+  border:1px solid rgba(200,155,69,.5);
   position:relative;
-  border:1px solid rgba(201,155,74,.5);
-  box-shadow:
-    0 30px 80px rgba(91,56,33,.12),
-    inset 0 0 60px rgba(239,210,140,.1);
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
+  text-align:center;
+  padding:60px 25px;
+  box-shadow:
+    inset 0 0 80px rgba(200,155,69,.07),
+    0 30px 90px rgba(70,42,25,.1);
 }
 
-.frame::before,
-.frame::after{
-  content:"✦";
+.hero-frame:before,
+.hero-frame:after{
   position:absolute;
   font-size:70px;
   color:var(--gold);
   opacity:.65;
 }
 
-.frame::before{
-  left:20px;
-  top:20px;
+.hero-frame:before{
+  content:"✦";
+  left:22px;
+  top:18px;
 }
 
-.frame::after{
-  right:20px;
-  bottom:20px;
+.hero-frame:after{
+  content:"✦";
+  right:22px;
+  bottom:18px;
 }
 
-.hero-kicker{
+.hero-inner{
+  position:relative;
+  z-index:2;
+}
+
+.kicker{
   font-family:'Cinzel',serif;
   letter-spacing:7px;
+  font-size:12px;
   color:var(--gold);
-  font-size:13px;
 }
 
 .hero h1{
-  margin:25px 0 10px;
   font-family:'Great Vibes',cursive;
-  font-size:clamp(55px,10vw,105px);
+  color:var(--rose2);
   font-weight:400;
-  color:var(--rose-dark);
+  font-size:clamp(65px,11vw,115px);
+  margin:20px 0;
 }
 
 .hero h2{
   font-family:'Cinzel',serif;
-  font-size:clamp(20px,4vw,34px);
-  letter-spacing:2px;
   font-weight:500;
+  font-size:clamp(19px,4vw,34px);
+  line-height:1.5;
 }
 
 .hero-date{
-  margin-top:22px;
+  margin-top:20px;
+  color:#8a6748;
+  letter-spacing:5px;
   font-family:'Cinzel',serif;
-  color:#8d6843;
-  letter-spacing:4px;
 }
 
 .scroll{
-  margin-top:65px;
-  color:#8f6d51;
-  font-size:12px;
-  letter-spacing:3px;
+  margin-top:70px;
+  font-size:11px;
+  letter-spacing:4px;
+  color:#806956;
 }
 
-.arrow{
+.scroll i{
   display:block;
-  margin-top:12px;
-  font-size:25px;
+  margin-top:15px;
   animation:bounce 1.7s infinite;
+  font-size:20px;
 }
 
 @keyframes bounce{
@@ -411,126 +437,133 @@ body{
   50%{transform:translateY(10px)}
 }
 
-/* sections */
+/* =========================================
+   SECTIONS
+========================================= */
 
 section{
   padding:110px 20px;
-  position:relative;
 }
 
 .container{
-  width:min(1050px,92vw);
+  width:min(1080px,92vw);
   margin:auto;
 }
 
-.section-heading{
+.section-title{
   text-align:center;
   margin-bottom:60px;
 }
 
-.section-heading span{
+.section-title span{
   font-family:'Cinzel',serif;
-  color:var(--gold);
-  letter-spacing:5px;
   font-size:11px;
+  letter-spacing:5px;
+  color:var(--gold);
 }
 
-.section-heading h2{
+.section-title h2{
   font-family:'Great Vibes',cursive;
-  color:var(--rose-dark);
-  font-size:65px;
   font-weight:400;
-  margin:5px 0;
+  font-size:68px;
+  color:var(--rose2);
+  margin:8px 0;
 }
 
-.section-heading p{
-  color:#856d5b;
+.section-title p{
+  color:var(--muted);
 }
 
-/* scratch */
+/* =========================================
+   SCRATCH CARDS
+========================================= */
 
-.scratch-container{
+.scratch-grid{
   display:flex;
   justify-content:center;
-  gap:20px;
+  gap:22px;
   flex-wrap:wrap;
 }
 
 .scratch-card{
-  width:190px;
-  height:140px;
+  width:200px;
+  height:150px;
   position:relative;
+  border-radius:17px;
   overflow:hidden;
-  border-radius:15px;
-  background:#fffaf1;
-  box-shadow:0 15px 35px rgba(90,50,25,.12);
-  border:1px solid rgba(201,155,74,.35);
+  background:#fffdf8;
+  border:1px solid rgba(200,155,69,.35);
+  box-shadow:0 20px 40px rgba(70,42,25,.1);
 }
 
-.scratch-content{
+.scratch-card canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:5;
+  cursor:crosshair;
+  touch-action:none;
+}
+
+.scratch-result{
   position:absolute;
   inset:0;
   display:flex;
   flex-direction:column;
-  align-items:center;
   justify-content:center;
+  align-items:center;
 }
 
-.scratch-content small{
+.scratch-result small{
   font-family:'Cinzel',serif;
   letter-spacing:3px;
-  color:#a48665;
+  color:#9a7a5c;
 }
 
-.scratch-content strong{
+.scratch-result strong{
   font-family:'Cinzel',serif;
-  font-size:30px;
-  color:var(--rose-dark);
-  margin-top:10px;
+  font-size:32px;
+  color:var(--rose2);
+  margin-top:8px;
 }
 
-.scratch-cover{
+.scratch-hint{
   position:absolute;
-  inset:0;
-  z-index:2;
-  cursor:pointer;
-  background:
-    linear-gradient(135deg,#b78536,#f1d58c,#a87527);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:white;
-  font-family:'Cinzel',serif;
+  bottom:9px;
+  width:100%;
+  text-align:center;
+  font-size:9px;
   letter-spacing:2px;
-  transition:.5s;
+  color:white;
+  z-index:7;
+  pointer-events:none;
+  text-shadow:0 1px 3px #604315;
 }
 
-.scratch-card.revealed .scratch-cover{
-  transform:translateY(110%);
-}
-
-/* timeline */
+/* =========================================
+   TIMELINE
+========================================= */
 
 .timeline{
-  max-width:750px;
+  max-width:800px;
   margin:auto;
   position:relative;
 }
 
-.timeline::before{
+.timeline:before{
   content:"";
   position:absolute;
   left:50%;
   top:0;
   bottom:0;
   width:1px;
-  background:linear-gradient(var(--gold),transparent);
+  background:linear-gradient(var(--gold),rgba(200,155,69,.05));
 }
 
 .event{
   width:50%;
-  padding:20px 40px;
-  position:relative;
+  padding:20px 45px;
 }
 
 .event:nth-child(even){
@@ -538,17 +571,22 @@ section{
 }
 
 .event-card{
-  padding:25px;
   background:rgba(255,255,255,.55);
-  border:1px solid rgba(201,155,74,.25);
-  box-shadow:0 15px 35px rgba(90,50,25,.08);
-  border-radius:14px;
+  border:1px solid rgba(200,155,69,.25);
+  border-radius:17px;
+  padding:28px;
+  box-shadow:0 18px 40px rgba(70,42,25,.08);
+  transition:.35s;
 }
 
-.event h3{
-  font-family:'Cinzel',serif;
-  color:var(--rose-dark);
-  margin-bottom:8px;
+.event-card:hover{
+  transform:translateY(-5px);
+}
+
+.event-icon{
+  color:var(--gold);
+  font-size:22px;
+  margin-bottom:10px;
 }
 
 .event time{
@@ -557,7 +595,21 @@ section{
   font-size:13px;
 }
 
-/* countdown */
+.event h3{
+  font-family:'Cinzel',serif;
+  color:var(--rose2);
+  margin:8px 0;
+}
+
+.event p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+}
+
+/* =========================================
+   COUNTDOWN
+========================================= */
 
 .countdown{
   display:flex;
@@ -566,124 +618,130 @@ section{
   flex-wrap:wrap;
 }
 
-.time-box{
+.counter{
   width:145px;
   padding:30px 15px;
   text-align:center;
-  background:rgba(255,255,255,.55);
-  border:1px solid rgba(201,155,74,.3);
-  border-radius:15px;
+  border-radius:17px;
+  background:rgba(255,255,255,.6);
+  border:1px solid rgba(200,155,69,.3);
+  box-shadow:0 15px 35px rgba(70,42,25,.08);
 }
 
-.time-box strong{
+.counter strong{
   display:block;
   font-family:'Cinzel',serif;
   font-size:40px;
-  color:var(--rose-dark);
+  color:var(--rose2);
 }
 
-.time-box span{
+.counter span{
   font-size:10px;
   letter-spacing:3px;
-  color:#8e735e;
+  color:#92765e;
 }
 
-/* venue */
+/* =========================================
+   VENUE
+========================================= */
 
 .venue{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:30px;
-  align-items:stretch;
+  gap:28px;
 }
 
-.venue-card,
-.map{
-  min-height:350px;
-  border-radius:18px;
+.venue-info,
+.map-box{
+  min-height:360px;
+  border-radius:20px;
   overflow:hidden;
-  border:1px solid rgba(201,155,74,.3);
-  background:rgba(255,255,255,.5);
-  box-shadow:0 20px 45px rgba(90,50,25,.1);
+  border:1px solid rgba(200,155,69,.3);
+  background:rgba(255,255,255,.55);
+  box-shadow:0 20px 50px rgba(70,42,25,.1);
 }
 
-.venue-card{
+.venue-info{
   padding:50px;
   display:flex;
   flex-direction:column;
   justify-content:center;
 }
 
-.venue-card h3{
+.venue-info h3{
   font-family:'Great Vibes',cursive;
-  font-size:55px;
-  color:var(--rose-dark);
+  color:var(--rose2);
+  font-size:58px;
 }
 
-.venue-card p{
-  margin:15px 0;
-  line-height:1.8;
-  color:#765f4e;
+.venue-info p{
+  color:var(--muted);
+  line-height:1.9;
+  margin:18px 0;
 }
 
-.map iframe{
+.map-box iframe{
   width:100%;
   height:100%;
-  min-height:350px;
+  min-height:360px;
   border:0;
 }
 
-/* dress code */
-
-.dress{
-  text-align:center;
+.map-button{
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  padding:15px 20px;
+  border-radius:10px;
+  background:linear-gradient(135deg,#a97931,#e5c577,#a97931);
+  color:white;
+  text-decoration:none;
+  font-family:'Cinzel',serif;
+  letter-spacing:1px;
 }
 
-.swatches{
+/* =========================================
+   DRESS CODE
+========================================= */
+
+.colors{
   display:flex;
   justify-content:center;
   gap:20px;
   flex-wrap:wrap;
 }
 
-.swatch{
-  width:150px;
+.color{
+  width:170px;
   padding:15px;
-  background:#fff;
-  border-radius:15px;
-  box-shadow:0 10px 30px rgba(90,50,25,.08);
+  border-radius:17px;
+  background:white;
+  box-shadow:0 12px 30px rgba(70,42,25,.08);
 }
 
-.swatch-color{
-  width:100%;
-  height:70px;
-  border-radius:10px;
+.color-preview{
+  height:80px;
+  border-radius:12px;
   margin-bottom:12px;
 }
 
-.swatch:nth-child(1) .swatch-color{
-  background:#e9bfc5;
-}
+.pink{background:#e9bdc4}
+.rose{background:#bd847e}
+.ivory{background:#fff8eb}
 
-.swatch:nth-child(2) .swatch-color{
-  background:#b77b6d;
-}
+/* =========================================
+   RSVP
+========================================= */
 
-.swatch:nth-child(3) .swatch-color{
-  background:#fff8ed;
-  border:1px solid #ead9c2;
-}
-
-/* RSVP */
-
-.rsvp-form{
-  width:min(650px,100%);
+.form{
+  width:min(680px,100%);
   margin:auto;
-  background:rgba(255,255,255,.6);
   padding:40px;
-  border-radius:20px;
-  border:1px solid rgba(201,155,74,.3);
-  box-shadow:0 20px 50px rgba(90,50,25,.1);
+  border-radius:22px;
+  background:rgba(255,255,255,.62);
+  border:1px solid rgba(200,155,69,.3);
+  box-shadow:0 20px 50px rgba(70,42,25,.1);
 }
 
 .field{
@@ -692,169 +750,151 @@ section{
 
 .field label{
   display:block;
+  font-size:11px;
+  letter-spacing:2px;
+  color:#765b48;
   margin-bottom:8px;
-  font-size:12px;
-  letter-spacing:1px;
-  color:#795f4c;
 }
 
 .field input,
-.field textarea,
-.field select{
+.field select,
+.field textarea{
   width:100%;
-  padding:15px;
-  border:1px solid #ddc7a9;
-  background:#fffdf9;
-  border-radius:10px;
+  border:1px solid #dcc5a6;
   outline:none;
-  font-family:inherit;
+  background:#fffdf9;
   color:var(--brown);
+  border-radius:10px;
+  padding:15px;
+  font-family:inherit;
 }
 
 .field textarea{
-  min-height:120px;
+  min-height:130px;
   resize:vertical;
 }
 
-.btn{
+.submit{
   width:100%;
   border:0;
-  padding:17px;
   border-radius:10px;
-  cursor:pointer;
-  background:linear-gradient(135deg,#a97b32,#e5c477,#a97b32);
+  padding:17px;
+  background:linear-gradient(135deg,#a97931,#e4c273,#a97931);
   color:white;
+  cursor:pointer;
   font-family:'Cinzel',serif;
   letter-spacing:2px;
   transition:.3s;
 }
 
-.btn:hover{
+.submit:hover{
   transform:translateY(-3px);
-  box-shadow:0 10px 25px rgba(169,123,50,.3);
+  box-shadow:0 10px 30px rgba(169,121,49,.3);
 }
 
-/* music */
-
-.music{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  z-index:500;
-  width:55px;
-  height:55px;
-  border-radius:50%;
-  border:1px solid rgba(201,155,74,.5);
-  background:rgba(255,250,240,.9);
-  box-shadow:0 10px 25px rgba(80,45,25,.15);
-  cursor:pointer;
-  color:var(--gold);
-  font-size:20px;
-}
-
-/* footer */
+/* =========================================
+   FOOTER
+========================================= */
 
 footer{
-  padding:60px 20px;
+  padding:70px 20px;
   text-align:center;
-  border-top:1px solid rgba(201,155,74,.2);
+  border-top:1px solid rgba(200,155,69,.2);
 }
 
-footer h3{
+footer h2{
   font-family:'Great Vibes',cursive;
-  font-size:45px;
-  color:var(--rose-dark);
+  color:var(--rose2);
+  font-size:55px;
 }
 
 footer p{
+  color:#92765e;
+  font-size:10px;
+  letter-spacing:3px;
   margin-top:10px;
-  font-size:11px;
-  letter-spacing:2px;
-  color:#927963;
 }
 
-/* sparkle */
+/* =========================================
+   SPARKLES
+========================================= */
 
-.sparkle{
+.spark{
   position:fixed;
-  pointer-events:none;
-  width:5px;
-  height:5px;
+  width:6px;
+  height:6px;
   border-radius:50%;
-  background:#e8c66e;
-  box-shadow:0 0 15px #e8c66e;
-  animation:spark .8s forwards;
-  z-index:10000;
+  background:#f1d484;
+  box-shadow:0 0 18px #f1d484;
+  pointer-events:none;
+  z-index:100000;
+  animation:spark .9s forwards;
 }
 
 @keyframes spark{
-  0%{
-    transform:scale(1);
-    opacity:1;
-  }
-  100%{
-    transform:translate(
-      calc((var(--x) - .5) * 180px),
-      calc((var(--y) - .5) * 180px)
-    ) scale(0);
+  to{
+    transform:translate(var(--dx),var(--dy)) scale(0);
     opacity:0;
   }
 }
 
-/* mobile */
+/* =========================================
+   MOBILE
+========================================= */
 
 @media(max-width:700px){
 
-  .envelope-wrapper{
+  .intro-title{
+    font-size:9px;
+    letter-spacing:4px;
+  }
+
+  .envelope-scene{
     height:330px;
   }
 
   .envelope{
-    height:230px;
+    height:225px;
   }
 
   .flap{
-    height:170px;
+    height:175px;
   }
 
   .letter{
-    height:220px;
+    height:215px;
   }
 
   .letter-name{
-    font-size:45px;
+    font-size:48px;
   }
 
   .seal{
-    width:85px;
-    height:85px;
+    width:86px;
+    height:86px;
   }
 
   .seal span{
-    font-size:17px;
+    font-size:16px;
   }
 
   .hero{
     padding:30px 15px;
   }
 
-  .frame{
+  .hero-frame{
     min-height:560px;
   }
 
-  .hero h1{
-    font-size:65px;
-  }
-
-  .timeline::before{
-    left:10px;
+  .timeline:before{
+    left:9px;
   }
 
   .event,
   .event:nth-child(even){
     width:100%;
     margin-left:0;
-    padding-left:35px;
+    padding-left:32px;
     padding-right:0;
   }
 
@@ -862,12 +902,16 @@ footer p{
     grid-template-columns:1fr;
   }
 
-  .time-box{
-    width:130px;
+  .venue-info{
+    padding:35px;
   }
 
-  .rsvp-form{
+  .form{
     padding:25px;
+  }
+
+  .counter{
+    width:135px;
   }
 }
 </style>
@@ -875,37 +919,57 @@ footer p{
 
 <body>
 
-<!-- =========================
-     ENVELOPE INTRO
-========================= -->
+<!-- =========================================
+     ENVELOPE
+========================================= -->
 
-<div class="intro" id="intro">
-
-  <div class="particle p1"></div>
-  <div class="particle p2"></div>
-  <div class="particle p3"></div>
-  <div class="particle p4"></div>
-  <div class="particle p5"></div>
-  <div class="particle p6"></div>
+<div id="intro">
 
   <div class="intro-content">
 
-    <div class="envelope-wrapper">
+    <div class="intro-title">
+      A SPECIAL BIRTHDAY INVITATION
+    </div>
+
+    <div class="envelope-scene">
 
       <div class="envelope" id="envelope">
 
         <div class="letter">
+
           <div class="letter-content">
-            <div class="small-title">YOU ARE INVITED</div>
-            <div class="letter-name">Jana</div>
-            <div class="small-title">BIRTHDAY CELEBRATION</div>
+
+            <div class="letter-small">
+              YOU ARE INVITED
+            </div>
+
+            <div class="letter-name">
+              Jana
+            </div>
+
+            <div class="letter-small">
+              BIRTHDAY CELEBRATION
+            </div>
+
           </div>
+
         </div>
 
-        <div class="envelope-front"></div>
+        <div class="floral">
+          <i class="fa-solid fa-leaf f1"></i>
+          <i class="fa-solid fa-seedling f2"></i>
+          <i class="fa-solid fa-leaf f3"></i>
+          <i class="fa-solid fa-seedling f4"></i>
+        </div>
+
+        <div class="front">
+          <div class="front-left"></div>
+          <div class="front-right"></div>
+        </div>
 
         <div class="flap"></div>
 
+        <!-- J & M SEAL -->
         <div class="seal" id="seal">
           <span>J &amp; M</span>
         </div>
@@ -914,8 +978,8 @@ footer p{
 
     </div>
 
-    <div class="open-text">
-      TAP THE SEAL TO OPEN
+    <div class="open-label">
+      TAP THE GOLD SEAL TO OPEN
     </div>
 
   </div>
@@ -923,19 +987,24 @@ footer p{
 </div>
 
 
-<!-- =========================
-     MAIN WEBSITE
-========================= -->
+<!-- =========================================
+     MAIN SITE
+========================================= -->
 
-<div class="page" id="page">
+<div id="site">
 
-  <!-- MUSIC -->
-  <button class="music" id="musicBtn" title="Music">
-    ♫
+  <!-- Music -->
+  <button class="music-btn" id="musicBtn">
+    <i class="fa-solid fa-music"></i>
   </button>
 
-  <!-- Replace music.mp3 with your own audio -->
-  <audio id="musicAudio" loop>
+  <!--
+      OPTIONAL MUSIC:
+      Put music.mp3 beside this index.html.
+      Browser autoplay restrictions mean music starts
+      after the user's seal click.
+  -->
+  <audio id="audio" loop preload="auto">
     <source src="music.mp3" type="audio/mpeg">
   </audio>
 
@@ -944,25 +1013,34 @@ footer p{
 
   <section class="hero">
 
-    <div class="frame">
+    <div class="hero-glow"></div>
 
-      <div class="hero-kicker">
-        A SPECIAL INVITATION
-      </div>
+    <div class="hero-frame">
 
-      <h1>You're Invited</h1>
+      <div class="hero-inner">
 
-      <h2>
-        Jana Waleed's Birthday Celebration
-      </h2>
+        <div class="kicker">
+          A SPECIAL INVITATION
+        </div>
 
-      <div class="hero-date">
-        MAY 04 · 2010
-      </div>
+        <h1>
+          You're Invited
+        </h1>
 
-      <div class="scroll">
-        SCROLL DOWN TO EXPLORE
-        <span class="arrow">↓</span>
+        <h2>
+          To Celebrate The Birthday<br>
+          Of Jana Waleed
+        </h2>
+
+        <div class="hero-date">
+          MAY 04 · 2010
+        </div>
+
+        <div class="scroll">
+          SCROLL DOWN TO EXPLORE
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+
       </div>
 
     </div>
@@ -970,42 +1048,53 @@ footer p{
   </section>
 
 
-  <!-- DATE -->
+  <!-- SCRATCH DATE -->
 
   <section>
 
     <div class="container">
 
-      <div class="section-heading">
+      <div class="section-title">
+
         <span>01 — DISCOVER THE DATE</span>
-        <h2>Scratch to Reveal</h2>
-        <p>Reveal each part of the special date.</p>
+
+        <h2>
+          Scratch To Reveal
+        </h2>
+
+        <p>
+          Scratch each golden card with your finger or mouse.
+        </p>
+
       </div>
 
-      <div class="scratch-container">
+      <div class="scratch-grid">
 
         <div class="scratch-card">
-          <div class="scratch-content">
+          <div class="scratch-result">
             <small>DAY</small>
             <strong>04</strong>
           </div>
-          <div class="scratch-cover">SCRATCH</div>
+          <canvas></canvas>
+          <div class="scratch-hint">SCRATCH HERE</div>
         </div>
 
         <div class="scratch-card">
-          <div class="scratch-content">
+          <div class="scratch-result">
             <small>MONTH</small>
             <strong>MAY</strong>
           </div>
-          <div class="scratch-cover">SCRATCH</div>
+          <canvas></canvas>
+          <div class="scratch-hint">SCRATCH HERE</div>
         </div>
 
         <div class="scratch-card">
-          <div class="scratch-content">
+          <div class="scratch-result">
             <small>YEAR</small>
             <strong>2010</strong>
           </div>
-          <div class="scratch-cover">SCRATCH</div>
+          <canvas></canvas>
+          <div class="scratch-hint">SCRATCH HERE</div>
         </div>
 
       </div>
@@ -1021,44 +1110,111 @@ footer p{
 
     <div class="container">
 
-      <div class="section-heading">
+      <div class="section-title">
+
         <span>02 — THE CELEBRATION</span>
-        <h2>Party Timeline</h2>
-        <p>A beautiful evening awaits.</p>
+
+        <h2>
+          Party Timeline
+        </h2>
+
+        <p>
+          A beautiful evening full of memories.
+        </p>
+
       </div>
 
       <div class="timeline">
 
         <div class="event">
+
           <div class="event-card">
+
+            <div class="event-icon">
+              <i class="fa-solid fa-champagne-glasses"></i>
+            </div>
+
             <time>06:00 PM</time>
-            <h3>Welcome Drinks</h3>
-            <p>Guest arrival and welcome.</p>
+
+            <h3>
+              Guest Arrival
+            </h3>
+
+            <p>
+              Welcome drinks and greetings.
+            </p>
+
           </div>
+
         </div>
 
+
         <div class="event">
+
           <div class="event-card">
+
+            <div class="event-icon">
+              <i class="fa-solid fa-cake-candles"></i>
+            </div>
+
             <time>06:30 PM</time>
-            <h3>Cake Cutting</h3>
-            <p>The birthday celebration begins.</p>
+
+            <h3>
+              Cake Cutting
+            </h3>
+
+            <p>
+              The special birthday moment.
+            </p>
+
           </div>
+
         </div>
 
+
         <div class="event">
+
           <div class="event-card">
+
+            <div class="event-icon">
+              <i class="fa-solid fa-utensils"></i>
+            </div>
+
             <time>07:30 PM</time>
-            <h3>Dinner & Music</h3>
-            <p>Enjoy dinner and beautiful music.</p>
+
+            <h3>
+              Dinner & Music
+            </h3>
+
+            <p>
+              Dinner, music and good conversations.
+            </p>
+
           </div>
+
         </div>
 
+
         <div class="event">
+
           <div class="event-card">
+
+            <div class="event-icon">
+              <i class="fa-solid fa-music"></i>
+            </div>
+
             <time>09:00 PM</time>
-            <h3>Dance & Party</h3>
-            <p>Let's celebrate together.</p>
+
+            <h3>
+              Dance Party
+            </h3>
+
+            <p>
+              Let's celebrate and enjoy the night.
+            </p>
+
           </div>
+
         </div>
 
       </div>
@@ -1074,30 +1230,34 @@ footer p{
 
     <div class="container">
 
-      <div class="section-heading">
+      <div class="section-title">
+
         <span>03 — COUNTDOWN</span>
-        <h2>The Big Moment</h2>
-        <p>Counting down to the celebration.</p>
+
+        <h2>
+          Until The Celebration
+        </h2>
+
       </div>
 
       <div class="countdown">
 
-        <div class="time-box">
+        <div class="counter">
           <strong id="days">00</strong>
           <span>DAYS</span>
         </div>
 
-        <div class="time-box">
+        <div class="counter">
           <strong id="hours">00</strong>
           <span>HOURS</span>
         </div>
 
-        <div class="time-box">
+        <div class="counter">
           <strong id="minutes">00</strong>
           <span>MINUTES</span>
         </div>
 
-        <div class="time-box">
+        <div class="counter">
           <strong id="seconds">00</strong>
           <span>SECONDS</span>
         </div>
@@ -1109,42 +1269,60 @@ footer p{
   </section>
 
 
-  <!-- VENUE -->
+  <!-- LOCATION -->
 
   <section>
 
     <div class="container">
 
-      <div class="section-heading">
+      <div class="section-title">
+
         <span>04 — LOCATION</span>
-        <h2>Join Us</h2>
-        <p>We can't wait to celebrate together.</p>
+
+        <h2>
+          Join The Celebration
+        </h2>
+
+        <p>
+          We are waiting for you.
+        </p>
+
       </div>
+
 
       <div class="venue">
 
-        <div class="venue-card">
+        <div class="venue-info">
 
-          <h3>The Celebration</h3>
+          <h3>
+            The Venue
+          </h3>
 
           <p>
-            📍 Your Venue Name<br>
+            <i class="fa-solid fa-location-dot"></i>
+            Your Venue Name<br>
             Your City, Egypt
           </p>
 
           <p>
-            Please update this section with your real
-            party location.
+            Replace the venue information with
+            your real party location.
           </p>
 
-          <button class="btn"
-            onclick="window.open('https://maps.google.com','_blank')">
+          <a
+            class="map-button"
+            href="https://www.google.com/maps"
+            target="_blank">
+
+            <i class="fa-solid fa-map-location-dot"></i>
             OPEN IN MAPS
-          </button>
+
+          </a>
 
         </div>
 
-        <div class="map">
+
+        <div class="map-box">
 
           <iframe
             src="https://www.google.com/maps?q=Egypt&output=embed"
@@ -1164,28 +1342,36 @@ footer p{
 
   <section>
 
-    <div class="container dress">
+    <div class="container">
 
-      <div class="section-heading">
-        <span>05 — STYLE</span>
-        <h2>Dress Code</h2>
-        <p>Elegant, soft and celebratory.</p>
+      <div class="section-title">
+
+        <span>05 — DRESS CODE</span>
+
+        <h2>
+          Soft & Elegant
+        </h2>
+
+        <p>
+          Suggested colors for the celebration.
+        </p>
+
       </div>
 
-      <div class="swatches">
+      <div class="colors">
 
-        <div class="swatch">
-          <div class="swatch-color"></div>
+        <div class="color">
+          <div class="color-preview pink"></div>
           <strong>Pastel Pink</strong>
         </div>
 
-        <div class="swatch">
-          <div class="swatch-color"></div>
+        <div class="color">
+          <div class="color-preview rose"></div>
           <strong>Rose Gold</strong>
         </div>
 
-        <div class="swatch">
-          <div class="swatch-color"></div>
+        <div class="color">
+          <div class="color-preview ivory"></div>
           <strong>Ivory</strong>
         </div>
 
@@ -1202,56 +1388,108 @@ footer p{
 
     <div class="container">
 
-      <div class="section-heading">
+      <div class="section-title">
+
         <span>06 — RSVP</span>
-        <h2>Celebrate With Us</h2>
-        <p>Let us know you're coming.</p>
+
+        <h2>
+          Celebrate With Us
+        </h2>
+
+        <p>
+          Confirm your attendance and leave a birthday wish.
+        </p>
+
       </div>
 
-      <form class="rsvp-form" id="rsvpForm">
+
+      <form class="form" id="rsvpForm">
 
         <div class="field">
-          <label>YOUR NAME</label>
+
+          <label>
+            YOUR NAME
+          </label>
+
           <input
             type="text"
+            id="guestName"
             placeholder="Enter your name"
             required>
+
         </div>
 
-        <div class="field">
-          <label>ATTENDANCE</label>
 
-          <select required>
-            <option value="">Select an option</option>
-            <option>Yes, I'll be there</option>
-            <option>Sorry, I can't attend</option>
+        <div class="field">
+
+          <label>
+            ATTENDANCE
+          </label>
+
+          <select id="attendance" required>
+
+            <option value="">
+              Select
+            </option>
+
+            <option>
+              Yes, I'll be there
+            </option>
+
+            <option>
+              Sorry, I can't attend
+            </option>
+
           </select>
 
         </div>
 
+
         <div class="field">
-          <label>DIETARY PREFERENCE</label>
+
+          <label>
+            DIETARY PREFERENCE
+          </label>
 
           <select>
-            <option>No special preference</option>
-            <option>Vegetarian</option>
-            <option>Other</option>
+
+            <option>
+              No special preference
+            </option>
+
+            <option>
+              Vegetarian
+            </option>
+
+            <option>
+              Other
+            </option>
+
           </select>
 
         </div>
 
+
         <div class="field">
 
-          <label>YOUR WISH FOR JANA</label>
+          <label>
+            BIRTHDAY WISH FOR JANA
+          </label>
 
           <textarea
-            placeholder="Write a beautiful birthday wish...">
+            placeholder="Write your birthday wish...">
           </textarea>
 
         </div>
 
-        <button class="btn" type="submit">
+
+        <button
+          class="submit"
+          type="submit">
+
+          <i class="fa-solid fa-paper-plane"></i>
           SEND RSVP
+
         </button>
 
       </form>
@@ -1261,12 +1499,16 @@ footer p{
   </section>
 
 
+  <!-- FOOTER -->
+
   <footer>
 
-    <h3>Jana's Birthday</h3>
+    <h2>
+      Jana's Birthday
+    </h2>
 
     <p>
-      MADE WITH LOVE · 04 MAY 2010
+      MAY 04 · 2010
     </p>
 
   </footer>
@@ -1276,167 +1518,503 @@ footer p{
 
 <script>
 
-/* =========================
-   ENVELOPE OPEN
-========================= */
+/* =========================================
+   ELEMENTS
+========================================= */
 
-const seal = document.getElementById("seal");
-const envelope = document.getElementById("envelope");
 const intro = document.getElementById("intro");
-const page = document.getElementById("page");
-const music = document.getElementById("musicAudio");
+const envelope = document.getElementById("envelope");
+const seal = document.getElementById("seal");
+const site = document.getElementById("site");
+
+const audio = document.getElementById("audio");
 const musicBtn = document.getElementById("musicBtn");
 
 let opened = false;
 
-seal.addEventListener("click", () => {
+
+/* =========================================
+   OPEN ENVELOPE
+========================================= */
+
+seal.addEventListener("click", async () => {
 
   if(opened) return;
 
   opened = true;
 
-  createSparkles();
+  createSparkles(
+    window.innerWidth / 2,
+    window.innerHeight / 2,
+    35
+  );
 
+  /* Envelope animation */
   envelope.classList.add("open");
+
+  /* Confetti */
+  launchConfetti();
+
+  /*
+    Browser autoplay policy:
+    The seal click is a user interaction,
+    so audio can normally start here.
+  */
+
+  try{
+
+    await audio.play();
+
+    musicBtn.innerHTML =
+      '<i class="fa-solid fa-pause"></i>';
+
+  }catch(error){
+
+    musicBtn.innerHTML =
+      '<i class="fa-solid fa-play"></i>';
+
+  }
 
   setTimeout(() => {
 
     intro.classList.add("hide");
-    page.classList.add("visible");
+    site.classList.add("visible");
 
-    music.play()
-      .then(() => {
-        musicBtn.textContent = "❚❚";
-      })
-      .catch(() => {
-        musicBtn.textContent = "♫";
-      });
-
-  },1300);
+  },1500);
 
 });
 
 
-/* =========================
-   MUSIC
-========================= */
+/* =========================================
+   MUSIC CONTROL
+========================================= */
 
-let musicPlaying = false;
+musicBtn.addEventListener("click", async () => {
 
-musicBtn.addEventListener("click", () => {
+  if(audio.paused){
 
-  if(music.paused){
+    try{
 
-    music.play()
-      .then(() => {
-        musicPlaying = true;
-        musicBtn.textContent = "❚❚";
-      });
+      await audio.play();
+
+      musicBtn.innerHTML =
+        '<i class="fa-solid fa-pause"></i>';
+
+    }catch(error){
+
+      musicBtn.innerHTML =
+        '<i class="fa-solid fa-play"></i>';
+
+    }
 
   }else{
 
-    music.pause();
-    musicPlaying = false;
-    musicBtn.textContent = "♫";
+    audio.pause();
+
+    musicBtn.innerHTML =
+      '<i class="fa-solid fa-play"></i>';
 
   }
 
 });
 
 
-/* =========================
-   SCRATCH
-========================= */
+/* =========================================
+   CONFETTI
+========================================= */
 
-document.querySelectorAll(".scratch-card")
-.forEach(card => {
+function launchConfetti(){
 
-  const cover = card.querySelector(".scratch-cover");
+  if(typeof confetti !== "function") return;
 
-  cover.addEventListener("click", () => {
-
-    card.classList.add("revealed");
-
-    createSparkles();
-
+  confetti({
+    particleCount:120,
+    spread:90,
+    startVelocity:35,
+    origin:{
+      x:.5,
+      y:.45
+    }
   });
+
+  setTimeout(() => {
+
+    confetti({
+      particleCount:70,
+      spread:70,
+      origin:{
+        x:.15,
+        y:.65
+      }
+    });
+
+  },250);
+
+  setTimeout(() => {
+
+    confetti({
+      particleCount:70,
+      spread:70,
+      origin:{
+        x:.85,
+        y:.65
+      }
+    });
+
+  },450);
+
+}
+
+
+/* =========================================
+   REAL SCRATCH CANVAS
+========================================= */
+
+const scratchCards =
+  document.querySelectorAll(".scratch-card");
+
+scratchCards.forEach(card => {
+
+  const canvas = card.querySelector("canvas");
+  const ctx = canvas.getContext("2d");
+
+  let drawing = false;
+  let revealed = false;
+
+  function resize(){
+
+    const rect = card.getBoundingClientRect();
+
+    const dpr = window.devicePixelRatio || 1;
+
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+
+    canvas.style.width = rect.width + "px";
+    canvas.style.height = rect.height + "px";
+
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+
+    drawCover(rect.width,rect.height);
+
+  }
+
+
+  function drawCover(width,height){
+
+    const gradient =
+      ctx.createLinearGradient(
+        0,0,
+        width,height
+      );
+
+    gradient.addColorStop(0,"#a87324");
+    gradient.addColorStop(.5,"#f0d183");
+    gradient.addColorStop(1,"#98651f");
+
+    ctx.globalCompositeOperation = "source-over";
+
+    ctx.fillStyle = gradient;
+
+    ctx.fillRect(0,0,width,height);
+
+    /* Metallic pattern */
+
+    ctx.globalAlpha=.25;
+
+    for(let i=0;i<width;i+=15){
+
+      ctx.fillStyle =
+        i%30===0
+        ? "#fff1b4"
+        : "#744a15";
+
+      ctx.fillRect(i,0,5,height);
+
+    }
+
+    ctx.globalAlpha=1;
+
+    /* Scratch title */
+
+    ctx.fillStyle="rgba(255,248,220,.9)";
+    ctx.font="600 12px Montserrat";
+    ctx.textAlign="center";
+    ctx.fillText(
+      "SCRATCH TO REVEAL",
+      width/2,
+      height/2+5
+    );
+
+  }
+
+
+  function position(e){
+
+    const rect =
+      canvas.getBoundingClientRect();
+
+    let clientX;
+    let clientY;
+
+    if(e.touches && e.touches.length){
+
+      clientX=e.touches[0].clientX;
+      clientY=e.touches[0].clientY;
+
+    }else{
+
+      clientX=e.clientX;
+      clientY=e.clientY;
+
+    }
+
+    return {
+      x:clientX-rect.left,
+      y:clientY-rect.top
+    };
+
+  }
+
+
+  function scratch(e){
+
+    if(!drawing || revealed) return;
+
+    const p=position(e);
+
+    ctx.globalCompositeOperation =
+      "destination-out";
+
+    ctx.beginPath();
+
+    ctx.arc(
+      p.x,
+      p.y,
+      25,
+      0,
+      Math.PI*2
+    );
+
+    ctx.fill();
+
+    checkReveal();
+
+  }
+
+
+  function start(e){
+
+    drawing=true;
+    scratch(e);
+
+  }
+
+
+  function stop(){
+
+    drawing=false;
+
+  }
+
+
+  function checkReveal(){
+
+    /*
+      Check how much canvas is transparent.
+    */
+
+    const data =
+      ctx.getImageData(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      ).data;
+
+    let transparent=0;
+
+    /*
+      Sample every 16th pixel for performance.
+    */
+
+    for(let i=3;i<data.length;i+=64){
+
+      if(data[i] < 80){
+        transparent++;
+      }
+
+    }
+
+    const total =
+      data.length / 64;
+
+    const percentage =
+      transparent / total;
+
+    if(percentage > .48){
+
+      revealed=true;
+
+      canvas.style.transition=".7s";
+
+      canvas.style.opacity="0";
+
+      setTimeout(() => {
+
+        canvas.style.display="none";
+
+      },700);
+
+      launchConfetti();
+
+    }
+
+  }
+
+
+  canvas.addEventListener(
+    "mousedown",
+    start
+  );
+
+  canvas.addEventListener(
+    "mousemove",
+    scratch
+  );
+
+  window.addEventListener(
+    "mouseup",
+    stop
+  );
+
+
+  canvas.addEventListener(
+    "touchstart",
+    start,
+    {passive:false}
+  );
+
+  canvas.addEventListener(
+    "touchmove",
+    e => {
+
+      e.preventDefault();
+
+      scratch(e);
+
+    },
+    {passive:false}
+  );
+
+  window.addEventListener(
+    "touchend",
+    stop
+  );
+
+
+  resize();
+
+  window.addEventListener(
+    "resize",
+    resize
+  );
 
 });
 
 
-/* =========================
+/* =========================================
    COUNTDOWN
-========================= */
+========================================= */
 
 /*
-   CHANGE THIS DATE
-   TO YOUR PARTY DATE.
+  CHANGE THIS DATE TO YOUR EVENT DATE.
+
+  Example:
+  2026-10-04T18:00:00
 */
 
-const partyDate = new Date("2026-10-04T18:00:00").getTime();
+const eventDate =
+  new Date("2026-10-04T18:00:00").getTime();
+
 
 function updateCountdown(){
 
-  const now = new Date().getTime();
+  const now =
+    Date.now();
 
-  const difference = partyDate - now;
+  let distance =
+    eventDate-now;
 
-  if(difference <= 0){
-
-    document.getElementById("days").textContent = "00";
-    document.getElementById("hours").textContent = "00";
-    document.getElementById("minutes").textContent = "00";
-    document.getElementById("seconds").textContent = "00";
-
-    return;
-
+  if(distance < 0){
+    distance=0;
   }
 
-  const days = Math.floor(
-    difference / (1000 * 60 * 60 * 24)
-  );
+  const days =
+    Math.floor(
+      distance/(1000*60*60*24)
+    );
 
-  const hours = Math.floor(
-    (difference / (1000 * 60 * 60)) % 24
-  );
+  const hours =
+    Math.floor(
+      (distance/(1000*60*60))%24
+    );
 
-  const minutes = Math.floor(
-    (difference / (1000 * 60)) % 60
-  );
+  const minutes =
+    Math.floor(
+      (distance/(1000*60))%60
+    );
 
-  const seconds = Math.floor(
-    (difference / 1000) % 60
-  );
+  const seconds =
+    Math.floor(
+      (distance/1000)%60
+    );
 
-  document.getElementById("days").textContent =
+  document.getElementById("days")
+    .textContent=
     String(days).padStart(2,"0");
 
-  document.getElementById("hours").textContent =
+  document.getElementById("hours")
+    .textContent=
     String(hours).padStart(2,"0");
 
-  document.getElementById("minutes").textContent =
+  document.getElementById("minutes")
+    .textContent=
     String(minutes).padStart(2,"0");
 
-  document.getElementById("seconds").textContent =
+  document.getElementById("seconds")
+    .textContent=
     String(seconds).padStart(2,"0");
 
 }
 
 updateCountdown();
-setInterval(updateCountdown,1000);
+
+setInterval(
+  updateCountdown,
+  1000
+);
 
 
-/* =========================
+/* =========================================
    RSVP
-========================= */
+========================================= */
 
-document.getElementById("rsvpForm")
-.addEventListener("submit",(e)=>{
+document
+.getElementById("rsvpForm")
+.addEventListener("submit",e=>{
 
   e.preventDefault();
 
+  const name =
+    document.getElementById("guestName").value;
+
+  launchConfetti();
+
   alert(
-    "Thank you! Your RSVP has been received. ✨"
+    "Thank you, " +
+    name +
+    "! Your RSVP has been received."
   );
 
   e.target.reset();
@@ -1444,38 +2022,60 @@ document.getElementById("rsvpForm")
 });
 
 
-/* =========================
-   SPARKLES
-========================= */
+/* =========================================
+   CLICK SPARKLES
+========================================= */
 
-function createSparkles(){
+document.addEventListener("click",e=>{
 
-  for(let i=0;i<25;i++){
+  if(
+    e.target.closest(".seal") ||
+    e.target.closest(".music-btn")
+  ){
+    return;
+  }
 
-    const sparkle = document.createElement("div");
+  createSparkles(
+    e.clientX,
+    e.clientY,
+    7
+  );
 
-    sparkle.className = "sparkle";
+});
 
-    sparkle.style.left =
-      (window.innerWidth / 2) + "px";
 
-    sparkle.style.top =
-      (window.innerHeight / 2) + "px";
+function createSparkles(x,y,count){
 
-    sparkle.style.setProperty(
-      "--x",
-      Math.random()
+  for(let i=0;i<count;i++){
+
+    const spark =
+      document.createElement("div");
+
+    spark.className="spark";
+
+    spark.style.left=x+"px";
+    spark.style.top=y+"px";
+
+    const angle =
+      Math.random()*Math.PI*2;
+
+    const distance =
+      30+Math.random()*100;
+
+    spark.style.setProperty(
+      "--dx",
+      Math.cos(angle)*distance+"px"
     );
 
-    sparkle.style.setProperty(
-      "--y",
-      Math.random()
+    spark.style.setProperty(
+      "--dy",
+      Math.sin(angle)*distance+"px"
     );
 
-    document.body.appendChild(sparkle);
+    document.body.appendChild(spark);
 
     setTimeout(()=>{
-      sparkle.remove();
+      spark.remove();
     },900);
 
   }
@@ -1483,44 +2083,46 @@ function createSparkles(){
 }
 
 
-/* =========================
-   CLICK SPARKLES
-========================= */
+/* =========================================
+   EXTRA CONFETTI WHEN SCROLLING
+========================================= */
 
-document.addEventListener("click",(e)=>{
+let confettiTriggered=false;
 
-  if(
-    e.target.closest(".seal") ||
-    e.target.closest(".music") ||
-    e.target.closest(".btn")
-  ) return;
+window.addEventListener("scroll",()=>{
 
-  const sparkle = document.createElement("div");
+  if(confettiTriggered) return;
 
-  sparkle.className = "sparkle";
+  const scroll =
+    window.scrollY;
 
-  sparkle.style.left = e.clientX + "px";
-  sparkle.style.top = e.clientY + "px";
+  if(scroll>500){
 
-  sparkle.style.setProperty(
-    "--x",
-    Math.random()
-  );
+    confettiTriggered=true;
 
-  sparkle.style.setProperty(
-    "--y",
-    Math.random()
-  );
+    /*
+      Small decorative burst.
+    */
 
-  document.body.appendChild(sparkle);
+    if(typeof confetti==="function"){
 
-  setTimeout(()=>{
-    sparkle.remove();
-  },800);
+      confetti({
+        particleCount:35,
+        spread:60,
+        scalar:.7,
+        origin:{
+          x:.5,
+          y:1
+        }
+      });
+
+    }
+
+  }
 
 });
 
 </script>
 
 </body>
-  </html>
+</html>
