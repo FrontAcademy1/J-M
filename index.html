@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jana's Birthday Invitation</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap');
+
+:root{
+  --cream:#fff8ed;
+  --paper:#f8ead7;
+  --gold:#c99b4a;
+  --gold-light:#efd28c;
+  --rose:#d99ca5;
+  --rose-dark:#a96b76;
+  --brown:#4c3028;
+  --white:#fffdf9;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(239,210,140,.18),transparent 25%),
+    radial-gradient(circle at 80% 70%,rgba(217,156,165,.16),transparent 25%),
+    var(--cream);
+  color:var(--brown);
+  font-family:'Montserrat',sans-serif;
+  overflow-x:hidden;
+}
+
+/* =========================
+   INTRO / ENVELOPE
+========================= */
+
+.intro{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at center,rgba(255,255,255,.8),transparent 35%),
+    linear-gradient(135deg,#ead7bb,#fff8ed,#e6cfae);
+  transition:1.4s ease;
+}
+
+.intro.hide{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.intro-content{
+  width:min(900px,92vw);
+  text-align:center;
+  position:relative;
+}
+
+/* floating particles */
+
+.particle{
+  position:absolute;
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:var(--gold-light);
+  box-shadow:0 0 15px var(--gold);
+  animation:float 5s infinite ease-in-out;
+}
+
+.p1{left:5%;top:20%;animation-delay:0s}
+.p2{left:15%;top:75%;animation-delay:1s}
+.p3{right:8%;top:25%;animation-delay:2s}
+.p4{right:17%;bottom:10%;animation-delay:1.5s}
+.p5{left:45%;top:5%;animation-delay:2.5s}
+.p6{right:40%;bottom:7%;animation-delay:.5s}
+
+@keyframes float{
+  0%,100%{transform:translateY(0) scale(1);opacity:.4}
+  50%{transform:translateY(-30px) scale(1.5);opacity:1}
+}
+
+.envelope-wrapper{
+  position:relative;
+  width:min(650px,88vw);
+  height:420px;
+  margin:auto;
+  perspective:1400px;
+}
+
+/* envelope body */
+
+.envelope{
+  position:absolute;
+  width:100%;
+  height:300px;
+  bottom:0;
+  left:0;
+  border-radius:8px;
+  background:
+    linear-gradient(145deg,#fffaf0,#ead8bb);
+  box-shadow:
+    0 35px 70px rgba(89,55,33,.25),
+    inset 0 0 30px rgba(255,255,255,.6);
+  overflow:visible;
+}
+
+/* paper texture */
+
+.envelope::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.16;
+  pointer-events:none;
+  background-image:
+    radial-gradient(#8f6c4c 0.6px,transparent .6px);
+  background-size:8px 8px;
+}
+
+/* envelope front */
+
+.envelope-front{
+  position:absolute;
+  inset:0;
+  z-index:4;
+  overflow:hidden;
+}
+
+.envelope-front::before,
+.envelope-front::after{
+  content:"";
+  position:absolute;
+  width:55%;
+  height:100%;
+  background:linear-gradient(145deg,#f6e8d0,#dfc39d);
+}
+
+.envelope-front::before{
+  left:0;
+  clip-path:polygon(0 0,100% 100%,0 100%);
+}
+
+.envelope-front::after{
+  right:0;
+  clip-path:polygon(100% 0,100% 100%,0 100%);
+}
+
+/* flap */
+
+.flap{
+  position:absolute;
+  z-index:7;
+  left:0;
+  top:0;
+  width:100%;
+  height:230px;
+  transform-origin:top center;
+  transform:rotateX(0deg);
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  background:
+    linear-gradient(135deg,#fff8ea,#e2c8a1);
+  box-shadow:0 8px 20px rgba(80,45,25,.12);
+  transition:1.2s cubic-bezier(.65,.05,.36,1);
+  backface-visibility:hidden;
+}
+
+.envelope.open .flap{
+  transform:rotateX(180deg);
+  z-index:1;
+}
+
+/* inner letter */
+
+.letter{
+  position:absolute;
+  z-index:3;
+  width:88%;
+  height:285px;
+  left:6%;
+  bottom:15px;
+  background:
+    linear-gradient(135deg,#fffdf7,#f7ecda);
+  border:1px solid rgba(201,155,74,.3);
+  box-shadow:0 15px 30px rgba(90,50,25,.15);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  transition:1.2s cubic-bezier(.65,.05,.36,1);
+}
+
+.envelope.open .letter{
+  transform:translateY(-175px);
+}
+
+/* decorative letter */
+
+.letter-content{
+  text-align:center;
+}
+
+.small-title{
+  font-family:'Cinzel',serif;
+  font-size:12px;
+  letter-spacing:5px;
+  color:var(--gold);
+}
+
+.letter-name{
+  font-family:'Great Vibes',cursive;
+  font-size:60px;
+  color:var(--rose-dark);
+  margin:8px 0;
+}
+
+/* wax seal */
+
+.seal{
+  position:absolute;
+  z-index:10;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:105px;
+  height:105px;
+  border-radius:50%;
+  border:5px solid #d8ae5d;
+  background:
+    radial-gradient(circle at 30% 25%,#f3d891,#a97827 55%,#7e5419);
+  box-shadow:
+    0 12px 25px rgba(81,49,16,.35),
+    inset 0 3px 5px rgba(255,255,255,.5),
+    0 0 35px rgba(239,210,140,.55);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff8df;
+  cursor:pointer;
+  transition:.4s ease;
+  user-select:none;
+}
+
+.seal:hover{
+  transform:translate(-50%,-50%) scale(1.08);
+  box-shadow:
+    0 15px 30px rgba(81,49,16,.35),
+    0 0 55px rgba(239,210,140,.9);
+}
+
+.seal::before{
+  content:"";
+  position:absolute;
+  inset:7px;
+  border:1px solid rgba(255,245,205,.65);
+  border-radius:50%;
+}
+
+.seal span{
+  font-family:'Cinzel',serif;
+  font-weight:600;
+  font-size:21px;
+  letter-spacing:2px;
+  text-shadow:0 2px 3px rgba(90,50,10,.4);
+}
+
+.open-text{
+  margin-top:25px;
+  font-family:'Cinzel',serif;
+  letter-spacing:4px;
+  font-size:12px;
+  color:#76533a;
+  animation:pulseText 2s infinite;
+}
+
+@keyframes pulseText{
+  0%,100%{opacity:.45}
+  50%{opacity:1}
+}
+
+/* =========================
+   MAIN PAGE
+========================= */
+
+.page{
+  opacity:0;
+  visibility:hidden;
+  transition:1.5s ease;
+}
+
+.page.visible{
+  opacity:1;
+  visibility:visible;
+}
+
+/* hero */
+
+.hero{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:80px 20px;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  border-radius:50%;
+  background:rgba(239,210,140,.15);
+  filter:blur(60px);
+}
+
+.frame{
+  width:min(900px,95vw);
+  min-height:620px;
+  padding:90px 30px;
+  position:relative;
+  border:1px solid rgba(201,155,74,.5);
+  box-shadow:
+    0 30px 80px rgba(91,56,33,.12),
+    inset 0 0 60px rgba(239,210,140,.1);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+.frame::before,
+.frame::after{
+  content:"✦";
+  position:absolute;
+  font-size:70px;
+  color:var(--gold);
+  opacity:.65;
+}
+
+.frame::before{
+  left:20px;
+  top:20px;
+}
+
+.frame::after{
+  right:20px;
+  bottom:20px;
+}
+
+.hero-kicker{
+  font-family:'Cinzel',serif;
+  letter-spacing:7px;
+  color:var(--gold);
+  font-size:13px;
+}
+
+.hero h1{
+  margin:25px 0 10px;
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(55px,10vw,105px);
+  font-weight:400;
+  color:var(--rose-dark);
+}
+
+.hero h2{
+  font-family:'Cinzel',serif;
+  font-size:clamp(20px,4vw,34px);
+  letter-spacing:2px;
+  font-weight:500;
+}
+
+.hero-date{
+  margin-top:22px;
+  font-family:'Cinzel',serif;
+  color:#8d6843;
+  letter-spacing:4px;
+}
+
+.scroll{
+  margin-top:65px;
+  color:#8f6d51;
+  font-size:12px;
+  letter-spacing:3px;
+}
+
+.arrow{
+  display:block;
+  margin-top:12px;
+  font-size:25px;
+  animation:bounce 1.7s infinite;
+}
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(10px)}
+}
+
+/* sections */
+
+section{
+  padding:110px 20px;
+  position:relative;
+}
+
+.container{
+  width:min(1050px,92vw);
+  margin:auto;
+}
+
+.section-heading{
+  text-align:center;
+  margin-bottom:60px;
+}
+
+.section-heading span{
+  font-family:'Cinzel',serif;
+  color:var(--gold);
+  letter-spacing:5px;
+  font-size:11px;
+}
+
+.section-heading h2{
+  font-family:'Great Vibes',cursive;
+  color:var(--rose-dark);
+  font-size:65px;
+  font-weight:400;
+  margin:5px 0;
+}
+
+.section-heading p{
+  color:#856d5b;
+}
+
+/* scratch */
+
+.scratch-container{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.scratch-card{
+  width:190px;
+  height:140px;
+  position:relative;
+  overflow:hidden;
+  border-radius:15px;
+  background:#fffaf1;
+  box-shadow:0 15px 35px rgba(90,50,25,.12);
+  border:1px solid rgba(201,155,74,.35);
+}
+
+.scratch-content{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.scratch-content small{
+  font-family:'Cinzel',serif;
+  letter-spacing:3px;
+  color:#a48665;
+}
+
+.scratch-content strong{
+  font-family:'Cinzel',serif;
+  font-size:30px;
+  color:var(--rose-dark);
+  margin-top:10px;
+}
+
+.scratch-cover{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  cursor:pointer;
+  background:
+    linear-gradient(135deg,#b78536,#f1d58c,#a87527);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  font-family:'Cinzel',serif;
+  letter-spacing:2px;
+  transition:.5s;
+}
+
+.scratch-card.revealed .scratch-cover{
+  transform:translateY(110%);
+}
+
+/* timeline */
+
+.timeline{
+  max-width:750px;
+  margin:auto;
+  position:relative;
+}
+
+.timeline::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  bottom:0;
+  width:1px;
+  background:linear-gradient(var(--gold),transparent);
+}
+
+.event{
+  width:50%;
+  padding:20px 40px;
+  position:relative;
+}
+
+.event:nth-child(even){
+  margin-left:50%;
+}
+
+.event-card{
+  padding:25px;
+  background:rgba(255,255,255,.55);
+  border:1px solid rgba(201,155,74,.25);
+  box-shadow:0 15px 35px rgba(90,50,25,.08);
+  border-radius:14px;
+}
+
+.event h3{
+  font-family:'Cinzel',serif;
+  color:var(--rose-dark);
+  margin-bottom:8px;
+}
+
+.event time{
+  color:var(--gold);
+  font-weight:600;
+  font-size:13px;
+}
+
+/* countdown */
+
+.countdown{
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.time-box{
+  width:145px;
+  padding:30px 15px;
+  text-align:center;
+  background:rgba(255,255,255,.55);
+  border:1px solid rgba(201,155,74,.3);
+  border-radius:15px;
+}
+
+.time-box strong{
+  display:block;
+  font-family:'Cinzel',serif;
+  font-size:40px;
+  color:var(--rose-dark);
+}
+
+.time-box span{
+  font-size:10px;
+  letter-spacing:3px;
+  color:#8e735e;
+}
+
+/* venue */
+
+.venue{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+  align-items:stretch;
+}
+
+.venue-card,
+.map{
+  min-height:350px;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid rgba(201,155,74,.3);
+  background:rgba(255,255,255,.5);
+  box-shadow:0 20px 45px rgba(90,50,25,.1);
+}
+
+.venue-card{
+  padding:50px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.venue-card h3{
+  font-family:'Great Vibes',cursive;
+  font-size:55px;
+  color:var(--rose-dark);
+}
+
+.venue-card p{
+  margin:15px 0;
+  line-height:1.8;
+  color:#765f4e;
+}
+
+.map iframe{
+  width:100%;
+  height:100%;
+  min-height:350px;
+  border:0;
+}
+
+/* dress code */
+
+.dress{
+  text-align:center;
+}
+
+.swatches{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.swatch{
+  width:150px;
+  padding:15px;
+  background:#fff;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(90,50,25,.08);
+}
+
+.swatch-color{
+  width:100%;
+  height:70px;
+  border-radius:10px;
+  margin-bottom:12px;
+}
+
+.swatch:nth-child(1) .swatch-color{
+  background:#e9bfc5;
+}
+
+.swatch:nth-child(2) .swatch-color{
+  background:#b77b6d;
+}
+
+.swatch:nth-child(3) .swatch-color{
+  background:#fff8ed;
+  border:1px solid #ead9c2;
+}
+
+/* RSVP */
+
+.rsvp-form{
+  width:min(650px,100%);
+  margin:auto;
+  background:rgba(255,255,255,.6);
+  padding:40px;
+  border-radius:20px;
+  border:1px solid rgba(201,155,74,.3);
+  box-shadow:0 20px 50px rgba(90,50,25,.1);
+}
+
+.field{
+  margin-bottom:20px;
+}
+
+.field label{
+  display:block;
+  margin-bottom:8px;
+  font-size:12px;
+  letter-spacing:1px;
+  color:#795f4c;
+}
+
+.field input,
+.field textarea,
+.field select{
+  width:100%;
+  padding:15px;
+  border:1px solid #ddc7a9;
+  background:#fffdf9;
+  border-radius:10px;
+  outline:none;
+  font-family:inherit;
+  color:var(--brown);
+}
+
+.field textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.btn{
+  width:100%;
+  border:0;
+  padding:17px;
+  border-radius:10px;
+  cursor:pointer;
+  background:linear-gradient(135deg,#a97b32,#e5c477,#a97b32);
+  color:white;
+  font-family:'Cinzel',serif;
+  letter-spacing:2px;
+  transition:.3s;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 25px rgba(169,123,50,.3);
+}
+
+/* music */
+
+.music{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:500;
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  border:1px solid rgba(201,155,74,.5);
+  background:rgba(255,250,240,.9);
+  box-shadow:0 10px 25px rgba(80,45,25,.15);
+  cursor:pointer;
+  color:var(--gold);
+  font-size:20px;
+}
+
+/* footer */
+
+footer{
+  padding:60px 20px;
+  text-align:center;
+  border-top:1px solid rgba(201,155,74,.2);
+}
+
+footer h3{
+  font-family:'Great Vibes',cursive;
+  font-size:45px;
+  color:var(--rose-dark);
+}
+
+footer p{
+  margin-top:10px;
+  font-size:11px;
+  letter-spacing:2px;
+  color:#927963;
+}
+
+/* sparkle */
+
+.sparkle{
+  position:fixed;
+  pointer-events:none;
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:#e8c66e;
+  box-shadow:0 0 15px #e8c66e;
+  animation:spark .8s forwards;
+  z-index:10000;
+}
+
+@keyframes spark{
+  0%{
+    transform:scale(1);
+    opacity:1;
+  }
+  100%{
+    transform:translate(
+      calc((var(--x) - .5) * 180px),
+      calc((var(--y) - .5) * 180px)
+    ) scale(0);
+    opacity:0;
+  }
+}
+
+/* mobile */
+
+@media(max-width:700px){
+
+  .envelope-wrapper{
+    height:330px;
+  }
+
+  .envelope{
+    height:230px;
+  }
+
+  .flap{
+    height:170px;
+  }
+
+  .letter{
+    height:220px;
+  }
+
+  .letter-name{
+    font-size:45px;
+  }
+
+  .seal{
+    width:85px;
+    height:85px;
+  }
+
+  .seal span{
+    font-size:17px;
+  }
+
+  .hero{
+    padding:30px 15px;
+  }
+
+  .frame{
+    min-height:560px;
+  }
+
+  .hero h1{
+    font-size:65px;
+  }
+
+  .timeline::before{
+    left:10px;
+  }
+
+  .event,
+  .event:nth-child(even){
+    width:100%;
+    margin-left:0;
+    padding-left:35px;
+    padding-right:0;
+  }
+
+  .venue{
+    grid-template-columns:1fr;
+  }
+
+  .time-box{
+    width:130px;
+  }
+
+  .rsvp-form{
+    padding:25px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     ENVELOPE INTRO
+========================= -->
+
+<div class="intro" id="intro">
+
+  <div class="particle p1"></div>
+  <div class="particle p2"></div>
+  <div class="particle p3"></div>
+  <div class="particle p4"></div>
+  <div class="particle p5"></div>
+  <div class="particle p6"></div>
+
+  <div class="intro-content">
+
+    <div class="envelope-wrapper">
+
+      <div class="envelope" id="envelope">
+
+        <div class="letter">
+          <div class="letter-content">
+            <div class="small-title">YOU ARE INVITED</div>
+            <div class="letter-name">Jana</div>
+            <div class="small-title">BIRTHDAY CELEBRATION</div>
+          </div>
+        </div>
+
+        <div class="envelope-front"></div>
+
+        <div class="flap"></div>
+
+        <div class="seal" id="seal">
+          <span>J &amp; M</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="open-text">
+      TAP THE SEAL TO OPEN
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     MAIN WEBSITE
+========================= -->
+
+<div class="page" id="page">
+
+  <!-- MUSIC -->
+  <button class="music" id="musicBtn" title="Music">
+    ♫
+  </button>
+
+  <!-- Replace music.mp3 with your own audio -->
+  <audio id="musicAudio" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="frame">
+
+      <div class="hero-kicker">
+        A SPECIAL INVITATION
+      </div>
+
+      <h1>You're Invited</h1>
+
+      <h2>
+        Jana Waleed's Birthday Celebration
+      </h2>
+
+      <div class="hero-date">
+        MAY 04 · 2010
+      </div>
+
+      <div class="scroll">
+        SCROLL DOWN TO EXPLORE
+        <span class="arrow">↓</span>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- DATE -->
+
+  <section>
+
+    <div class="container">
+
+      <div class="section-heading">
+        <span>01 — DISCOVER THE DATE</span>
+        <h2>Scratch to Reveal</h2>
+        <p>Reveal each part of the special date.</p>
+      </div>
+
+      <div class="scratch-container">
+
+        <div class="scratch-card">
+          <div class="scratch-content">
+            <small>DAY</small>
+            <strong>04</strong>
+          </div>
+          <div class="scratch-cover">SCRATCH</div>
+        </div>
+
+        <div class="scratch-card">
+          <div class="scratch-content">
+            <small>MONTH</small>
+            <strong>MAY</strong>
+          </div>
+          <div class="scratch-cover">SCRATCH</div>
+        </div>
+
+        <div class="scratch-card">
+          <div class="scratch-content">
+            <small>YEAR</small>
+            <strong>2010</strong>
+          </div>
+          <div class="scratch-cover">SCRATCH</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- TIMELINE -->
+
+  <section>
+
+    <div class="container">
+
+      <div class="section-heading">
+        <span>02 — THE CELEBRATION</span>
+        <h2>Party Timeline</h2>
+        <p>A beautiful evening awaits.</p>
+      </div>
+
+      <div class="timeline">
+
+        <div class="event">
+          <div class="event-card">
+            <time>06:00 PM</time>
+            <h3>Welcome Drinks</h3>
+            <p>Guest arrival and welcome.</p>
+          </div>
+        </div>
+
+        <div class="event">
+          <div class="event-card">
+            <time>06:30 PM</time>
+            <h3>Cake Cutting</h3>
+            <p>The birthday celebration begins.</p>
+          </div>
+        </div>
+
+        <div class="event">
+          <div class="event-card">
+            <time>07:30 PM</time>
+            <h3>Dinner & Music</h3>
+            <p>Enjoy dinner and beautiful music.</p>
+          </div>
+        </div>
+
+        <div class="event">
+          <div class="event-card">
+            <time>09:00 PM</time>
+            <h3>Dance & Party</h3>
+            <p>Let's celebrate together.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- COUNTDOWN -->
+
+  <section>
+
+    <div class="container">
+
+      <div class="section-heading">
+        <span>03 — COUNTDOWN</span>
+        <h2>The Big Moment</h2>
+        <p>Counting down to the celebration.</p>
+      </div>
+
+      <div class="countdown">
+
+        <div class="time-box">
+          <strong id="days">00</strong>
+          <span>DAYS</span>
+        </div>
+
+        <div class="time-box">
+          <strong id="hours">00</strong>
+          <span>HOURS</span>
+        </div>
+
+        <div class="time-box">
+          <strong id="minutes">00</strong>
+          <span>MINUTES</span>
+        </div>
+
+        <div class="time-box">
+          <strong id="seconds">00</strong>
+          <span>SECONDS</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- VENUE -->
+
+  <section>
+
+    <div class="container">
+
+      <div class="section-heading">
+        <span>04 — LOCATION</span>
+        <h2>Join Us</h2>
+        <p>We can't wait to celebrate together.</p>
+      </div>
+
+      <div class="venue">
+
+        <div class="venue-card">
+
+          <h3>The Celebration</h3>
+
+          <p>
+            📍 Your Venue Name<br>
+            Your City, Egypt
+          </p>
+
+          <p>
+            Please update this section with your real
+            party location.
+          </p>
+
+          <button class="btn"
+            onclick="window.open('https://maps.google.com','_blank')">
+            OPEN IN MAPS
+          </button>
+
+        </div>
+
+        <div class="map">
+
+          <iframe
+            src="https://www.google.com/maps?q=Egypt&output=embed"
+            loading="lazy">
+          </iframe>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- DRESS CODE -->
+
+  <section>
+
+    <div class="container dress">
+
+      <div class="section-heading">
+        <span>05 — STYLE</span>
+        <h2>Dress Code</h2>
+        <p>Elegant, soft and celebratory.</p>
+      </div>
+
+      <div class="swatches">
+
+        <div class="swatch">
+          <div class="swatch-color"></div>
+          <strong>Pastel Pink</strong>
+        </div>
+
+        <div class="swatch">
+          <div class="swatch-color"></div>
+          <strong>Rose Gold</strong>
+        </div>
+
+        <div class="swatch">
+          <div class="swatch-color"></div>
+          <strong>Ivory</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- RSVP -->
+
+  <section>
+
+    <div class="container">
+
+      <div class="section-heading">
+        <span>06 — RSVP</span>
+        <h2>Celebrate With Us</h2>
+        <p>Let us know you're coming.</p>
+      </div>
+
+      <form class="rsvp-form" id="rsvpForm">
+
+        <div class="field">
+          <label>YOUR NAME</label>
+          <input
+            type="text"
+            placeholder="Enter your name"
+            required>
+        </div>
+
+        <div class="field">
+          <label>ATTENDANCE</label>
+
+          <select required>
+            <option value="">Select an option</option>
+            <option>Yes, I'll be there</option>
+            <option>Sorry, I can't attend</option>
+          </select>
+
+        </div>
+
+        <div class="field">
+          <label>DIETARY PREFERENCE</label>
+
+          <select>
+            <option>No special preference</option>
+            <option>Vegetarian</option>
+            <option>Other</option>
+          </select>
+
+        </div>
+
+        <div class="field">
+
+          <label>YOUR WISH FOR JANA</label>
+
+          <textarea
+            placeholder="Write a beautiful birthday wish...">
+          </textarea>
+
+        </div>
+
+        <button class="btn" type="submit">
+          SEND RSVP
+        </button>
+
+      </form>
+
+    </div>
+
+  </section>
+
+
+  <footer>
+
+    <h3>Jana's Birthday</h3>
+
+    <p>
+      MADE WITH LOVE · 04 MAY 2010
+    </p>
+
+  </footer>
+
+</div>
+
+
+<script>
+
+/* =========================
+   ENVELOPE OPEN
+========================= */
+
+const seal = document.getElementById("seal");
+const envelope = document.getElementById("envelope");
+const intro = document.getElementById("intro");
+const page = document.getElementById("page");
+const music = document.getElementById("musicAudio");
+const musicBtn = document.getElementById("musicBtn");
+
+let opened = false;
+
+seal.addEventListener("click", () => {
+
+  if(opened) return;
+
+  opened = true;
+
+  createSparkles();
+
+  envelope.classList.add("open");
+
+  setTimeout(() => {
+
+    intro.classList.add("hide");
+    page.classList.add("visible");
+
+    music.play()
+      .then(() => {
+        musicBtn.textContent = "❚❚";
+      })
+      .catch(() => {
+        musicBtn.textContent = "♫";
+      });
+
+  },1300);
+
+});
+
+
+/* =========================
+   MUSIC
+========================= */
+
+let musicPlaying = false;
+
+musicBtn.addEventListener("click", () => {
+
+  if(music.paused){
+
+    music.play()
+      .then(() => {
+        musicPlaying = true;
+        musicBtn.textContent = "❚❚";
+      });
+
+  }else{
+
+    music.pause();
+    musicPlaying = false;
+    musicBtn.textContent = "♫";
+
+  }
+
+});
+
+
+/* =========================
+   SCRATCH
+========================= */
+
+document.querySelectorAll(".scratch-card")
+.forEach(card => {
+
+  const cover = card.querySelector(".scratch-cover");
+
+  cover.addEventListener("click", () => {
+
+    card.classList.add("revealed");
+
+    createSparkles();
+
+  });
+
+});
+
+
+/* =========================
+   COUNTDOWN
+========================= */
+
+/*
+   CHANGE THIS DATE
+   TO YOUR PARTY DATE.
+*/
+
+const partyDate = new Date("2026-10-04T18:00:00").getTime();
+
+function updateCountdown(){
+
+  const now = new Date().getTime();
+
+  const difference = partyDate - now;
+
+  if(difference <= 0){
+
+    document.getElementById("days").textContent = "00";
+    document.getElementById("hours").textContent = "00";
+    document.getElementById("minutes").textContent = "00";
+    document.getElementById("seconds").textContent = "00";
+
+    return;
+
+  }
+
+  const days = Math.floor(
+    difference / (1000 * 60 * 60 * 24)
+  );
+
+  const hours = Math.floor(
+    (difference / (1000 * 60 * 60)) % 24
+  );
+
+  const minutes = Math.floor(
+    (difference / (1000 * 60)) % 60
+  );
+
+  const seconds = Math.floor(
+    (difference / 1000) % 60
+  );
+
+  document.getElementById("days").textContent =
+    String(days).padStart(2,"0");
+
+  document.getElementById("hours").textContent =
+    String(hours).padStart(2,"0");
+
+  document.getElementById("minutes").textContent =
+    String(minutes).padStart(2,"0");
+
+  document.getElementById("seconds").textContent =
+    String(seconds).padStart(2,"0");
+
+}
+
+updateCountdown();
+setInterval(updateCountdown,1000);
+
+
+/* =========================
+   RSVP
+========================= */
+
+document.getElementById("rsvpForm")
+.addEventListener("submit",(e)=>{
+
+  e.preventDefault();
+
+  alert(
+    "Thank you! Your RSVP has been received. ✨"
+  );
+
+  e.target.reset();
+
+});
+
+
+/* =========================
+   SPARKLES
+========================= */
+
+function createSparkles(){
+
+  for(let i=0;i<25;i++){
+
+    const sparkle = document.createElement("div");
+
+    sparkle.className = "sparkle";
+
+    sparkle.style.left =
+      (window.innerWidth / 2) + "px";
+
+    sparkle.style.top =
+      (window.innerHeight / 2) + "px";
+
+    sparkle.style.setProperty(
+      "--x",
+      Math.random()
+    );
+
+    sparkle.style.setProperty(
+      "--y",
+      Math.random()
+    );
+
+    document.body.appendChild(sparkle);
+
+    setTimeout(()=>{
+      sparkle.remove();
+    },900);
+
+  }
+
+}
+
+
+/* =========================
+   CLICK SPARKLES
+========================= */
+
+document.addEventListener("click",(e)=>{
+
+  if(
+    e.target.closest(".seal") ||
+    e.target.closest(".music") ||
+    e.target.closest(".btn")
+  ) return;
+
+  const sparkle = document.createElement("div");
+
+  sparkle.className = "sparkle";
+
+  sparkle.style.left = e.clientX + "px";
+  sparkle.style.top = e.clientY + "px";
+
+  sparkle.style.setProperty(
+    "--x",
+    Math.random()
+  );
+
+  sparkle.style.setProperty(
+    "--y",
+    Math.random()
+  );
+
+  document.body.appendChild(sparkle);
+
+  setTimeout(()=>{
+    sparkle.remove();
+  },800);
+
+});
+
+</script>
+
+</body>
+  </html>
