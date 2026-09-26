@@ -2,711 +2,633 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#17080c">
 
-<title>Our Love Book 🖤</title>
+<title>Our Love Book</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Caveat:wght@500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg:#100404;
-  --red:#8b1a1a;
-  --deep:#3d0707;
-  --gold:#c9a96a;
-  --paper:#f4e8cf;
-  --ink:#2a1712;
-  --white:#fff;
-  --shadow:rgba(0,0,0,.55);
+  --bg:#12070a;
+  --paper:#f4ead7;
+  --paper2:#eadbc0;
+  --ink:#30171a;
+  --red:#8d1725;
+  --red2:#b52b3d;
+  --gold:#c99a4b;
+  --white:#fff9ef;
 }
 
 *{
-  margin:0;
-  padding:0;
   box-sizing:border-box;
   -webkit-tap-highlight-color:transparent;
 }
 
-html,
-body{
+html,body{
   width:100%;
   height:100%;
+  margin:0;
+}
+
+body{
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 45%,#3a1019 0,#1d080e 38%,#090306 100%);
+  color:white;
+  font-family:Cairo,sans-serif;
+  touch-action:none;
+}
+
+button{
+  font:inherit;
+}
+
+#app{
+  width:100%;
+  height:100%;
+  position:relative;
   overflow:hidden;
 }
 
-body{
-  font-family:'Playfair Display',serif;
-  background:
-    radial-gradient(circle at 50% 30%,#350b0b 0%,#120303 55%,#050101 100%);
-  color:white;
-  touch-action:none;
-  user-select:none;
-}
+/* ---------------- INTRO ---------------- */
 
-/* =========================================================
-   INTRO
-========================================================= */
-
-#intro{
-  position:fixed;
+.intro{
+  position:absolute;
   inset:0;
-  z-index:1000;
+  z-index:100;
   display:flex;
-  flex-direction:column;
-  align-items:center;
   justify-content:center;
-  background:
-    radial-gradient(circle at center,#3c0b0b 0%,#120303 55%,#040101 100%);
+  align-items:center;
+  background:#100509;
   transition:opacity .7s ease,visibility .7s ease;
 }
 
-#intro.hide{
+.intro.hide{
   opacity:0;
   visibility:hidden;
   pointer-events:none;
 }
 
+.intro-box{
+  width:min(90vw,500px);
+  text-align:center;
+}
+
 .intro-frame{
-  width:min(240px,70vw);
-  height:min(320px,75vh);
-  border:2px solid var(--gold);
-  border-radius:50% / 40%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
   position:relative;
-  cursor:pointer;
-  box-shadow:
-    0 0 35px rgba(201,169,106,.25),
-    inset 0 0 35px rgba(139,26,26,.25);
-  animation:float 3.5s ease-in-out infinite;
+  width:230px;
+  height:300px;
+  margin:auto;
+  border:1px solid rgba(220,175,90,.5);
+  border-radius:120px 120px 20px 20px;
+  overflow:hidden;
+  background:
+    linear-gradient(rgba(80,10,20,.2),rgba(0,0,0,.6)),
+    url("assets/intro.jpg") center/cover;
+  box-shadow:0 20px 70px rgba(0,0,0,.65);
 }
-
-@keyframes float{
-  50%{transform:translateY(-8px)}
-}
-
-.intro-frame:before,
-.intro-frame:after{
-  content:"";
-  position:absolute;
-  border:1px solid rgba(201,169,106,.3);
-  border-radius:50% / 40%;
-}
-
-.intro-frame:before{inset:10px}
-.intro-frame:after{inset:20px}
 
 .candle{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+  position:absolute;
+  left:50%;
+  bottom:35px;
+  transform:translateX(-50%);
+  width:35px;
+  height:100px;
+  background:linear-gradient(90deg,#d6b36a,#fff2c2,#c99a4b);
+  border-radius:5px 5px 3px 3px;
 }
 
 .flame{
-  width:18px;
-  height:35px;
-  border-radius:50% 50% 45% 45%;
-  background:
-    radial-gradient(circle at 50% 70%,#fff 0%,#ffd84d 30%,#ff4b16 65%,transparent 100%);
-  box-shadow:0 0 35px 10px rgba(255,80,20,.4);
-  animation:flicker .5s infinite alternate;
-}
-
-@keyframes flicker{
-  from{transform:scale(.96) rotate(-2deg)}
-  to{transform:scale(1.05) rotate(2deg)}
-}
-
-.wick{
-  width:3px;
-  height:7px;
-  background:#111;
-}
-
-.candle-body{
-  width:42px;
-  height:105px;
-  border-radius:6px 6px 10px 10px;
-  background:linear-gradient(90deg,#651010,#b52b2b,#5a0909);
-  box-shadow:inset -7px 0 12px rgba(0,0,0,.4);
-}
-
-.butterfly{
   position:absolute;
-  font-size:20px;
-  animation:butterfly 5s ease-in-out infinite;
+  left:50%;
+  top:-42px;
+  width:24px;
+  height:40px;
+  transform:translateX(-50%);
+  border-radius:60% 40% 60% 40%;
+  background:#ffca58;
+  box-shadow:0 0 25px #ff9f22;
+  animation:flame 1.2s ease-in-out infinite alternate;
 }
 
-.b1{top:8%;left:12%}
-.b2{top:18%;right:10%;animation-delay:1s}
-.b3{bottom:12%;left:18%;animation-delay:2s}
-.b4{bottom:22%;right:15%;animation-delay:3s}
+@keyframes flame{
+  from{transform:translateX(-50%) scale(.9) rotate(-3deg)}
+  to{transform:translateX(-50%) scale(1.08) rotate(4deg)}
+}
 
-@keyframes butterfly{
-  50%{transform:translate(12px,-18px) rotate(10deg)}
+.intro-small{
+  margin-top:30px;
+  color:#d7b96f;
+  letter-spacing:5px;
+  font-size:12px;
 }
 
 .intro-title{
-  margin-top:30px;
-  font-family:Cinzel,serif;
-  color:var(--gold);
-  font-size:clamp(1rem,4vw,1.5rem);
-  letter-spacing:4px;
+  font-family:"Playfair Display",serif;
+  font-size:clamp(34px,9vw,65px);
+  margin:8px 0 20px;
 }
 
-.intro-hint{
-  margin-top:10px;
-  color:#aaa;
-  font-family:Caveat,cursive;
+.enter{
+  border:1px solid rgba(216,166,76,.65);
+  background:rgba(255,255,255,.05);
+  color:#fff2ce;
+  padding:13px 32px;
+  border-radius:999px;
+  cursor:pointer;
+  transition:.2s;
 }
 
-/* =========================================================
-   TOP BAR
-========================================================= */
+.enter:active{
+  transform:scale(.95);
+}
 
-#topbar{
-  position:fixed;
+/* ---------------- TOP ---------------- */
+
+.top{
+  position:absolute;
   top:0;
   left:0;
   right:0;
-  z-index:200;
+  z-index:20;
+  height:70px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:12px 15px;
-  opacity:0;
-  transform:translateY(-30px);
-  transition:.5s;
+  padding:0 22px;
   pointer-events:none;
 }
 
-#topbar.show{
-  opacity:1;
-  transform:none;
-  pointer-events:auto;
+.logo{
+  font-family:"Playfair Display",serif;
+  letter-spacing:2px;
+  color:#f3d798;
+  font-size:16px;
 }
 
-.brand{
-  font-family:Cinzel,serif;
-  color:var(--gold);
-  letter-spacing:3px;
-  font-size:.85rem;
+.page-counter{
+  font-family:"Caveat",cursive;
+  font-size:23px;
+  color:#f8dfaa;
 }
 
-.icon-btn{
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  border:1px solid var(--gold);
-  background:rgba(0,0,0,.45);
-  color:var(--gold);
-  cursor:pointer;
-}
+/* ---------------- BOOK ---------------- */
 
-/* =========================================================
-   SCENE
-========================================================= */
-
-#scene{
-  position:fixed;
-  inset:0;
+.stage{
+  width:100%;
+  height:100%;
   display:flex;
-  justify-content:center;
   align-items:center;
-  padding:55px 8px 70px;
-  opacity:0;
-  transition:opacity .7s;
-}
-
-#scene.show{
-  opacity:1;
+  justify-content:center;
+  perspective:1800px;
 }
 
 .book{
   position:relative;
-  width:min(1000px,96vw);
-  height:min(650px,82vh);
-  perspective:1800px;
-  transform:rotateX(4deg);
+  width:min(92vw,1000px);
+  height:min(76vh,650px);
+  min-height:420px;
+  transform-style:preserve-3d;
 }
 
-/* book cover */
-
-.book-cover{
+.book-shadow{
   position:absolute;
-  inset:-10px;
-  background:
-    linear-gradient(135deg,#160606,#050202);
-  border:2px solid var(--gold);
-  border-radius:8px;
+  left:4%;
+  right:4%;
+  bottom:-25px;
+  height:35px;
+  background:rgba(0,0,0,.45);
+  border-radius:50%;
+}
+
+.spread{
+  position:absolute;
+  inset:0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border-radius:12px;
+  overflow:hidden;
   box-shadow:
-    0 35px 60px rgba(0,0,0,.65),
-    inset 0 0 35px rgba(0,0,0,.7);
+    0 20px 55px rgba(0,0,0,.55),
+    0 2px 0 rgba(255,255,255,.15) inset;
+  background:#211;
+  opacity:0;
+  pointer-events:none;
 }
 
-.book-cover:after{
-  content:"";
-  position:absolute;
-  top:0;
-  bottom:0;
-  left:50%;
-  width:16px;
-  transform:translateX(-50%);
-  background:linear-gradient(
-    90deg,
-    rgba(0,0,0,.7),
-    transparent,
-    rgba(0,0,0,.7)
-  );
+.spread.active{
+  opacity:1;
+  pointer-events:auto;
 }
-
-/* =========================================================
-   PAGE
-========================================================= */
 
 .page{
-  position:absolute;
-  top:0;
-  width:50%;
-  height:100%;
+  position:relative;
   overflow:hidden;
   background-color:var(--paper);
   color:var(--ink);
   background-size:cover;
   background-position:center;
-  transform-style:preserve-3d;
-  backface-visibility:hidden;
-  -webkit-backface-visibility:hidden;
-  will-change:transform;
-  contain:layout paint;
-  transition:
-    transform .72s cubic-bezier(.65,.05,.25,1);
+  isolation:isolate;
 }
 
-.page:before{
+.page.left{
+  border-right:1px solid rgba(50,20,15,.25);
+}
+
+.page.right{
+  border-left:1px solid rgba(50,20,15,.15);
+}
+
+.page::after{
   content:"";
   position:absolute;
   inset:0;
+  z-index:-1;
   background:
-    linear-gradient(
-      rgba(244,232,207,.84),
-      rgba(244,232,207,.84)
-    );
+    linear-gradient(90deg,rgba(255,255,255,.18),transparent 15%,transparent 85%,rgba(0,0,0,.08));
   pointer-events:none;
 }
 
 .page-content{
-  position:relative;
-  z-index:2;
-  width:100%;
-  height:100%;
-  padding:clamp(16px,3vw,35px);
-}
-
-.page.right{
-  right:0;
-  transform-origin:left center;
-  transform:rotateY(0deg);
-  border-radius:3px 8px 8px 3px;
-  box-shadow:inset 15px 0 20px -18px rgba(0,0,0,.5);
-  z-index:10;
-}
-
-.page.right.flipped{
-  transform:rotateY(-180deg);
-  z-index:4;
-}
-
-.page.left{
-  left:0;
-  transform-origin:right center;
-  transform:rotateY(180deg);
-  opacity:0;
-  pointer-events:none;
-  border-radius:8px 3px 3px 8px;
-  z-index:5;
-}
-
-.page.left.show{
-  transform:rotateY(0deg);
-  opacity:1;
-  pointer-events:auto;
-}
-
-/* =========================================================
-   PAGE CONTENT
-========================================================= */
-
-.page-title{
-  font-family:Cinzel,serif;
+  position:absolute;
+  inset:0;
+  padding:clamp(22px,4vw,45px);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
   text-align:center;
-  color:var(--deep);
-  font-size:clamp(1rem,2.5vw,1.5rem);
-  letter-spacing:3px;
-}
-
-.page-sub{
-  text-align:center;
-  color:var(--red);
-  font-family:Caveat,cursive;
-  margin-top:4px;
-  font-size:1rem;
-}
-
-.photo{
-  position:absolute;
-  background:#fff;
-  padding:7px 7px 32px;
-  box-shadow:0 12px 25px rgba(0,0,0,.3);
-  cursor:pointer;
-  transition:transform .2s;
-}
-
-.photo:active{
-  transform:scale(.96) !important;
-}
-
-.photo img{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  pointer-events:none;
-}
-
-.photo .caption{
-  position:absolute;
-  bottom:5px;
-  left:0;
-  right:0;
-  text-align:center;
-  font-family:Caveat,cursive;
-  color:#333;
-  font-size:.9rem;
-}
-
-.photo-a{
-  width:clamp(120px,17vw,175px);
-  height:clamp(150px,22vw,210px);
-}
-
-.photo-b{
-  width:clamp(100px,14vw,145px);
-  height:clamp(125px,18vw,175px);
-}
-
-.photo-c{
-  width:clamp(125px,18vw,185px);
-  height:clamp(150px,22vw,215px);
-}
-
-.tape{
-  position:absolute;
-  width:55px;
-  height:17px;
-  top:-9px;
-  left:50%;
-  transform:translateX(-50%) rotate(-3deg);
-  background:rgba(201,169,106,.7);
-  z-index:3;
-}
-
-.sticker{
-  position:absolute;
-  z-index:3;
-  font-size:clamp(1.4rem,3vw,2rem);
-}
-
-.label{
-  position:absolute;
-  z-index:3;
-  padding:4px 10px;
-  border:1px dashed var(--red);
-  background:rgba(139,26,26,.1);
-  color:var(--deep);
-  font-family:Cinzel,serif;
-  font-size:.7rem;
-  letter-spacing:2px;
 }
 
 .page-number{
   position:absolute;
-  bottom:10px;
-  color:var(--red);
-  opacity:.55;
-  font-family:Cinzel,serif;
-  font-size:.65rem;
+  bottom:16px;
+  color:#876e4d;
+  font-family:"Caveat",cursive;
+  font-size:19px;
 }
 
-/* =========================================================
-   PAGE FLIP LIGHT
-========================================================= */
+.page h2{
+  font-family:"Playfair Display",serif;
+  color:#641521;
+  font-size:clamp(25px,4vw,42px);
+  margin:0 0 8px;
+}
 
-.page-flip-light{
+.page p{
+  max-width:430px;
+  line-height:1.9;
+  font-size:clamp(13px,1.8vw,17px);
+  margin:7px 0;
+}
+
+.script{
+  font-family:"Caveat",cursive;
+  color:#8d1725;
+  font-size:clamp(24px,4vw,38px);
+}
+
+.photo{
+  width:min(70%,270px);
+  aspect-ratio:4/5;
+  object-fit:cover;
+  padding:8px;
+  background:#fffaf0;
+  box-shadow:0 8px 20px rgba(0,0,0,.25);
+  transform:rotate(-2deg);
+  margin:15px 0;
+}
+
+.right .photo{
+  transform:rotate(2deg);
+}
+
+/* ---------------- PAGE VIDEO ---------------- */
+
+.page-video{
+  width:min(85%,360px);
+  max-height:230px;
+  object-fit:cover;
+  border-radius:8px;
+  margin-top:15px;
+  box-shadow:0 8px 22px rgba(0,0,0,.25);
+  background:#000;
+}
+
+/* ---------------- FLOWERS ---------------- */
+
+.flowers{
   position:absolute;
   inset:0;
   pointer-events:none;
+  overflow:hidden;
+  z-index:4;
+}
+
+.flower{
+  position:absolute;
+  font-size:27px;
   opacity:0;
+  transform:translateY(40px) scale(.3) rotate(0);
+}
+
+.spread.active .flower{
+  animation:flowerAppear .9s ease forwards;
+}
+
+.flower:nth-child(1){left:8%;top:8%;animation-delay:.05s}
+.flower:nth-child(2){right:9%;top:13%;animation-delay:.15s}
+.flower:nth-child(3){left:13%;bottom:10%;animation-delay:.25s}
+.flower:nth-child(4){right:12%;bottom:8%;animation-delay:.35s}
+.flower:nth-child(5){left:48%;top:5%;animation-delay:.45s}
+
+@keyframes flowerAppear{
+  0%{
+    opacity:0;
+    transform:translateY(35px) scale(.2) rotate(-30deg);
+  }
+  70%{
+    opacity:1;
+    transform:translateY(-4px) scale(1.15) rotate(10deg);
+  }
+  100%{
+    opacity:.9;
+    transform:translateY(0) scale(1) rotate(0);
+  }
+}
+
+/* ---------------- TURN ANIMATION ---------------- */
+
+.turn-layer{
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:50%;
+  z-index:30;
+  pointer-events:none;
+  transform-style:preserve-3d;
+  display:none;
+}
+
+.turn-layer.right{
+  right:0;
+  transform-origin:left center;
+}
+
+.turn-layer.left{
+  left:0;
+  transform-origin:right center;
+}
+
+.turn-layer.go-next{
+  display:block;
+  animation:turnNext .62s cubic-bezier(.22,.72,.2,1) forwards;
+}
+
+.turn-layer.go-prev{
+  display:block;
+  animation:turnPrev .62s cubic-bezier(.22,.72,.2,1) forwards;
+}
+
+@keyframes turnNext{
+  from{transform:rotateY(0deg)}
+  to{transform:rotateY(-180deg)}
+}
+
+@keyframes turnPrev{
+  from{transform:rotateY(0deg)}
+  to{transform:rotateY(180deg)}
+}
+
+.turn-paper{
+  position:absolute;
+  inset:0;
+  background:var(--paper);
+  box-shadow:0 0 25px rgba(0,0,0,.3);
+  overflow:hidden;
+  background-size:cover;
+  background-position:center;
+}
+
+.turn-paper::after{
+  content:"";
+  position:absolute;
+  inset:0;
   background:linear-gradient(
     90deg,
-    transparent 55%,
-    rgba(255,255,255,.22) 75%,
-    rgba(0,0,0,.22) 100%
+    rgba(0,0,0,.02),
+    transparent 45%,
+    rgba(0,0,0,.28)
   );
-  z-index:20;
-  transition:opacity .2s;
 }
 
-.page.flipping .page-flip-light{
-  opacity:1;
-}
+/* ---------------- CONTROLS ---------------- */
 
-/* =========================================================
-   HINT
-========================================================= */
-
-.hint{
+.controls{
   position:absolute;
-  bottom:12px;
-  right:15px;
-  color:var(--red);
-  font-family:Caveat,cursive;
-  opacity:.55;
-  font-size:.9rem;
-  z-index:10;
-}
-
-/* =========================================================
-   BOTTOM BUTTONS
-========================================================= */
-
-.bottom{
-  position:fixed;
-  bottom:18px;
-  left:0;
-  right:0;
+  z-index:50;
+  left:50%;
+  bottom:22px;
+  transform:translateX(-50%);
   display:flex;
-  justify-content:center;
-  gap:14px;
-  z-index:300;
+  align-items:center;
+  gap:10px;
 }
 
-.bottom button{
-  width:52px;
-  height:52px;
+.ctrl{
+  width:47px;
+  height:47px;
+  border:1px solid rgba(220,180,100,.55);
+  background:rgba(20,5,9,.8);
+  color:#f5d99b;
   border-radius:50%;
-  border:2px solid var(--gold);
   cursor:pointer;
-  font-size:1.25rem;
-  box-shadow:0 8px 25px rgba(0,0,0,.4);
+  display:grid;
+  place-items:center;
+  font-size:19px;
 }
 
-#heartBtn{
-  background:linear-gradient(145deg,#c52d3b,#680b14);
-  animation:heartbeat 1.7s infinite;
+.ctrl.big{
+  width:57px;
+  height:57px;
+  background:#801525;
 }
 
-#musicBtn{
-  background:linear-gradient(145deg,#c9a96a,#87641d);
+.ctrl:active{
+  transform:scale(.9);
 }
 
-#videoBtn{
-  background:linear-gradient(145deg,#8b1a1a,#400707);
+.ctrl:disabled{
+  opacity:.3;
 }
 
-@keyframes heartbeat{
-  0%,100%{transform:scale(1)}
-  20%{transform:scale(1.08)}
-  35%{transform:scale(1)}
+/* ---------------- HEART ---------------- */
+
+.heart-button{
+  position:absolute;
+  z-index:60;
+  right:24px;
+  bottom:25px;
+  width:55px;
+  height:55px;
+  border:0;
+  border-radius:50%;
+  background:#8d1725;
+  color:white;
+  font-size:23px;
+  box-shadow:0 8px 25px rgba(100,0,20,.4);
+  cursor:pointer;
 }
 
-/* =========================================================
-   LOVE MODAL
-========================================================= */
+/* ---------------- MODAL ---------------- */
 
-.overlay{
+.modal{
   position:fixed;
   inset:0;
-  z-index:500;
-  display:flex;
-  justify-content:center;
+  z-index:200;
+  display:none;
   align-items:center;
-  padding:15px;
-  background:rgba(3,0,0,.88);
-  backdrop-filter:blur(8px);
-  opacity:0;
-  visibility:hidden;
-  transition:.3s;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.75);
 }
 
-.overlay.open{
-  opacity:1;
-  visibility:visible;
+.modal.open{
+  display:flex;
 }
 
-.love-box{
-  width:min(480px,95vw);
-  max-height:90vh;
+.modal-box{
+  width:min(92vw,600px);
+  max-height:88vh;
   overflow:auto;
-  background:
-    radial-gradient(circle at top,#350b0b,#0c0202 65%);
-  border:2px solid var(--gold);
-  border-radius:16px;
-  padding:25px 20px;
+  background:var(--paper);
+  color:var(--ink);
+  border-radius:15px;
+  padding:25px;
   text-align:center;
-  box-shadow:0 30px 70px rgba(0,0,0,.8);
-  transform:scale(.85);
-  transition:.35s;
-}
-
-.overlay.open .love-box{
-  transform:scale(1);
+  position:relative;
+  box-shadow:0 20px 70px #000;
 }
 
 .close{
   position:absolute;
   top:10px;
-  right:15px;
+  left:12px;
   border:0;
   background:none;
-  color:var(--gold);
-  font-size:28px;
+  font-size:25px;
+  color:#641521;
   cursor:pointer;
 }
 
-.love-heart{
-  font-size:4rem;
-  animation:heartbeat 1.3s infinite;
-  margin-bottom:5px;
+.modal-box h2{
+  font-family:"Playfair Display",serif;
+  color:#751727;
 }
 
-.love-title{
-  font-family:Cinzel,serif;
-  color:var(--gold);
-  letter-spacing:2px;
+.modal-video{
+  width:100%;
+  max-height:55vh;
+  background:#000;
+  border-radius:10px;
 }
 
-.love-text{
-  margin-top:15px;
-  color:#eee;
-  line-height:2;
-  font-size:.98rem;
-}
-
-.signature{
-  margin-top:15px;
-  color:var(--gold);
-  font-family:Caveat,cursive;
-  font-size:1.3rem;
-}
-
-/* =========================================================
-   MEDIA CONTROLS INSIDE LOVE MESSAGE
-========================================================= */
-
-.love-actions{
-  margin-top:22px;
+.modal-actions{
   display:flex;
   justify-content:center;
   gap:10px;
+  margin-top:15px;
   flex-wrap:wrap;
 }
 
-.love-action{
-  border:1px solid var(--gold);
-  background:rgba(139,26,26,.35);
+.action{
+  border:0;
+  border-radius:999px;
+  padding:10px 18px;
+  background:#7d1625;
   color:#fff;
-  padding:10px 17px;
-  border-radius:30px;
   cursor:pointer;
-  font-family:Cairo,sans-serif;
 }
 
-.love-action:active{
-  transform:scale(.95);
-}
+/* ---------------- MOBILE ---------------- */
 
-/* =========================================================
-   VIDEO
-========================================================= */
-
-.video-box{
-  width:min(850px,96vw);
-  background:#070101;
-  border:2px solid var(--gold);
-  border-radius:12px;
-  padding:10px;
-  position:relative;
-}
-
-.video-box video{
-  width:100%;
-  display:block;
-  max-height:75vh;
-  border-radius:8px;
-  background:#000;
-}
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:700px){
+@media(max-width:650px){
 
   .book{
-    width:98vw;
-    height:min(560px,78vh);
-    transform:rotateX(2deg);
+    width:94vw;
+    height:68vh;
+    min-height:390px;
   }
 
   .page-content{
-    padding:13px 9px;
+    padding:18px 14px;
+  }
+
+  .page h2{
+    font-size:23px;
+  }
+
+  .page p{
+    font-size:12px;
+    line-height:1.7;
   }
 
   .photo{
-    padding:4px 4px 24px;
+    width:76%;
+    max-height:210px;
   }
 
-  .photo .caption{
-    font-size:.68rem;
+  .page-video{
+    max-height:150px;
   }
 
-  .photo-a{
-    width:110px;
-    height:135px;
+  .controls{
+    bottom:16px;
   }
 
-  .photo-b{
-    width:90px;
-    height:112px;
+  .heart-button{
+    right:13px;
+    bottom:18px;
   }
 
-  .photo-c{
-    width:120px;
-    height:145px;
+  .logo{
+    font-size:13px;
   }
 
-  .label{
-    font-size:.58rem;
-  }
-
-  .bottom{
-    bottom:12px;
-  }
-
-  .bottom button{
-    width:48px;
-    height:48px;
+  .page-counter{
+    font-size:19px;
   }
 }
 
-@media(max-height:500px) and (orientation:landscape){
+/* Very small phones */
+
+@media(max-height:650px){
   .book{
-    height:88vh;
+    height:65vh;
+  }
+
+  .controls{
+    bottom:8px;
+  }
+
+  .heart-button{
+    bottom:10px;
+  }
+}
+
+/* Reduced motion */
+
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms!important;
+    transition-duration:.01ms!important;
   }
 }
 </style>
@@ -714,132 +636,165 @@ body{
 
 <body>
 
-<!-- =====================================================
-     INTRO
-===================================================== -->
+<div id="app">
 
-<div id="intro">
+  <!-- INTRO -->
+  <section class="intro" id="intro">
 
-  <div class="intro-frame" id="openBtn">
+    <div class="intro-box">
 
-    <span class="butterfly b1">🦋</span>
-    <span class="butterfly b2">🦋</span>
-    <span class="butterfly b3">🦋</span>
-    <span class="butterfly b4">🦋</span>
+      <div class="intro-frame">
+        <div class="candle">
+          <div class="flame"></div>
+        </div>
+      </div>
 
-    <div class="candle">
-      <div class="flame"></div>
-      <div class="wick"></div>
-      <div class="candle-body"></div>
+      <div class="intro-small">A PRIVATE MEMORY BOOK</div>
+
+      <div class="intro-title">
+        Our Love Book
+      </div>
+
+      <button class="enter" id="enterBtn">
+        Open Our Story
+      </button>
+
     </div>
 
+  </section>
+
+
+  <!-- TOP -->
+  <header class="top">
+    <div class="logo">♡ OUR STORY</div>
+    <div class="page-counter" id="counter">01 / 10</div>
+  </header>
+
+
+  <!-- BOOK -->
+  <main class="stage">
+
+    <div class="book" id="book">
+
+      <div class="book-shadow"></div>
+
+      <!--
+        الـ 5 spreads يتم إنشاؤهم من JavaScript
+        وكل spread يحتوي صفحتين.
+      -->
+
+      <div id="spreads"></div>
+
+      <!-- الصفحة التي تتحرك أثناء التقليب -->
+      <div class="turn-layer right" id="turnRight">
+        <div class="turn-paper" id="turnPaperRight"></div>
+      </div>
+
+      <div class="turn-layer left" id="turnLeft">
+        <div class="turn-paper" id="turnPaperLeft"></div>
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- CONTROLS -->
+  <div class="controls">
+
+    <button class="ctrl" id="prevBtn" aria-label="Previous">
+      ‹
+    </button>
+
+    <button class="ctrl big" id="nextBtn" aria-label="Next">
+      ›
+    </button>
+
   </div>
 
-  <div class="intro-title">A LOVE LETTER</div>
-  <div class="intro-hint">اضغط على الشمعة 🕯️</div>
 
-</div>
-
-
-<!-- =====================================================
-     TOP
-===================================================== -->
-
-<div id="topbar">
-
-  <div class="brand">
-    🖤 OUR STORY
-  </div>
-
-  <button class="icon-btn" id="themeBtn">
-    🌙
+  <!-- LOVE BUTTON -->
+  <button class="heart-button" id="loveBtn">
+    ♥
   </button>
 
-</div>
 
+  <!-- MEMORY MODAL -->
+  <div class="modal" id="memoryModal">
 
-<!-- =====================================================
-     BOOK
-===================================================== -->
+    <div class="modal-box">
 
-<div id="scene">
+      <button class="close" data-close="memoryModal">×</button>
 
-  <div class="book" id="book">
+      <h2 id="memoryTitle">Memory</h2>
 
-    <div class="book-cover"></div>
+      <p id="memoryText"></p>
 
-  </div>
+      <div class="modal-actions">
 
-</div>
+        <button class="action" id="memoryVideoBtn">
+          ▶ تشغيل الفيديو
+        </button>
 
+        <button class="action" id="memoryMusicBtn">
+          ♪ تشغيل الموسيقى
+        </button>
 
-<!-- =====================================================
-     BOTTOM
-===================================================== -->
-
-<div class="bottom">
-
-  <button id="heartBtn">❤️</button>
-
-  <button id="musicBtn">🎵</button>
-
-  <button id="videoBtn">🎬</button>
-
-</div>
-
-
-<!-- =====================================================
-     LOVE MESSAGE
-===================================================== -->
-
-<div class="overlay" id="loveOverlay">
-
-  <div class="love-box">
-
-    <button class="close" id="closeLove">×</button>
-
-    <div class="love-heart">❤️</div>
-
-    <div class="love-title">
-      إلى حبيبي
-    </div>
-
-    <div class="love-text" id="loveText"></div>
-
-    <div class="signature">
-      — FOREVER YOURS —
-    </div>
-
-    <div class="love-actions">
-
-      <button class="love-action" id="loveMusic">
-        🎵 تشغيل الأغنية
-      </button>
-
-      <button class="love-action" id="loveVideo">
-        🎬 مشاهدة الفيديو
-      </button>
+      </div>
 
     </div>
 
   </div>
 
-</div>
+
+  <!-- VIDEO MODAL -->
+  <div class="modal" id="videoModal">
+
+    <div class="modal-box">
+
+      <button class="close" data-close="videoModal">×</button>
+
+      <h2>Our Video</h2>
+
+      <video
+        id="mainVideo"
+        class="modal-video"
+        controls
+        playsinline
+        preload="none">
+      </video>
+
+    </div>
+
+  </div>
 
 
-<!-- =====================================================
-     VIDEO
-===================================================== -->
+  <!-- LOVE MODAL -->
+  <div class="modal" id="loveModal">
 
-<div class="overlay" id="videoOverlay">
+    <div class="modal-box">
 
-  <div class="video-box">
+      <button class="close" data-close="loveModal">×</button>
 
-    <button class="close" id="closeVideo">×</button>
+      <div style="font-size:55px;color:#9b182a">♥</div>
 
-    <video id="video" controls playsinline preload="metadata">
-      <source src="video.mp4" type="video/mp4">
-    </video>
+      <h2>رسالة صغيرة</h2>
+
+      <p id="loveText"></p>
+
+      <div class="modal-actions">
+
+        <button class="action" id="loveMusic">
+          ♪ الموسيقى
+        </button>
+
+        <button class="action" id="loveVideo">
+          ▶ الفيديو
+        </button>
+
+      </div>
+
+    </div>
 
   </div>
 
@@ -847,543 +802,672 @@ body{
 
 
 <script>
-'use strict';
+"use strict";
 
 /* =========================================================
-   ⚙️ الإعدادات
+   1 — ملفاتك
    =========================================================
 
-   غيّر الصور هنا فقط.
+   ضع ملفاتك داخل:
 
-   background = خلفية الصفحة
-   photo      = الصورة الرئيسية
-========================================================= */
+   assets/
+      intro.jpg
+
+      bg1.jpg
+      bg2.jpg
+      ...
+      bg10.jpg
+
+      photo1.jpg
+      photo2.jpg
+      ...
+      photo10.jpg
+
+      video1.mp4
+      video2.mp4
+      ...
+      video10.mp4
+
+      song.mp3
+
+   لو مش عايز فيديو في صفحة معينة:
+   video: ""
+
+   ========================================================= */
 
 const PAGES = [
 
   {
-    title:"OUR STORY",
-    sub:"— the beginning —",
-    background:"images/bg1.jpg",
-    photo:"images/photo1.jpg",
-    caption:"Our Beginning",
-    position:"top:20%;left:10%;transform:rotate(-5deg)",
-    label:"MEMORIES",
-    text:"من هنا بدأت حكايتنا، ومن هنا بدأت أجمل ذكرياتي."
+    title:"البداية",
+    sub:"كل حكاية جميلة تبدأ بلحظة",
+    text:"هنا بدأت حكايتنا الصغيرة، ومن هنا يبدأ كتاب ذكرياتنا.",
+    background:"assets/bg1.jpg",
+    photo:"assets/photo1.jpg",
+    video:"assets/video1.mp4",
+    script:"Chapter One"
   },
 
   {
-    title:"MOMENTS",
-    sub:"— little universe —",
-    background:"images/bg2.jpg",
-    photo:"images/photo2.jpg",
-    caption:"Beautiful Moment",
-    position:"top:22%;right:10%;transform:rotate(5deg)",
-    label:"MOMENTS",
-    text:"هناك لحظات صغيرة تصبح في القلب أكبر من كل شيء."
+    title:"أول ذكرى",
+    sub:"لحظة لن أنساها",
+    text:"صورة واحدة ممكن ترجع لنا ألف إحساس وذكرى.",
+    background:"assets/bg2.jpg",
+    photo:"assets/photo2.jpg",
+    video:"assets/video2.mp4",
+    script:"Our First Memory"
   },
 
   {
-    title:"FIRST MEMORY",
-    sub:"— I remember —",
-    background:"images/bg3.jpg",
-    photo:"images/photo3.jpg",
-    caption:"Memory",
-    position:"top:18%;left:12%;transform:rotate(-4deg)",
-    label:"MEMORY",
-    text:"أول ذكرى لنا ستظل دائمًا واحدة من أجمل صفحات حياتي."
+    title:"ضحكتنا",
+    sub:"أجمل الأصوات",
+    text:"الضحكة اللي بتخلّي اليوم العادي يتحول لذكرى جميلة.",
+    background:"assets/bg3.jpg",
+    photo:"assets/photo3.jpg",
+    video:"assets/video3.mp4",
+    script:"Your Smile"
   },
 
   {
-    title:"YOU",
-    sub:"— my favorite person —",
-    background:"images/bg4.jpg",
-    photo:"images/photo4.jpg",
-    caption:"You",
-    position:"top:20%;right:9%;transform:rotate(4deg)",
-    label:"YOU",
-    text:"وسط كل الناس، عيني دائمًا تعرف طريقها إليك."
+    title:"لحظة مميزة",
+    sub:"فصل جديد من الحكاية",
+    text:"كل صفحة هنا شايلة جزء صغير من قصتنا.",
+    background:"assets/bg4.jpg",
+    photo:"assets/photo4.jpg",
+    video:"assets/video4.mp4",
+    script:"A Special Moment"
   },
 
   {
-    title:"US",
-    sub:"— just us —",
-    background:"images/bg5.jpg",
-    photo:"images/photo5.jpg",
-    caption:"Us",
-    position:"top:18%;left:10%;transform:rotate(-6deg)",
-    label:"US",
-    text:"أجمل شيء في القصة كلها هو كلمة نحن."
+    title:"ذكريات",
+    sub:"تفاصيل صغيرة",
+    text:"أحياناً أبسط التفاصيل هي اللي بتفضل في الذاكرة.",
+    background:"assets/bg5.jpg",
+    photo:"assets/photo5.jpg",
+    video:"assets/video5.mp4",
+    script:"Memories"
   },
 
   {
-    title:"DREAMS",
-    sub:"— our future —",
-    background:"images/bg6.jpg",
-    photo:"images/photo6.jpg",
-    caption:"Dreams",
-    position:"top:20%;right:11%;transform:rotate(5deg)",
-    label:"DREAM",
-    text:"أتمنى أن تظل كل أحلامنا القادمة مليئة بنا."
+    title:"يوم جميل",
+    sub:"احتفظ بهذا اليوم",
+    text:"يوم مرّ بسرعة، لكن ذكراه تستحق أن تبقى هنا.",
+    background:"assets/bg6.jpg",
+    photo:"assets/photo6.jpg",
+    video:"assets/video6.mp4",
+    script:"Beautiful Day"
   },
 
   {
-    title:"LAUGHTER",
-    sub:"— your smile —",
-    background:"images/bg7.jpg",
-    photo:"images/photo7.jpg",
-    caption:"Your Smile",
-    position:"top:17%;left:12%;transform:rotate(-4deg)",
-    label:"HAPPY",
-    text:"ضحكتك وحدها تستطيع أن تجعل اليوم العادي ذكرى جميلة."
+    title:"معاً",
+    sub:"صفحة وراء صفحة",
+    text:"كل صفحة جديدة تضيف تفصيلاً آخر للحكاية.",
+    background:"assets/bg7.jpg",
+    photo:"assets/photo7.jpg",
+    video:"assets/video7.mp4",
+    script:"Together"
   },
 
   {
-    title:"ADVENTURE",
-    sub:"— together —",
-    background:"images/bg8.jpg",
-    photo:"images/photo8.jpg",
-    caption:"Adventure",
-    position:"top:21%;right:10%;transform:rotate(5deg)",
-    label:"JOURNEY",
-    text:"أي مكان يصبح أجمل عندما نكون معًا."
+    title:"لحظة أخرى",
+    sub:"Still in our story",
+    text:"الذكريات الحلوة لا تحتاج إلى وقت طويل حتى تصبح مهمة.",
+    background:"assets/bg8.jpg",
+    photo:"assets/photo8.jpg",
+    video:"assets/video8.mp4",
+    script:"Another Chapter"
   },
 
   {
-    title:"LETTERS",
-    sub:"— words from my heart —",
-    background:"images/bg9.jpg",
-    photo:"images/photo9.jpg",
-    caption:"For You",
-    position:"top:18%;left:10%;transform:rotate(-5deg)",
-    label:"LOVE",
-    text:"كل كلمة هنا جزء صغير من الكلام الذي في قلبي."
+    title:"قبل النهاية",
+    sub:"لم تنتهِ الحكاية",
+    text:"وصلنا لصفحة متقدمة، لكن أجمل شيء أن القصة مستمرة.",
+    background:"assets/bg9.jpg",
+    photo:"assets/photo9.jpg",
+    video:"assets/video9.mp4",
+    script:"Almost There"
   },
 
   {
-    title:"FOREVER",
-    sub:"— to be continued —",
-    background:"images/bg10.jpg",
-    photo:"images/photo10.jpg",
-    caption:"Forever",
-    position:"top:18%;right:10%;transform:rotate(4deg)",
-    label:"FOREVER",
-    text:"هذه ليست نهاية الكتاب، لأن أجمل صفحاتنا لم تُكتب بعد."
+    title:"النهاية؟",
+    sub:"أو بداية جديدة",
+    text:"آخر صفحة في الكتاب، لكنها ليست آخر ذكرى.",
+    background:"assets/bg10.jpg",
+    photo:"assets/photo10.jpg",
+    video:"assets/video10.mp4",
+    script:"To Be Continued"
   }
 
 ];
 
 
 /* =========================================================
-   🎵 الملفات
-========================================================= */
+   SETTINGS
+   ========================================================= */
 
-const SONG_FILE = "song.mp3";
-const VIDEO_FILE = "video.mp4";
+const SONG_FILE = "assets/song.mp3";
 
-
-/* =========================================================
-   💌 الرسالة
-========================================================= */
-
-const LOVE_MESSAGE =
-"كل يوم معك هو هدية جميلة، وكل لحظة تجمعنا تصبح ذكرى أحتفظ بها في قلبي. أنت أجمل جزء في حكايتي، وأتمنى أن تظل كل صفحات هذه القصة مليئة بالحب والضحك واللحظات الجميلة. أحبك أكثر من الأمس، وأقل من الغد. 🖤";
+const FLOWER = "🌸";
 
 
 /* =========================================================
-   VARIABLES
-========================================================= */
+   ELEMENTS
+   ========================================================= */
 
-const book = document.getElementById("book");
-const scene = document.getElementById("scene");
+const spreadsContainer = document.getElementById("spreads");
+
+const counter = document.getElementById("counter");
+
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+const turnRight = document.getElementById("turnRight");
+const turnLeft = document.getElementById("turnLeft");
+
+const turnPaperRight =
+  document.getElementById("turnPaperRight");
+
+const turnPaperLeft =
+  document.getElementById("turnPaperLeft");
+
 const intro = document.getElementById("intro");
-const topbar = document.getElementById("topbar");
 
-let currentSpread = 0;
-let isAnimating = false;
+const enterBtn = document.getElementById("enterBtn");
+
+const loveBtn = document.getElementById("loveBtn");
+
+const memoryModal =
+  document.getElementById("memoryModal");
+
+const videoModal =
+  document.getElementById("videoModal");
+
+const loveModal =
+  document.getElementById("loveModal");
+
+const memoryTitle =
+  document.getElementById("memoryTitle");
+
+const memoryText =
+  document.getElementById("memoryText");
+
+const mainVideo =
+  document.getElementById("mainVideo");
+
+const memoryVideoBtn =
+  document.getElementById("memoryVideoBtn");
+
+const memoryMusicBtn =
+  document.getElementById("memoryMusicBtn");
+
+const loveMusic =
+  document.getElementById("loveMusic");
+
+const loveVideo =
+  document.getElementById("loveVideo");
+
+const loveText =
+  document.getElementById("loveText");
+
+
+/* =========================================================
+   STATE
+   ========================================================= */
+
+let currentPage = 0;
+
+let isTurning = false;
+
+let currentVideo = "";
+
 let audio = null;
-let typingTimer = null;
 
 
 /* =========================================================
-   CREATE 10 PAGES
-========================================================= */
+   CREATE SPREADS
+   ========================================================= */
 
-function createPages(){
+function createPage(page, index){
 
-  PAGES.forEach((data,index)=>{
+  const side = index % 2 === 0 ? "left" : "right";
 
-    const page = document.createElement("div");
+  const article = document.createElement("article");
 
-    page.className =
-      "page " +
-      (index % 2 === 0 ? "left" : "right");
+  article.className = `page ${side}`;
 
-    page.dataset.index = index;
+  article.dataset.index = index;
 
-    page.style.backgroundImage =
-      `url("${data.background}")`;
+  article.style.backgroundImage =
+    `linear-gradient(rgba(255,248,232,.35),rgba(255,248,232,.35)),url("${page.background}")`;
 
-    const content = document.createElement("div");
+  const content = document.createElement("div");
 
-    content.className = "page-content";
+  content.className = "page-content";
 
-    content.innerHTML = `
+  content.innerHTML = `
 
-      <h2 class="page-title">
-        ${data.title}
-      </h2>
+    <div class="script">
+      ${escapeHTML(page.script)}
+    </div>
 
-      <div class="page-sub">
-        ${data.sub}
-      </div>
+    <h2>
+      ${escapeHTML(page.title)}
+    </h2>
 
-      <div
-        class="photo photo-${index % 3 === 0 ? "a" : index % 3 === 1 ? "b" : "c"}"
-        style="${data.position}"
-        data-index="${index}"
-      >
+    <p>
+      ${escapeHTML(page.sub)}
+    </p>
 
-        <div class="tape"></div>
+    <img
+      class="photo"
+      src="${page.photo}"
+      alt=""
+      loading="${index < 2 ? "eager" : "lazy"}"
+      decoding="async"
+      onerror="this.style.display='none'"
+    >
 
-        <img
-          src="${data.photo}"
-          alt="${data.caption}"
-          loading="lazy"
-          draggable="false"
-        >
+    <p>
+      ${escapeHTML(page.text)}
+    </p>
 
-        <div class="caption">
-          ${data.caption}
-        </div>
-
-      </div>
-
-      <span
-        class="sticker"
-        style="bottom:12%;right:12%"
-      >
-        ${index % 2 === 0 ? "🌹" : "🖤"}
-      </span>
-
-      <span
-        class="label"
-        style="top:58%;${index % 2 === 0 ? "right:8%" : "left:8%"}"
-      >
-        ${data.label}
-      </span>
-
-      <div class="page-number"
-           style="${index % 2 === 0 ? "left:12px" : "right:12px"}">
-        ${index + 1}
-      </div>
-
-      <div class="hint">
-        ${index < 9 ? "اسحب أو اضغط للتقليب" : "النهاية ♥"}
-      </div>
-
-      <div class="page-flip-light"></div>
-
-    `;
-
-    page.appendChild(content);
-
-    /*
-      نضع الصفحات بالترتيب.
-    */
-
-    if(index % 2 === 0){
-
-      /*
-        الصفحات الفردية تكون خلفية.
-      */
-
-      page.style.zIndex = 5 + index;
-
-      book.appendChild(page);
-
-    }else{
-
-      page.style.zIndex = 20 + index;
-
-      book.appendChild(page);
-
+    ${
+      page.video
+      ?
+      `
+      <button
+        class="action page-video-button"
+        data-page-video="${index}">
+        ▶ شاهد ذكرى الصفحة
+      </button>
+      `
+      :
+      ""
     }
+
+    <span class="page-number">
+      ${String(index + 1).padStart(2,"0")}
+    </span>
+
+  `;
+
+  article.appendChild(content);
+
+  /* flowers */
+
+  const flowers = document.createElement("div");
+
+  flowers.className = "flowers";
+
+  for(let i=0;i<5;i++){
+
+    const f = document.createElement("span");
+
+    f.className = "flower";
+
+    f.textContent = FLOWER;
+
+    flowers.appendChild(f);
+
+  }
+
+  article.appendChild(flowers);
+
+  return article;
+
+}
+
+
+function buildBook(){
+
+  spreadsContainer.innerHTML = "";
+
+  for(let i=0;i<10;i+=2){
+
+    const spread = document.createElement("section");
+
+    spread.className = "spread";
+
+    spread.dataset.spread = i / 2;
+
+    spread.appendChild(createPage(PAGES[i],i));
+
+    spread.appendChild(createPage(PAGES[i+1],i+1));
+
+    spreadsContainer.appendChild(spread);
+
+  }
+
+  showSpread(0);
+
+}
+
+
+/* =========================================================
+   SHOW SPREAD
+   ========================================================= */
+
+function showSpread(spreadIndex){
+
+  const spreads =
+    document.querySelectorAll(".spread");
+
+  spreads.forEach((spread,i)=>{
+
+    spread.classList.toggle(
+      "active",
+      i === spreadIndex
+    );
 
   });
 
+  currentPage = spreadIndex * 2;
 
-  prepareInitialState();
-  bindPhotoClicks();
+  updateUI();
 
-}
+  /*
+    تحميل الفيديو فقط للصفحتين الموجودتين
+    حتى لا نحمل 10 فيديوهات مرة واحدة.
+  */
 
-
-/* =========================================================
-   INITIAL STATE
-========================================================= */
-
-function prepareInitialState(){
-
-  const pages =
-    [...document.querySelectorAll(".page")];
-
-  pages.forEach((page,index)=>{
-
-    /*
-      أول صفحة ظاهرة.
-    */
-
-    if(index === 0){
-
-      page.classList.add("show");
-
-    }
-
-    /*
-      الصفحات اليمين القادمة تكون مغلقة.
-    */
-
-    if(index % 2 === 1){
-
-      if(index > 1){
-        page.classList.add("flipped");
-      }
-
-    }
-
-    /*
-      الصفحات اليسار القديمة مخفية.
-    */
-
-    if(index > 0 && index % 2 === 0){
-      page.classList.remove("show");
-    }
-
-  });
+  prepareCurrentSpread(spreadIndex);
 
 }
 
 
 /* =========================================================
-   OPEN BOOK
-========================================================= */
+   VIDEO LAZY SETUP
+   ========================================================= */
 
-document.getElementById("openBtn").addEventListener(
-  "click",
-  openBook,
-  {passive:true}
-);
+function prepareCurrentSpread(spreadIndex){
 
-function openBook(){
+  const start = spreadIndex * 2;
 
-  intro.classList.add("hide");
+  const end = start + 1;
 
-  setTimeout(()=>{
+  for(let i=start;i<=end;i++){
 
-    topbar.classList.add("show");
-    scene.classList.add("show");
+    const videoButton =
+      document.querySelector(
+        `[data-page-video="${i}"]`
+      );
 
-  },250);
+    if(videoButton){
+
+      videoButton.onclick = function(e){
+
+        e.stopPropagation();
+
+        openPageVideo(i);
+
+      };
+
+    }
+
+  }
 
 }
 
 
 /* =========================================================
-   PAGE NAVIGATION
-=========================================================
+   PAGE VIDEO
+   ========================================================= */
 
-   spread:
-   0 = pages 1-2
-   1 = pages 3-4
-   2 = pages 5-6
-   3 = pages 7-8
-   4 = pages 9-10
-========================================================= */
+function openPageVideo(index){
+
+  const page = PAGES[index];
+
+  if(!page || !page.video) return;
+
+  currentVideo = page.video;
+
+  mainVideo.pause();
+
+  mainVideo.removeAttribute("src");
+
+  /*
+    src بيتحط وقت الفتح فقط.
+    ده يقلل تحميل الفيديوهات أثناء تقليب الكتاب.
+  */
+
+  mainVideo.src = currentVideo;
+
+  videoModal.classList.add("open");
+
+  mainVideo.play().catch(()=>{});
+
+}
+
+
+/* =========================================================
+   PAGE TURN
+   ========================================================= */
 
 function nextPage(){
 
-  if(isAnimating) return;
+  if(isTurning) return;
 
-  if(currentSpread >= 4) return;
+  if(currentPage >= 8){
 
-  isAnimating = true;
+    /*
+      الصفحة الأخيرة
+      لا يوجد انتقال بعد صفحة 10.
+    */
 
-  const pages =
-    [...document.querySelectorAll(".page")];
-
-  const rightIndex =
-    currentSpread * 2 + 1;
-
-  const nextLeftIndex =
-    currentSpread * 2 + 2;
-
-  const rightPage =
-    pages[rightIndex];
-
-  const nextLeft =
-    pages[nextLeftIndex];
-
-  if(!rightPage || !nextLeft){
-    isAnimating=false;
     return;
+
   }
 
-  rightPage.classList.add("flipping");
+  isTurning = true;
+
+  const oldSpread =
+    currentPage / 2;
+
+  const nextSpread =
+    oldSpread + 1;
 
   /*
-    إجبار المتصفح على قراءة الحالة قبل transform.
-    يمنع القفزة المفاجئة.
+    الورقة التي ستتحرك تأخذ صورة
+    الصفحة اليمنى الحالية.
   */
 
-  void rightPage.offsetWidth;
+  const rightPage =
+    PAGES[currentPage + 1];
 
-  rightPage.classList.add("flipped");
+  turnPaperRight.style.backgroundImage =
+    `url("${rightPage.background}")`;
+
+  turnRight.classList.remove("go-next");
+
+  /*
+    force reflow
+  */
+
+  void turnRight.offsetWidth;
+
+  turnRight.classList.add("go-next");
 
   setTimeout(()=>{
 
-    nextLeft.classList.add("show");
+    showSpread(nextSpread);
 
-    currentSpread++;
+  },300);
 
-    rightPage.classList.remove("flipping");
+  setTimeout(()=>{
 
-    /*
-      ننتظر انتهاء الـ transition فعليًا.
-    */
+    turnRight.classList.remove("go-next");
 
-    setTimeout(()=>{
+    isTurning = false;
 
-      isAnimating=false;
-
-    },120);
-
-  },730);
+  },650);
 
 }
 
 
 function prevPage(){
 
-  if(isAnimating) return;
+  if(isTurning) return;
 
-  if(currentSpread <= 0) return;
+  if(currentPage <= 0){
 
-  isAnimating = true;
-
-  const pages =
-    [...document.querySelectorAll(".page")];
-
-  const currentLeftIndex =
-    currentSpread * 2;
-
-  const previousRightIndex =
-    currentSpread * 2 - 1;
-
-  const currentLeft =
-    pages[currentLeftIndex];
-
-  const previousRight =
-    pages[previousRightIndex];
-
-  if(!currentLeft || !previousRight){
-
-    isAnimating=false;
     return;
 
   }
 
-  currentLeft.classList.add("flipping");
+  isTurning = true;
 
-  void currentLeft.offsetWidth;
+  const oldSpread =
+    currentPage / 2;
 
-  currentLeft.classList.remove("show");
+  const prevSpread =
+    oldSpread - 1;
+
+  const leftPage =
+    PAGES[currentPage];
+
+  turnPaperLeft.style.backgroundImage =
+    `url("${leftPage.background}")`;
+
+  turnLeft.classList.remove("go-prev");
+
+  void turnLeft.offsetWidth;
+
+  turnLeft.classList.add("go-prev");
 
   setTimeout(()=>{
 
-    previousRight.classList.add("flipping");
+    showSpread(prevSpread);
 
-    void previousRight.offsetWidth;
+  },300);
 
-    previousRight.classList.remove("flipped");
+  setTimeout(()=>{
 
-    currentSpread--;
+    turnLeft.classList.remove("go-prev");
 
-    setTimeout(()=>{
+    isTurning = false;
 
-      currentLeft.classList.remove("flipping");
-      previousRight.classList.remove("flipping");
-
-      isAnimating=false;
-
-    },650);
-
-  },80);
+  },650);
 
 }
 
 
 /* =========================================================
-   TOUCH / SWIPE
-========================================================= */
+   UI
+   ========================================================= */
 
-let touchStartX=0;
-let touchStartY=0;
-let touchStartTime=0;
-let touching=false;
+function updateUI(){
 
-scene.addEventListener(
+  counter.textContent =
+    `${String(currentPage+1).padStart(2,"0")} / 10`;
+
+  prevBtn.disabled =
+    currentPage === 0;
+
+  nextBtn.disabled =
+    currentPage >= 8;
+
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+nextBtn.addEventListener(
+  "click",
+  nextPage
+);
+
+prevBtn.addEventListener(
+  "click",
+  prevPage
+);
+
+
+/* =========================================================
+   KEYBOARD
+   ========================================================= */
+
+document.addEventListener(
+  "keydown",
+  e=>{
+
+    if(e.key === "ArrowLeft"){
+
+      nextPage();
+
+    }
+
+    if(e.key === "ArrowRight"){
+
+      prevPage();
+
+    }
+
+    if(e.key === "Escape"){
+
+      closeAllModals();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   SWIPE
+   ========================================================= */
+
+let startX = 0;
+let startY = 0;
+
+const book =
+  document.getElementById("book");
+
+book.addEventListener(
   "touchstart",
   e=>{
 
-    if(isAnimating) return;
+    if(isTurning) return;
 
-    const t=e.touches[0];
+    const touch = e.changedTouches[0];
 
-    touchStartX=t.clientX;
-    touchStartY=t.clientY;
-    touchStartTime=performance.now();
-
-    touching=true;
+    startX = touch.clientX;
+    startY = touch.clientY;
 
   },
   {passive:true}
 );
 
 
-scene.addEventListener(
+book.addEventListener(
   "touchend",
   e=>{
 
-    if(!touching) return;
+    if(isTurning) return;
 
-    touching=false;
+    const touch = e.changedTouches[0];
 
-    if(isAnimating) return;
+    const dx =
+      touch.clientX - startX;
 
-    const t=e.changedTouches[0];
-
-    const dx=t.clientX-touchStartX;
-    const dy=t.clientY-touchStartY;
-
-    const duration=
-      performance.now()-touchStartTime;
+    const dy =
+      touch.clientY - startY;
 
     /*
-      تجاهل اللمسات البسيطة.
+      تجاهل السحب الرأسي.
     */
 
-    if(
-      Math.abs(dx)<55 ||
-      Math.abs(dx)<Math.abs(dy)*1.35 ||
-      duration>700
-    ){
+    if(Math.abs(dx) < 45) return;
 
-      return;
+    if(Math.abs(dx) < Math.abs(dy)) return;
 
-    }
+    /*
+      RTL:
+      السحب لليسار = الصفحة التالية
+      السحب لليمين = السابقة
+    */
 
-    if(dx<0){
+    if(dx < 0){
 
       nextPage();
 
@@ -1399,46 +1483,161 @@ scene.addEventListener(
 
 
 /* =========================================================
-   DESKTOP CLICK
-========================================================= */
+   ENTER
+   ========================================================= */
 
-scene.addEventListener(
+enterBtn.addEventListener(
   "click",
-  e=>{
+  ()=>{
 
-    if(isAnimating) return;
-
-    if(e.target.closest(".photo")) return;
+    intro.classList.add("hide");
 
     /*
-      لا نقلب لو الضغط جاء من أزرار.
+      تشغيل الموسيقى بعد تفاعل المستخدم
+      يسمح للمتصفح بتشغيلها بدون مشكلة autoplay.
     */
 
-    const page =
-      e.target.closest(".page");
+    startMusic();
 
-    if(!page) return;
+  }
+);
 
-    const index =
-      Number(page.dataset.index);
+
+/* =========================================================
+   MUSIC
+   ========================================================= */
+
+function startMusic(){
+
+  if(!audio){
+
+    audio = new Audio(SONG_FILE);
+
+    audio.loop = true;
+
+    audio.preload = "none";
+
+  }
+
+  audio.play().catch(()=>{});
+
+}
+
+
+function toggleMusic(){
+
+  if(!audio){
+
+    startMusic();
+
+    return;
+
+  }
+
+  if(audio.paused){
+
+    audio.play().catch(()=>{});
+
+  }else{
+
+    audio.pause();
+
+  }
+
+}
+
+
+memoryMusicBtn.addEventListener(
+  "click",
+  toggleMusic
+);
+
+loveMusic.addEventListener(
+  "click",
+  toggleMusic
+);
+
+
+/* =========================================================
+   MEMORY BUTTON
+   ========================================================= */
+
+memoryVideoBtn.addEventListener(
+  "click",
+  ()=>{
+
+    closeModal(memoryModal);
+
+    openPageVideo(currentPage);
+
+  }
+);
+
+
+/* =========================================================
+   LOVE MESSAGE
+   ========================================================= */
+
+const LOVE_MESSAGE =
+`في حاجات كتير ممكن تتقال،
+لكن بعض الذكريات أجمل لما تفضل مكتوبة في مكان خاص.
+
+الكتاب ده مجرد صفحات،
+لكن كل صفحة فيه شايلة لحظة وذكرى جميلة.
+
+وكل ما نقلب صفحة،
+بنفتكر إن الحكايات الحلوة بتتكوّن من تفاصيل صغيرة.`;
+
+let typingTimer = null;
+
+loveBtn.addEventListener(
+  "click",
+  ()=>{
+
+    loveModal.classList.add("open");
+
+    loveText.textContent = "";
+
+    clearInterval(typingTimer);
+
+    let i = 0;
+
+    typingTimer = setInterval(()=>{
+
+      loveText.textContent =
+        LOVE_MESSAGE.slice(0,i++);
+
+      if(i > LOVE_MESSAGE.length){
+
+        clearInterval(typingTimer);
+
+      }
+
+    },18);
+
+  }
+);
+
+
+loveVideo.addEventListener(
+  "click",
+  ()=>{
+
+    closeModal(loveModal);
 
     /*
-      الضغط على النصف اليمين.
+      فيديو عام اختاره المستخدم
     */
 
-    if(index === currentSpread*2+1){
+    const firstAvailable =
+      PAGES.find(p=>p.video);
 
-      nextPage();
+    if(firstAvailable){
 
-    }
+      const index =
+        PAGES.indexOf(firstAvailable);
 
-    /*
-      الضغط على النصف اليسار.
-    */
-
-    if(index === currentSpread*2){
-
-      prevPage();
+      openPageVideo(index);
 
     }
 
@@ -1447,401 +1646,91 @@ scene.addEventListener(
 
 
 /* =========================================================
-   PHOTO MODAL
-========================================================= */
+   MODALS
+   ========================================================= */
 
-const photoOverlay =
-document.createElement("div");
+document.querySelectorAll("[data-close]").forEach(btn=>{
 
-photoOverlay.className="overlay";
+  btn.addEventListener(
+    "click",
+    ()=>{
 
-photoOverlay.innerHTML=`
+      const id =
+        btn.dataset.close;
 
-  <div class="love-box">
+      closeModal(
+        document.getElementById(id)
+      );
 
-    <button class="close" id="closePhoto">
-      ×
-    </button>
-
-    <img
-      id="memoryImage"
-      style="
-        width:100%;
-        max-height:55vh;
-        object-fit:cover;
-        border-radius:8px;
-      "
-    >
-
-    <h2
-      id="memoryTitle"
-      style="
-        color:#c9a96a;
-        margin-top:15px;
-        font-family:Cinzel,serif;
-      "
-    ></h2>
-
-    <p
-      id="memoryText"
-      style="
-        color:#eee;
-        line-height:1.9;
-        margin-top:10px;
-      "
-    ></p>
-
-  </div>
-
-`;
-
-document.body.appendChild(photoOverlay);
-
-
-function bindPhotoClicks(){
-
-  document.querySelectorAll(".photo").forEach(photo=>{
-
-    photo.addEventListener(
-      "click",
-      e=>{
-
-        e.stopPropagation();
-
-        const index =
-          Number(photo.dataset.index);
-
-        const data=PAGES[index];
-
-        document.getElementById(
-          "memoryImage"
-        ).src=data.photo;
-
-        document.getElementById(
-          "memoryTitle"
-        ).textContent=data.title;
-
-        document.getElementById(
-          "memoryText"
-        ).textContent=data.text;
-
-        photoOverlay.classList.add("open");
-
-      },
-      {passive:false}
-    );
-
-  });
-
-}
-
-
-document.getElementById("closePhoto").onclick=()=>{
-  photoOverlay.classList.remove("open");
-};
-
-photoOverlay.addEventListener("click",e=>{
-  if(e.target===photoOverlay){
-    photoOverlay.classList.remove("open");
-  }
-});
-
-
-/* =========================================================
-   MUSIC
-========================================================= */
-
-function initAudio(){
-
-  if(audio) return;
-
-  audio=new Audio();
-
-  audio.src=SONG_FILE;
-  audio.loop=true;
-  audio.preload="auto";
-
-}
-
-
-function toggleMusic(){
-
-  initAudio();
-
-  const buttons=[
-    document.getElementById("musicBtn"),
-    document.getElementById("loveMusic")
-  ];
-
-  if(audio.paused){
-
-    audio.play()
-      .then(()=>{
-
-        document.getElementById("musicBtn")
-          .textContent="⏸";
-
-        document.getElementById("loveMusic")
-          .textContent="⏸ إيقاف الأغنية";
-
-      })
-      .catch(()=>{
-
-        /*
-          المتصفح قد يمنع التشغيل التلقائي،
-          لكن الضغط المباشر على الزر يسمح به عادة.
-        */
-
-      });
-
-  }else{
-
-    audio.pause();
-
-    document.getElementById("musicBtn")
-      .textContent="🎵";
-
-    document.getElementById("loveMusic")
-      .textContent="🎵 تشغيل الأغنية";
-
-  }
-
-}
-
-
-document.getElementById("musicBtn")
-  .addEventListener("click",toggleMusic);
-
-
-/* =========================================================
-   LOVE LETTER
-========================================================= */
-
-const loveOverlay =
-document.getElementById("loveOverlay");
-
-document.getElementById("heartBtn")
-  .addEventListener("click",()=>{
-
-    loveOverlay.classList.add("open");
-
-    startTyping();
-
-  });
-
-
-document.getElementById("closeLove")
-  .addEventListener("click",()=>{
-
-    loveOverlay.classList.remove("open");
-
-    if(typingTimer){
-      clearTimeout(typingTimer);
     }
-
-  });
-
-
-loveOverlay.addEventListener("click",e=>{
-
-  if(e.target===loveOverlay){
-
-    loveOverlay.classList.remove("open");
-
-  }
+  );
 
 });
 
 
-function startTyping(){
+function closeModal(modal){
 
-  const target=
-    document.getElementById("loveText");
+  modal.classList.remove("open");
 
-  target.textContent="";
+}
 
-  if(typingTimer){
-    clearTimeout(typingTimer);
-  }
 
-  let i=0;
+function closeAllModals(){
 
-  function type(){
+  document
+    .querySelectorAll(".modal")
+    .forEach(m=>m.classList.remove("open"));
 
-    if(i>=LOVE_MESSAGE.length){
-      return;
+  mainVideo.pause();
+
+}
+
+
+/*
+  الضغط خارج المودال يغلقه.
+*/
+
+document.querySelectorAll(".modal").forEach(modal=>{
+
+  modal.addEventListener(
+    "click",
+    e=>{
+
+      if(e.target === modal){
+
+        closeModal(modal);
+
+      }
+
     }
-
-    target.textContent=
-      LOVE_MESSAGE.substring(0,i+1);
-
-    i++;
-
-    typingTimer=
-      setTimeout(type,32);
-
-  }
-
-  type();
-
-}
-
-
-document.getElementById("loveMusic")
-  .addEventListener("click",toggleMusic);
-
-
-/* =========================================================
-   VIDEO
-========================================================= */
-
-const videoOverlay=
-document.getElementById("videoOverlay");
-
-const video=
-document.getElementById("video");
-
-
-function openVideo(){
-
-  video.querySelector("source").src=VIDEO_FILE;
-
-  video.load();
-
-  videoOverlay.classList.add("open");
-
-}
-
-
-document.getElementById("videoBtn")
-  .addEventListener("click",openVideo);
-
-
-document.getElementById("loveVideo")
-  .addEventListener("click",openVideo);
-
-
-document.getElementById("closeVideo")
-  .addEventListener("click",()=>{
-
-    video.pause();
-
-    videoOverlay.classList.remove("open");
-
-  });
-
-
-videoOverlay.addEventListener("click",e=>{
-
-  if(e.target===videoOverlay){
-
-    video.pause();
-
-    videoOverlay.classList.remove("open");
-
-  }
+  );
 
 });
 
 
 /* =========================================================
-   THEME
-========================================================= */
+   ESCAPE HTML
+   ========================================================= */
 
-document.getElementById("themeBtn")
-  .addEventListener("click",()=>{
+function escapeHTML(value){
 
-    document.body.classList.toggle("light");
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
-    /*
-      الوضع هنا بسيط حتى لا نضيف animations
-      ثقيلة أثناء استخدام الكتاب.
-    */
-
-    document.getElementById("themeBtn")
-      .textContent=
-      document.body.classList.contains("light")
-      ? "🌙"
-      : "☀️";
-
-  });
-
-
-/* =========================================================
-   KEYBOARD
-========================================================= */
-
-document.addEventListener("keydown",e=>{
-
-  if(e.key==="ArrowLeft"){
-    nextPage();
-  }
-
-  if(e.key==="ArrowRight"){
-    prevPage();
-  }
-
-  if(e.key==="Escape"){
-
-    loveOverlay.classList.remove("open");
-    videoOverlay.classList.remove("open");
-    photoOverlay.classList.remove("open");
-
-    video.pause();
-
-  }
-
-});
+}
 
 
 /* =========================================================
    START
-========================================================= */
+   ========================================================= */
 
-createPages();
+buildBook();
 
 </script>
 
 </body>
 </html>
-
-//شكل ملفات المشروع
-
-OUR-LOVE-BOOK/
-│
-├── index.html
-│
-├── song.mp3
-├── video.mp4
-│
-└── images/
-    ├── bg1.jpg
-    ├── bg2.jpg
-    ├── bg3.jpg
-    ├── bg4.jpg
-    ├── bg5.jpg
-    ├── bg6.jpg
-    ├── bg7.jpg
-    ├── bg8.jpg
-    ├── bg9.jpg
-    ├── bg10.jpg
-    │
-    ├── photo1.jpg
-    ├── photo2.jpg
-    ├── photo3.jpg
-    ├── photo4.jpg
-    ├── photo5.jpg
-    ├── photo6.jpg
-    ├── photo7.jpg
-    ├── photo8.jpg
-    ├── photo9.jpg
-    └── photo10.jpg
-//
-المهم: كل صفحة الآن لها صورتان مستقلتان:
-
-background:"images/bg1.jpg",
-photo:"images/photo1.jpg",
-
-يعني مثلًا الصفحة الأولى تستخدم "bg1.jpg" كخلفية، و"photo1.jpg" كصورة فوق الورقة. والصفحة الثانية "bg2.jpg" + "photo2.jpg" وهكذا حتى الصفحة العاشرة.
-
-والأهم أني شلت حركة "filter" الثقيلة من قلب الصفحة، وقللت الـ3D والـshadow أثناء التقليب؛ ده الجزء الأساسي اللي هيخلي السحب والتقليب أخف بفرق واضح على الموبايل.//
