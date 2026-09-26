@@ -1,2031 +1,1536 @@
 <!DOCTYPE html>
-<html lang="ar" dir="ltr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#16080d">
-<title>For You, With Love</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>Happy Monthsary, My Love ♡</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,700&family=Caveat:wght@500;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Great+Vibes&family=Patrick+Hand&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --cream:#f4ead7;
-  --paper:#fbf5e8;
-  --paper-dark:#e9dbc0;
-  --plum:#4b2030;
-  --plum-dark:#26121b;
-  --teal:#244850;
-  --gold:#dca95f;
-  --pink:#e99bc1;
-  --ink:#30252a;
-  --shadow:0 24px 60px rgba(0,0,0,.42);
-}
+/* =========================================================
+   RESET
+========================================================= */
 
 *{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-html,
-body{
-  width:100%;
-  height:100%;
-  margin:0;
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-  overflow:hidden;
-  background:#10070b;
-  color:var(--ink);
-  font-family:Poppins,sans-serif;
-  -webkit-font-smoothing:antialiased;
-  touch-action:none;
-}
-
-button{
-  font:inherit;
+    background:#180707;
+    color:#fff;
+    font-family:"DM Sans",sans-serif;
+    overflow-x:hidden;
 }
 
 img{
-  display:block;
+    display:block;
+    max-width:100%;
 }
 
-/* =====================================================
-   INTRO
-===================================================== */
-
-.intro{
-  position:fixed;
-  inset:0;
-  z-index:1000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:
-    radial-gradient(circle at center,#42202d 0,#211019 42%,#0c0508 100%);
-  transition:opacity .55s ease,visibility .55s ease;
+button{
+    font:inherit;
 }
 
-.intro.hide{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root{
+    --red:#7a1010;
+    --red2:#9f1717;
+    --wine:#3b080d;
+    --purple:#34103c;
+    --cream:#fff7e9;
+    --paper:#f6ead5;
+    --ink:#241717;
 }
 
-.intro-inner{
-  text-align:center;
-  width:min(90vw,450px);
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+.section{
+    position:relative;
+    min-height:100vh;
+    overflow:hidden;
 }
 
-.candle-frame{
-  width:min(60vw,310px);
-  height:min(65vh,430px);
-  margin:auto;
-  border-radius:50% 50% 22% 22%;
-  position:relative;
-  overflow:hidden;
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  background:
-    linear-gradient(rgba(45,12,25,.15),rgba(0,0,0,.55)),
-    url("assets/intro.jpg") center/cover,
-    #321523;
-  box-shadow:
-    inset 0 0 60px rgba(0,0,0,.55),
-    0 25px 70px rgba(0,0,0,.45);
+.script{
+    font-family:"Great Vibes",cursive;
+    font-weight:400;
 }
 
-.butterfly{
-  position:absolute;
-  top:18%;
-  left:23%;
-  font-size:2.3rem;
-  animation:flutter 3s ease-in-out infinite;
+.hand{
+    font-family:"Patrick Hand",cursive;
 }
 
-@keyframes flutter{
-  0%,100%{
-    transform:translate(0,0) rotate(-6deg);
-  }
-  50%{
-    transform:translate(8px,-10px) rotate(7deg);
-  }
+.container{
+    width:min(1100px,92%);
+    margin:auto;
 }
 
-.candle{
-  width:45px;
-  height:185px;
-  margin-bottom:35px;
-  position:relative;
-  border-radius:6px 6px 3px 3px;
-  background:linear-gradient(
-    90deg,
-    #c9bda9,
-    #fff4dc 42%,
-    #d4c6ae
-  );
+.reveal{
+    opacity:0;
+    transform:translateY(50px);
+    transition:
+        opacity 1s ease,
+        transform 1s cubic-bezier(.2,.8,.2,1);
 }
 
-.flame{
-  position:absolute;
-  left:50%;
-  top:-54px;
-  width:27px;
-  height:52px;
-  transform:translateX(-50%);
-  border-radius:50% 50% 50% 50% / 65% 65% 35% 35%;
-  background:radial-gradient(
-    ellipse at 50% 72%,
-    #fff7d5 0 25%,
-    #e7b366 47%,
-    #b95122 90%
-  );
-  box-shadow:0 0 22px rgba(231,179,102,.65);
-  animation:flicker 1.5s ease-in-out infinite;
+.reveal.visible{
+    opacity:1;
+    transform:translateY(0);
 }
 
-@keyframes flicker{
-  0%,100%{
-    transform:translateX(-50%) scale(1);
-  }
-  50%{
-    transform:translateX(-50%) scale(.9,1.08) rotate(2deg);
-  }
+/* =========================================================
+   OPENING SCREEN
+========================================================= */
+
+#opening{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+        linear-gradient(
+            rgba(30,0,0,.35),
+            rgba(30,0,0,.65)
+        ),
+        url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2200&q=90")
+        center/cover;
 }
 
-.intro-label{
-  margin-top:28px;
-  color:#e8c98d;
-  letter-spacing:4px;
-  font-size:.75rem;
+.opening-overlay{
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(
+            circle at center,
+            transparent 10%,
+            rgba(0,0,0,.5) 100%
+        );
 }
 
-.intro-title{
-  color:#fff4dd;
-  font-family:"Playfair Display",serif;
-  font-style:italic;
-  font-size:clamp(35px,10vw,64px);
-  margin:5px 0 18px;
+.opening-content{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:25px;
 }
 
-.open-btn{
-  border:1px solid rgba(231,179,102,.55);
-  color:#fff0cf;
-  background:rgba(255,255,255,.06);
-  border-radius:999px;
-  padding:12px 28px;
-  cursor:pointer;
+.opening-small{
+    color:#fff;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    font-size:12px;
+    margin-bottom:18px;
 }
 
-/* =====================================================
-   MAIN
-===================================================== */
-
-#main{
-  position:fixed;
-  inset:0;
-  opacity:0;
-  visibility:hidden;
-  transition:opacity .5s ease;
+.opening-title{
+    font-family:"Great Vibes",cursive;
+    font-size:clamp(4rem,12vw,8rem);
+    line-height:.9;
+    text-shadow:0 8px 30px rgba(0,0,0,.5);
 }
 
-#main.show{
-  opacity:1;
-  visibility:visible;
+.opening-sub{
+    margin-top:20px;
+    font-size:13px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    opacity:.9;
 }
 
-/* =====================================================
-   HEADER
-===================================================== */
-
-.header{
-  position:absolute;
-  z-index:50;
-  top:18px;
-  left:20px;
-  right:20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  pointer-events:none;
-  color:#f4d79e;
+.opening-hint{
+    animation:pulse 1.7s infinite;
 }
 
-.brand{
-  font-family:"Playfair Display",serif;
-  font-size:15px;
-  letter-spacing:2px;
+@keyframes pulse{
+    0%,100%{opacity:.55}
+    50%{opacity:1}
 }
 
-.counter{
-  font-family:Caveat,cursive;
-  font-size:24px;
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+        radial-gradient(circle at 20% 20%,rgba(255,255,255,.08),transparent 25%),
+        linear-gradient(135deg,#47090d,#8d1116 55%,#370b18);
+    padding:80px 20px;
 }
 
-/* =====================================================
-   BOOK STAGE
-===================================================== */
-
-.stage{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  perspective:1600px;
+.hero-inner{
+    text-align:center;
+    max-width:1050px;
 }
 
-.book{
-  position:relative;
-  width:min(94vw,1050px);
-  height:min(74vh,680px);
-  min-height:410px;
-  transform-style:preserve-3d;
+.hero-kicker{
+    text-transform:uppercase;
+    letter-spacing:5px;
+    font-size:12px;
+    opacity:.7;
+    margin-bottom:25px;
 }
 
-/* base behind book */
-
-.book-base{
-  position:absolute;
-  inset:8px -7px -10px;
-  border-radius:12px;
-  background:#211016;
-  box-shadow:
-    0 30px 60px rgba(0,0,0,.55),
-    inset 0 0 0 2px rgba(220,170,90,.13);
-  transform:translateZ(-10px);
+.hero-title{
+    font-family:"Great Vibes",cursive;
+    font-size:clamp(4.5rem,12vw,9rem);
+    line-height:.85;
 }
 
-/* =====================================================
-   SPREAD
-   Every spread contains 2 pages.
-===================================================== */
-
-.spread{
-  position:absolute;
-  inset:0;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  border-radius:10px;
-  overflow:hidden;
-  background:var(--paper);
-  box-shadow:var(--shadow);
-  opacity:0;
-  pointer-events:none;
-  z-index:1;
+.hero-date{
+    margin-top:28px;
+    font-family:"Cormorant Garamond",serif;
+    font-size:20px;
+    letter-spacing:5px;
 }
 
-.spread.active{
-  opacity:1;
-  pointer-events:auto;
-  z-index:10;
+.couple-photos{
+    margin:55px auto 0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
 }
 
-.page{
-  position:relative;
-  overflow:hidden;
-  background-color:var(--paper);
-  background-position:center;
-  background-size:cover;
-  color:var(--ink);
-  isolation:isolate;
+.hero-photo{
+    width:min(330px,42vw);
+    aspect-ratio:4/5;
+    object-fit:cover;
+    border:12px solid var(--cream);
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
 }
 
-.page:first-child{
-  border-right:1px solid rgba(60,30,20,.18);
+.hero-photo:first-child{
+    transform:rotate(-5deg);
 }
 
-.page:last-child{
-  border-left:1px solid rgba(60,30,20,.12);
+.hero-photo:last-child{
+    transform:rotate(5deg);
 }
 
-.page::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:-1;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,.12),
-      transparent 22%,
-      transparent 78%,
-      rgba(0,0,0,.08)
-    );
-  pointer-events:none;
+.scroll-indicator{
+    margin-top:55px;
+    opacity:.65;
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
 }
 
-.page-inner{
-  position:absolute;
-  inset:0;
-  padding:clamp(18px,4vw,44px);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
+.scroll-indicator span{
+    display:block;
+    width:1px;
+    height:50px;
+    background:white;
+    margin:12px auto 0;
+    animation:scrollLine 1.5s infinite;
 }
 
-.page-script{
-  font-family:Caveat,cursive;
-  color:#8c263d;
-  font-size:clamp(22px,4vw,38px);
+@keyframes scrollLine{
+    0%{transform:scaleY(0);transform-origin:top}
+    50%{transform:scaleY(1);transform-origin:top}
+    51%{transform-origin:bottom}
+    100%{transform:scaleY(0);transform-origin:bottom}
 }
 
-.page-title{
-  margin:2px 0 6px;
-  font-family:"Playfair Display",serif;
-  color:#5b1d2d;
-  font-size:clamp(24px,4vw,42px);
+/* =========================================================
+   WELCOME PANEL
+========================================================= */
+
+.welcome{
+    background:#751014;
+    padding:100px 0;
 }
 
-.page-sub{
-  font-size:clamp(11px,1.7vw,16px);
-  color:#735f55;
-  margin:2px 0 10px;
+.welcome-grid{
+    display:grid;
+    grid-template-columns:1fr 1.4fr 1fr;
+    align-items:center;
+    gap:35px;
 }
 
-.page-photo{
-  width:min(68%,285px);
-  max-height:45%;
-  object-fit:cover;
-  aspect-ratio:4/3;
-  padding:7px;
-  background:#fffdf5;
-  box-shadow:0 8px 20px rgba(0,0,0,.22);
-  transform:rotate(-2deg);
+.side-photo{
+    width:100%;
+    aspect-ratio:3/4;
+    object-fit:cover;
+    border:8px solid var(--cream);
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
 }
 
-.page:nth-child(even) .page-photo{
-  transform:rotate(2deg);
+.side-photo.left{
+    transform:rotate(-5deg);
 }
 
-.page-text{
-  max-width:430px;
-  margin:13px auto 4px;
-  line-height:1.8;
-  font-size:clamp(11px,1.6vw,15px);
+.side-photo.right{
+    transform:rotate(5deg);
 }
 
-.page-video-btn{
-  border:0;
-  background:#7d1c31;
-  color:#fff8e9;
-  padding:8px 17px;
-  border-radius:999px;
-  margin-top:9px;
-  cursor:pointer;
-  font-size:12px;
+.welcome-card{
+    background:
+        linear-gradient(rgba(255,255,255,.96),rgba(255,255,255,.96));
+    color:#4b1717;
+    padding:50px 35px;
+    text-align:center;
+    border:2px dashed #8d3838;
+    outline:1px solid rgba(255,255,255,.3);
+    outline-offset:12px;
 }
 
-.page-number{
-  position:absolute;
-  bottom:13px;
-  color:#806e5e;
-  font-family:Caveat,cursive;
-  font-size:18px;
+.welcome-card h2{
+    font-family:"Great Vibes",cursive;
+    font-size:55px;
+    font-weight:400;
 }
 
-/* =====================================================
-   FLOWERS
-===================================================== */
+.welcome-card p{
+    margin-top:20px;
+    font-family:"Cormorant Garamond",serif;
+    font-size:20px;
+    line-height:1.6;
+}
 
-.flowers{
-  position:absolute;
-  inset:0;
-  z-index:5;
-  overflow:hidden;
-  pointer-events:none;
+.doodles{
+    display:flex;
+    justify-content:space-between;
+    margin-top:55px;
+    font-size:55px;
+}
+
+/* =========================================================
+   MEMORY GALLERY
+========================================================= */
+
+.memories{
+    background:
+        linear-gradient(135deg,#8d1117,#54115b);
+    padding:110px 0;
+}
+
+.section-heading{
+    text-align:center;
+    margin-bottom:70px;
+}
+
+.section-heading .small{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:5px;
+    opacity:.65;
+}
+
+.section-heading h2{
+    font-family:"Great Vibes",cursive;
+    font-size:clamp(4rem,9vw,7rem);
+    font-weight:400;
+    line-height:.9;
+}
+
+.memory-layout{
+    position:relative;
+    max-width:900px;
+    margin:auto;
+}
+
+.memory-line{
+    position:absolute;
+    left:50%;
+    top:0;
+    bottom:0;
+    width:2px;
+    border-left:2px dashed rgba(255,255,255,.5);
+    transform:translateX(-50%) rotate(4deg);
+}
+
+.memory-grid{
+    position:relative;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:65px 35px;
+}
+
+.polaroid{
+    background:#fffaf0;
+    padding:12px 12px 38px;
+    color:#211313;
+    box-shadow:0 18px 35px rgba(0,0,0,.3);
+    position:relative;
+    transition:transform .4s ease;
+}
+
+.polaroid:hover{
+    transform:translateY(-10px) rotate(0deg)!important;
+}
+
+.polaroid:nth-child(1){transform:rotate(-6deg)}
+.polaroid:nth-child(2){transform:rotate(4deg)}
+.polaroid:nth-child(3){transform:rotate(-3deg)}
+.polaroid:nth-child(4){transform:rotate(5deg)}
+.polaroid:nth-child(5){transform:rotate(-5deg)}
+.polaroid:nth-child(6){transform:rotate(3deg)}
+
+.polaroid img{
+    width:100%;
+    aspect-ratio:1/1.12;
+    object-fit:cover;
+}
+
+.polaroid span{
+    display:block;
+    font-family:"Patrick Hand",cursive;
+    text-align:center;
+    font-size:20px;
+    margin-top:8px;
+}
+
+/* =========================================================
+   FAVORITE PERSON
+========================================================= */
+
+.favorite{
+    background:#f1e5d0;
+    color:#321515;
+    padding:120px 0;
+}
+
+.favorite-inner{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
+}
+
+.camera-frame{
+    background:#171717;
+    padding:15px;
+    border:10px solid #252525;
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.35),
+        inset 0 0 0 3px #777;
+    position:relative;
+}
+
+.camera-frame::before{
+    content:"KODAK";
+    position:absolute;
+    top:-35px;
+    left:20px;
+    color:#fff;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.camera-frame img{
+    width:100%;
+    aspect-ratio:4/3;
+    object-fit:cover;
+}
+
+.camera-label{
+    color:#fff;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-top:10px;
+}
+
+.favorite-text h2{
+    font-family:"Great Vibes",cursive;
+    font-size:clamp(4rem,8vw,7rem);
+    line-height:.85;
+    font-weight:400;
+}
+
+.favorite-text p{
+    font-family:"Cormorant Garamond",serif;
+    font-size:24px;
+    line-height:1.5;
+    margin-top:30px;
+}
+
+.message-link{
+    display:inline-flex;
+    align-items:center;
+    gap:15px;
+    margin-top:40px;
+    color:#7a1010;
+    text-decoration:none;
+    font-family:"Patrick Hand",cursive;
+    font-size:28px;
+    transform:rotate(-5deg);
+    transition:transform .3s;
+}
+
+.message-link:hover{
+    transform:rotate(0) translateX(8px);
+}
+
+.arrow{
+    font-family:Arial,sans-serif;
+    font-size:35px;
+}
+
+/* =========================================================
+   LETTER
+========================================================= */
+
+.letter-section{
+    min-height:100vh;
+    padding:120px 0;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            #4b0b0e 0px,
+            #4b0b0e 4px,
+            #43090c 5px,
+            #43090c 8px
+        );
+}
+
+.notebook{
+    max-width:1050px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    background:#eadbbd;
+    color:#3a2520;
+    box-shadow:0 35px 70px rgba(0,0,0,.45);
+}
+
+.paper{
+    min-height:650px;
+    padding:55px;
+    position:relative;
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            #f3e7ca 0,
+            #f3e7ca 31px,
+            #cbbd9e 32px
+        );
+}
+
+.paper.left{
+    border-right:1px solid #b3a17d;
+}
+
+.paper h3{
+    font-family:"Great Vibes",cursive;
+    font-size:65px;
+    font-weight:400;
+    margin-bottom:25px;
+}
+
+.letter-photo{
+    width:70%;
+    margin:30px auto;
+    background:white;
+    padding:10px 10px 35px;
+    transform:rotate(-5deg);
+    box-shadow:0 15px 25px rgba(0,0,0,.25);
+}
+
+.letter-photo img{
+    aspect-ratio:1/1;
+    width:100%;
+    object-fit:cover;
+}
+
+.tape{
+    position:absolute;
+    width:130px;
+    height:35px;
+    background:rgba(225,194,135,.75);
+    top:30px;
+    left:50%;
+    transform:translateX(-50%) rotate(-5deg);
+}
+
+.letter-text{
+    font-family:"Patrick Hand",cursive;
+    font-size:25px;
+    line-height:1.65;
+}
+
+.letter-sign{
+    margin-top:30px;
+    font-family:"Great Vibes",cursive;
+    font-size:40px;
+}
+
+/* =========================================================
+   CAMERA COLLAGE
+========================================================= */
+
+.camera-section{
+    padding:120px 0;
+    background:
+        repeating-linear-gradient(
+            45deg,
+            #f5eeee 0,
+            #f5eeee 18px,
+            #9d1a22 18px,
+            #9d1a22 36px
+        );
+}
+
+.old-camera{
+    max-width:850px;
+    margin:auto;
+    position:relative;
+    padding:60px;
+    background:#272323;
+    border-radius:50px;
+    box-shadow:0 35px 60px rgba(0,0,0,.4);
+    border:12px solid #181616;
+}
+
+.camera-top{
+    position:absolute;
+    top:-40px;
+    left:80px;
+    width:180px;
+    height:45px;
+    background:#292525;
+    border-radius:15px 15px 0 0;
+}
+
+.camera-lens{
+    width:320px;
+    height:320px;
+    border-radius:50%;
+    background:#111;
+    border:25px solid #383333;
+    margin:auto;
+    padding:20px;
+    box-shadow:
+        inset 0 0 0 12px #111,
+        0 20px 35px rgba(0,0,0,.5);
+}
+
+.camera-lens img{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.camera-title{
+    color:white;
+    text-align:center;
+    margin-top:35px;
+    font-family:"Cormorant Garamond",serif;
+    letter-spacing:5px;
+}
+
+.floating-photo{
+    position:absolute;
+    width:180px;
+    background:#fff;
+    padding:10px 10px 35px;
+    box-shadow:0 20px 35px rgba(0,0,0,.35);
+}
+
+.floating-photo img{
+    width:100%;
+    aspect-ratio:1;
+    object-fit:cover;
+}
+
+.floating-photo.one{
+    left:-80px;
+    top:40px;
+    transform:rotate(-12deg);
+}
+
+.floating-photo.two{
+    right:-80px;
+    bottom:20px;
+    transform:rotate(10deg);
 }
 
 .flower{
-  position:absolute;
-  font-size:26px;
-  opacity:0;
-  transform:translateY(35px) scale(.25);
+    position:absolute;
+    font-size:50px;
 }
 
-.spread.active .flower{
-  animation:bloom .7s ease forwards;
+.flower.one{
+    left:20px;
+    bottom:20px;
 }
 
-.flower:nth-child(1){
-  top:7%;
-  left:7%;
-  animation-delay:.03s;
+.flower.two{
+    right:20px;
+    top:20px;
 }
 
-.flower:nth-child(2){
-  top:10%;
-  right:8%;
-  animation-delay:.12s;
+/* =========================================================
+   SONG
+========================================================= */
+
+.song-section{
+    min-height:80vh;
+    background:
+        radial-gradient(circle at center,rgba(160,20,30,.3),transparent 35%),
+        #170607;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:100px 20px;
 }
 
-.flower:nth-child(3){
-  bottom:8%;
-  left:11%;
-  animation-delay:.21s;
+.vinyl{
+    width:min(420px,75vw);
+    aspect-ratio:1;
+    border-radius:50%;
+    margin:auto;
+    background:
+        repeating-radial-gradient(
+            circle,
+            #090909 0 2px,
+            #161616 3px 5px
+        );
+    box-shadow:
+        0 30px 60px rgba(0,0,0,.7),
+        inset 0 0 0 15px #090909;
+    position:relative;
+    animation:spin 7s linear infinite;
 }
 
-.flower:nth-child(4){
-  bottom:9%;
-  right:10%;
-  animation-delay:.3s;
+.vinyl::before{
+    content:"";
+    position:absolute;
+    width:36%;
+    aspect-ratio:1;
+    border-radius:50%;
+    background:#8e151b;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
 }
 
-.flower:nth-child(5){
-  top:4%;
-  left:47%;
-  animation-delay:.4s;
+.vinyl::after{
+    content:"";
+    position:absolute;
+    width:14px;
+    aspect-ratio:1;
+    border-radius:50%;
+    background:#111;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
 }
 
-@keyframes bloom{
-  0%{
-    opacity:0;
-    transform:translateY(35px) scale(.2) rotate(-25deg);
-  }
-  70%{
-    opacity:1;
-    transform:translateY(-3px) scale(1.12) rotate(8deg);
-  }
-  100%{
-    opacity:.85;
-    transform:translateY(0) scale(1) rotate(0);
-  }
+@keyframes spin{
+    to{transform:rotate(360deg)}
 }
 
-/* =====================================================
-   TURNING PAGE
-   Only ONE element is animated.
-===================================================== */
-
-.turn-page{
-  position:absolute;
-  top:0;
-  bottom:0;
-  width:50%;
-  z-index:100;
-  display:none;
-  pointer-events:none;
-  transform-style:preserve-3d;
+.song-text{
+    margin-top:50px;
 }
 
-.turn-page.next{
-  right:0;
-  transform-origin:left center;
+.song-text h2{
+    font-family:"Great Vibes",cursive;
+    font-size:clamp(4rem,9vw,7rem);
+    font-weight:400;
 }
 
-.turn-page.prev{
-  left:0;
-  transform-origin:right center;
+.song-text p{
+    margin-top:10px;
+    opacity:.65;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-size:11px;
 }
 
-.turn-page.active-next{
-  display:block;
-  animation:pageNext .65s cubic-bezier(.22,.72,.2,1) forwards;
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.end{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:
+        linear-gradient(
+            rgba(20,0,0,.4),
+            rgba(20,0,0,.9)
+        ),
+        url("https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=2200&q=90")
+        center/cover;
 }
 
-.turn-page.active-prev{
-  display:block;
-  animation:pagePrev .65s cubic-bezier(.22,.72,.2,1) forwards;
+.end h2{
+    font-family:"Great Vibes",cursive;
+    font-size:clamp(5rem,12vw,10rem);
+    font-weight:400;
 }
 
-.turn-surface{
-  position:absolute;
-  inset:0;
-  background-color:var(--paper);
-  background-size:cover;
-  background-position:center;
-  box-shadow:0 0 28px rgba(0,0,0,.3);
-}
-
-.turn-surface::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(0,0,0,.02),
-      transparent 40%,
-      rgba(0,0,0,.23)
-    );
-}
-
-@keyframes pageNext{
-  from{
-    transform:rotateY(0);
-  }
-  to{
-    transform:rotateY(-180deg);
-  }
-}
-
-@keyframes pagePrev{
-  from{
-    transform:rotateY(0);
-  }
-  to{
-    transform:rotateY(180deg);
-  }
-}
-
-/* =====================================================
-   CONTROLS
-===================================================== */
-
-.controls{
-  position:absolute;
-  z-index:150;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:10px;
-}
-
-.control{
-  width:48px;
-  height:48px;
-  border:1px solid rgba(228,181,102,.5);
-  border-radius:50%;
-  background:rgba(24,8,14,.9);
-  color:#f4d59a;
-  cursor:pointer;
-  font-size:23px;
-}
-
-.control.main{
-  width:58px;
-  height:58px;
-  background:#7d1c31;
-}
-
-.control:active{
-  transform:scale(.92);
-}
-
-.control:disabled{
-  opacity:.25;
-}
-
-/* =====================================================
-   MUSIC
-===================================================== */
-
-.music{
-  position:absolute;
-  z-index:150;
-  bottom:20px;
-  left:20px;
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  border:1px solid rgba(228,181,102,.45);
-  background:rgba(24,8,14,.9);
-  color:#f4d59a;
-  cursor:pointer;
-}
-
-/* =====================================================
-   HEART
-===================================================== */
-
-.heart{
-  position:absolute;
-  z-index:150;
-  bottom:20px;
-  right:20px;
-  width:52px;
-  height:52px;
-  border:0;
-  border-radius:50%;
-  background:#7d1c31;
-  color:#f4a4c6;
-  font-size:22px;
-  cursor:pointer;
-}
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:500;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-  background:rgba(0,0,0,.78);
-}
-
-.modal.open{
-  display:flex;
-}
-
-.modal-box{
-  width:min(92vw,600px);
-  max-height:90vh;
-  overflow:auto;
-  background:var(--paper);
-  border-radius:14px;
-  padding:22px;
-  text-align:center;
-  color:var(--ink);
-  box-shadow:0 25px 70px rgba(0,0,0,.6);
-}
-
-.modal-box h2{
-  font-family:"Playfair Display",serif;
-  color:#6d1c31;
-}
-
-.modal-video{
-  width:100%;
-  max-height:65vh;
-  background:#000;
-  border-radius:8px;
-}
-
-.modal-close,
-.modal-action{
-  border:0;
-  border-radius:999px;
-  padding:9px 17px;
-  cursor:pointer;
-}
-
-.modal-close{
-  background:#ddd0bb;
-  color:#42202b;
-  margin-top:12px;
-}
-
-.modal-action{
-  background:#7d1c31;
-  color:white;
-  margin:5px;
-}
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:700px){
-
-  .book{
-    width:95vw;
-    height:67vh;
-    min-height:385px;
-  }
-
-  .page-inner{
-    padding:15px 11px;
-  }
-
-  .page-photo{
-    width:78%;
-    max-height:40%;
-  }
-
-  .page-text{
-    line-height:1.6;
-  }
-
-  .page-video-btn{
-    font-size:10px;
-    padding:7px 12px;
-  }
-
-  .brand{
+.end p{
+    margin-top:25px;
+    letter-spacing:4px;
+    text-transform:uppercase;
     font-size:12px;
-  }
+}
 
-  .counter{
+.back-top{
+    display:inline-block;
+    margin-top:40px;
+    padding:14px 25px;
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:100px;
+    color:#fff;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.back-top:hover{
+    background:#fff;
+    color:#4a0a0a;
+}
+
+/* =========================================================
+   MUSIC BUTTON
+========================================================= */
+
+.music-control{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:500;
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.3);
+    background:rgba(30,0,0,.7);
+    backdrop-filter:blur(10px);
+    color:white;
+    cursor:pointer;
     font-size:20px;
-  }
-
-  .controls{
-    bottom:13px;
-  }
-
-  .music{
-    bottom:14px;
-    left:12px;
-  }
-
-  .heart{
-    bottom:14px;
-    right:12px;
-  }
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
 }
 
-@media(max-width:430px){
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
-  .book{
-    height:64vh;
-    min-height:365px;
-  }
+@media(max-width:800px){
 
-  .page-photo{
-    width:82%;
-    max-height:34%;
-  }
+    .couple-photos{
+        gap:5px;
+    }
 
-  .page-title{
-    font-size:21px;
-  }
+    .hero-photo{
+        width:44vw;
+        border-width:7px;
+    }
 
-  .page-sub{
-    font-size:10px;
-  }
+    .welcome-grid{
+        grid-template-columns:1fr;
+        max-width:500px;
+    }
 
-  .page-text{
-    font-size:10px;
-  }
+    .side-photo{
+        width:60%;
+        margin:auto;
+    }
 
-  .flower{
-    font-size:21px;
-  }
+    .welcome-card{
+        order:-1;
+    }
+
+    .memory-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:35px 18px;
+    }
+
+    .memory-line{
+        display:none;
+    }
+
+    .favorite-inner{
+        grid-template-columns:1fr;
+    }
+
+    .favorite-text{
+        text-align:center;
+    }
+
+    .camera-frame{
+        width:90%;
+        margin:auto;
+    }
+
+    .notebook{
+        grid-template-columns:1fr;
+        width:95%;
+    }
+
+    .paper.left{
+        border-right:0;
+        border-bottom:1px solid #b3a17d;
+    }
+
+    .paper{
+        min-height:auto;
+        padding:40px 28px;
+    }
+
+    .old-camera{
+        width:85%;
+        padding:45px 25px;
+    }
+
+    .camera-lens{
+        width:65vw;
+        max-width:300px;
+    }
+
+    .floating-photo{
+        width:120px;
+    }
+
+    .floating-photo.one{
+        left:-35px;
+    }
+
+    .floating-photo.two{
+        right:-35px;
+    }
 }
 
-/* =====================================================
-   REDUCED MOTION
-===================================================== */
+@media(max-width:480px){
 
-@media(prefers-reduced-motion:reduce){
+    .opening-title{
+        font-size:4.4rem;
+    }
 
-  *,
-  *::before,
-  *::after{
-    animation-duration:.01ms!important;
-    transition-duration:.01ms!important;
-  }
+    .hero{
+        padding-top:110px;
+    }
 
+    .hero-title{
+        font-size:5rem;
+    }
+
+    .hero-date{
+        font-size:15px;
+        letter-spacing:3px;
+    }
+
+    .memory-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .polaroid{
+        padding:7px 7px 25px;
+    }
+
+    .polaroid span{
+        font-size:15px;
+    }
+
+    .welcome-card{
+        padding:40px 22px;
+    }
+
+    .welcome-card h2{
+        font-size:46px;
+    }
+
+    .letter-text{
+        font-size:21px;
+    }
+
+    .floating-photo{
+        width:100px;
+    }
+
+    .music-control{
+        right:14px;
+        bottom:14px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     INTRO
-===================================================== -->
+<!-- =======================================================
+     OPENING
+======================================================= -->
 
-<section class="intro" id="intro">
+<section id="opening">
 
-  <div class="intro-inner">
+    <div class="opening-overlay"></div>
 
-    <div class="candle-frame">
+    <div class="opening-content">
 
-      <div class="butterfly">🦋</div>
+        <div class="opening-small">
+            A little surprise for you
+        </div>
 
-      <div class="candle">
-        <div class="flame"></div>
-      </div>
+        <h1 class="opening-title">
+            You got a mail!
+        </h1>
 
     </div>
+</section>
 
-    <div class="intro-label">
-      A PRIVATE MEMORY BOOK
+
+<!-- =======================================================
+     MUSIC
+======================================================= -->
+
+<audio id="music" loop preload="auto">
+    <source
+        src="https://cdn.pixabay.com/audio/2022/10/25/audio_9464d58c2c.mp3"
+        type="audio/mpeg"
+    >
+</audio>
+
+<button
+    class="music-control"
+    id="musicBtn"
+    onclick="toggleMusic()"
+    aria-label="Music"
+>
+    ♫
+</button>
+
+
+<!-- =======================================================
+     HERO
+======================================================= -->
+
+<section class="section hero">
+
+    <div class="hero-inner reveal">
+
+        <div class="hero-kicker">
+            A little chapter of us
+        </div>
+
+        <h1 class="hero-title">
+            Happy 6th<br>
+            Monthsary
+        </h1>
+
+        <div class="hero-date">
+            MY LOVE · 6 MONTHS · 2026
+        </div>
+
+        <div class="couple-photos">
+
+            <img
+                class="hero-photo"
+                src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=900&q=85"
+                alt="Memory"
+            >
+
+            <img
+                class="hero-photo"
+                src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=900&q=85"
+                alt="Memory"
+            >
+
+        </div>
+
+        <div class="scroll-indicator">
+            Scroll to our story
+            <span></span>
+        </div>
+
     </div>
-
-    <div class="intro-title">
-      for you, with love
-    </div>
-
-    <button class="open-btn" id="openBtn">
-      Open Our Story
-    </button>
-
-  </div>
 
 </section>
 
 
-<!-- =====================================================
-     MAIN
-===================================================== -->
+<!-- =======================================================
+     WELCOME
+======================================================= -->
 
-<main id="main">
+<section class="section welcome">
 
-  <header class="header">
+    <div class="container">
 
-    <div class="brand">
-      ♡ OUR STORY
+        <div class="welcome-grid">
+
+            <img
+                class="side-photo left reveal"
+                src="https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?auto=format&fit=crop&w=800&q=85"
+                alt="Memory"
+            >
+
+            <div class="welcome-card reveal">
+
+                <h2>
+                    Hello, my favorite person.
+                </h2>
+
+                <p>
+                    Six months of little moments,
+                    random laughs, unforgettable days,
+                    and memories I never want to forget.
+                    <br><br>
+                    This little website is a tiny place
+                    where I kept some of them for you.
+                </p>
+
+                <div class="doodles">
+                    <span>♡</span>
+                    <span>✿</span>
+                </div>
+
+            </div>
+
+            <img
+                class="side-photo right reveal"
+                src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=85"
+                alt="Memory"
+            >
+
+        </div>
+
     </div>
 
-    <div class="counter" id="counter">
-      01 / 10
+</section>
+
+
+<!-- =======================================================
+     SIX MEMORIES
+======================================================= -->
+
+<section class="section memories">
+
+    <div class="container">
+
+        <div class="section-heading reveal">
+
+            <div class="small">
+                little pieces of us
+            </div>
+
+            <h2>
+                Our 6 Months Together
+            </h2>
+
+        </div>
+
+        <div class="memory-layout">
+
+            <div class="memory-line"></div>
+
+            <div class="memory-grid">
+
+                <div class="polaroid reveal">
+                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=700&q=85">
+                    <span>our beginning ♡</span>
+                </div>
+
+                <div class="polaroid reveal">
+                    <img src="https://images.unsplash.com/photo-1506869640319-fe1a24fd76dc?auto=format&fit=crop&w=700&q=85">
+                    <span>that happy day</span>
+                </div>
+
+                <div class="polaroid reveal">
+                    <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=700&q=85">
+                    <span>random adventures</span>
+                </div>
+
+                <div class="polaroid reveal">
+                    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=85">
+                    <span>sunny memories</span>
+                </div>
+
+                <div class="polaroid reveal">
+                    <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=700&q=85">
+                    <span>somewhere together</span>
+                </div>
+
+                <div class="polaroid reveal">
+                    <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=700&q=85">
+                    <span>still my favorite ♡</span>
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
-  </header>
+</section>
 
 
-  <section class="stage">
+<!-- =======================================================
+     FAVORITE PERSON
+======================================================= -->
 
-    <div class="book" id="book">
+<section class="section favorite">
 
-      <div class="book-base"></div>
+    <div class="container">
 
-      <div id="spreads"></div>
+        <div class="favorite-inner">
 
-      <!-- Animated paper -->
-      <div class="turn-page next" id="turnNext">
-        <div class="turn-surface" id="turnNextSurface"></div>
-      </div>
+            <div class="camera-frame reveal">
 
-      <div class="turn-page prev" id="turnPrev">
-        <div class="turn-surface" id="turnPrevSurface"></div>
-      </div>
+                <img
+                    src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1000&q=85"
+                    alt="Favorite memory"
+                >
+
+                <div class="camera-label">
+                    35MM · FAVORITE FRAME · 001
+                </div>
+
+            </div>
+
+            <div class="favorite-text reveal">
+
+                <h2>
+                    My Favorite<br>
+                    Person.
+                </h2>
+
+                <p>
+                    I LOVE YOU SO MUCH!
+                    <br>
+                    And if I could keep one picture
+                    from every day with you,
+                    I'd probably need a whole camera roll.
+                </p>
+
+                <a
+                    href="#letter"
+                    class="message-link"
+                >
+                    Click
+                    <span class="arrow">→</span>
+                </a>
+
+            </div>
+
+        </div>
 
     </div>
 
-  </section>
+</section>
 
 
-  <!-- Navigation -->
+<!-- =======================================================
+     LETTER
+======================================================= -->
 
-  <div class="controls">
+<section
+    class="section letter-section"
+    id="letter"
+>
 
-    <button
-      class="control"
-      id="prevBtn">
-      ‹
-    </button>
+    <div class="container">
 
-    <button
-      class="control main"
-      id="nextBtn">
-      ›
-    </button>
+        <div class="notebook reveal">
 
-  </div>
+            <!-- LEFT PAPER -->
 
+            <div class="paper left">
 
-  <!-- Music -->
+                <div class="tape"></div>
 
-  <button
-    class="music"
-    id="musicBtn"
-    title="Music">
-    ♪
-  </button>
+                <h3>
+                    Dear you,
+                </h3>
 
+                <div class="letter-photo">
 
-  <!-- Heart -->
+                    <img
+                        src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=85"
+                        alt="Memory"
+                    >
 
-  <button
-    class="heart"
-    id="heartBtn">
-    ♥
-  </button>
+                </div>
 
-</main>
+                <div
+                    style="
+                    text-align:center;
+                    font-size:45px;
+                    margin-top:30px;
+                    "
+                >
+                    ♡
+                </div>
 
-
-<!-- =====================================================
-     VIDEO MODAL
-===================================================== -->
-
-<div class="modal" id="videoModal">
-
-  <div class="modal-box">
-
-    <h2 id="videoTitle">
-      Our Memory
-    </h2>
-
-    <video
-      class="modal-video"
-      id="videoPlayer"
-      controls
-      playsinline
-      preload="none">
-    </video>
-
-    <br>
-
-    <button
-      class="modal-close"
-      id="closeVideo">
-      Close
-    </button>
-
-  </div>
-
-</div>
+            </div>
 
 
-<!-- =====================================================
-     LOVE MODAL
-===================================================== -->
+            <!-- RIGHT PAPER -->
 
-<div class="modal" id="loveModal">
+            <div class="paper">
 
-  <div class="modal-box">
+                <div class="letter-text">
 
-    <div style="font-size:55px;color:#9c2341;">
-      ♥
+                    If I had to describe these six months
+                    with one word, it would probably be
+                    <strong>beautiful.</strong>
+
+                    <br><br>
+
+                    Not because every day was perfect,
+                    but because somehow the little things
+                    became my favorite things.
+
+                    <br><br>
+
+                    Your laugh.
+                    Your messages.
+                    The random conversations.
+                    The moments that weren't planned.
+
+                    <br><br>
+
+                    Thank you for being part of
+                    my favorite memories.
+
+                    <br><br>
+
+                    Here's to all the memories we've already
+                    made, and all the ones waiting for us.
+
+                    <div class="letter-sign">
+                        Always yours ♡
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <h2>
-      A Little Message
-    </h2>
+</section>
 
-    <p id="loveMessage"></p>
 
-    <button
-      class="modal-action"
-      id="loveMusicBtn">
-      ♪ Music
-    </button>
+<!-- =======================================================
+     CAMERA COLLAGE
+======================================================= -->
 
-    <button
-      class="modal-action"
-      id="loveVideoBtn">
-      ▶ Video
-    </button>
+<section class="section camera-section">
 
-    <br>
+    <div class="container">
 
-    <button
-      class="modal-close"
-      id="closeLove">
-      Close
-    </button>
+        <div class="old-camera reveal">
 
-  </div>
+            <div class="camera-top"></div>
 
-</div>
+            <div class="flower one">
+                ✿
+            </div>
+
+            <div class="flower two">
+                ❀
+            </div>
+
+            <div class="floating-photo one">
+                <img
+                    src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=600&q=85"
+                    alt="Memory"
+                >
+            </div>
+
+            <div class="floating-photo two">
+                <img
+                    src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=85"
+                    alt="Memory"
+                >
+            </div>
+
+            <div class="camera-lens">
+
+                <img
+                    src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=900&q=85"
+                    alt="Camera memory"
+                >
+
+            </div>
+
+            <div class="camera-title">
+                MEMORIES · 35MM · LOVE
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     SONG
+======================================================= -->
+
+<section class="section song-section">
+
+    <div class="container">
+
+        <div class="vinyl reveal"></div>
+
+        <div class="song-text reveal">
+
+            <h2>
+                This song reminds me of you
+            </h2>
+
+            <p>
+                press play · close your eyes · remember us
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     END
+======================================================= -->
+
+<section class="section end">
+
+    <div class="container reveal">
+
+        <div class="opening-small">
+            and that's just one little chapter
+        </div>
+
+        <h2>
+            Until forever...
+        </h2>
+
+        <p>
+            Happy Monthsary, My Love ♡
+        </p>
+
+        <a
+            href="#"
+            class="back-top"
+        >
+            Back to the beginning
+        </a>
+
+    </div>
+
+</section>
 
 
 <script>
-"use strict";
-
-/* =========================================================
-   YOUR FILES
-   =========================================================
-
-   ضع الملفات بهذا الشكل:
-
-   assets/
-   ├── intro.jpg
-   │
-   ├── bg1.jpg
-   ├── bg2.jpg
-   ├── ...
-   ├── bg10.jpg
-   │
-   ├── photo1.jpg
-   ├── photo2.jpg
-   ├── ...
-   ├── photo10.jpg
-   │
-   ├── video1.mp4
-   ├── video2.mp4
-   ├── ...
-   ├── video10.mp4
-   │
-   └── song.mp3
-
-   تقدر تغيّر أسماء الملفات من هنا فقط.
-========================================================= */
-
-const PAGES = [
-
-  {
-    title:"The Beginning",
-    subtitle:"Where our story started",
-    text:"A small beginning that became one of the memories I want to keep forever.",
-    background:"assets/bg1.jpg",
-    photo:"assets/photo1.jpg",
-    video:"assets/video1.mp4"
-  },
-
-  {
-    title:"Our First Memory",
-    subtitle:"One moment, many feelings",
-    text:"Some moments are short, but somehow they stay with us for a very long time.",
-    background:"assets/bg2.jpg",
-    photo:"assets/photo2.jpg",
-    video:"assets/video2.mp4"
-  },
-
-  {
-    title:"Your Smile",
-    subtitle:"My favorite little thing",
-    text:"A simple smile can make an ordinary moment feel completely different.",
-    background:"assets/bg3.jpg",
-    photo:"assets/photo3.jpg",
-    video:"assets/video3.mp4"
-  },
-
-  {
-    title:"A Special Day",
-    subtitle:"A memory worth keeping",
-    text:"This page is for one of those days that deserves a place in our little book.",
-    background:"assets/bg4.jpg",
-    photo:"assets/photo4.jpg",
-    video:"assets/video4.mp4"
-  },
-
-  {
-    title:"Little Details",
-    subtitle:"The things we remember",
-    text:"Sometimes the smallest details become the memories that matter most.",
-    background:"assets/bg5.jpg",
-    photo:"assets/photo5.jpg",
-    video:"assets/video5.mp4"
-  },
-
-  {
-    title:"Beautiful Day",
-    subtitle:"A day I want to remember",
-    text:"Another little chapter, another memory saved inside this book.",
-    background:"assets/bg6.jpg",
-    photo:"assets/photo6.jpg",
-    video:"assets/video6.mp4"
-  },
-
-  {
-    title:"Together",
-    subtitle:"Page after page",
-    text:"Every page adds another small part to the story.",
-    background:"assets/bg7.jpg",
-    photo:"assets/photo7.jpg",
-    video:"assets/video7.mp4"
-  },
-
-  {
-    title:"Another Chapter",
-    subtitle:"Still our story",
-    text:"The best memories are the ones that make you smile when you remember them.",
-    background:"assets/bg8.jpg",
-    photo:"assets/photo8.jpg",
-    video:"assets/video8.mp4"
-  },
-
-  {
-    title:"Almost The End",
-    subtitle:"But not really",
-    text:"We reached another page, but a story doesn't have to end here.",
-    background:"assets/bg9.jpg",
-    photo:"assets/photo9.jpg",
-    video:"assets/video9.mp4"
-  },
-
-  {
-    title:"To Be Continued",
-    subtitle:"The last page for now",
-    text:"This may be page ten, but it doesn't have to be the last memory.",
-    background:"assets/bg10.jpg",
-    photo:"assets/photo10.jpg",
-    video:"assets/video10.mp4"
-  }
-
-];
-
 
 /* =========================================================
    MUSIC
 ========================================================= */
 
-const SONG = "assets/song.mp3";
+let musicPlaying = false;
 
-let audio = null;
+function toggleMusic(){
 
+    const music =
+        document.getElementById("music");
 
-/* =========================================================
-   STATE
-========================================================= */
+    const button =
+        document.getElementById("musicBtn");
 
-let spreadIndex = 0;
+    if(music.paused){
 
-let busy = false;
+        music.play();
 
-let currentVideoIndex = -1;
+        button.textContent = "❚❚";
 
-
-/* =========================================================
-   ELEMENTS
-========================================================= */
-
-const intro =
-  document.getElementById("intro");
-
-const main =
-  document.getElementById("main");
-
-const spreads =
-  document.getElementById("spreads");
-
-const book =
-  document.getElementById("book");
-
-const counter =
-  document.getElementById("counter");
-
-const prevBtn =
-  document.getElementById("prevBtn");
-
-const nextBtn =
-  document.getElementById("nextBtn");
-
-const turnNext =
-  document.getElementById("turnNext");
-
-const turnPrev =
-  document.getElementById("turnPrev");
-
-const turnNextSurface =
-  document.getElementById("turnNextSurface");
-
-const turnPrevSurface =
-  document.getElementById("turnPrevSurface");
-
-const videoModal =
-  document.getElementById("videoModal");
-
-const videoPlayer =
-  document.getElementById("videoPlayer");
-
-const videoTitle =
-  document.getElementById("videoTitle");
-
-const loveModal =
-  document.getElementById("loveModal");
-
-const loveMessage =
-  document.getElementById("loveMessage");
-
-
-/* =========================================================
-   BUILD BOOK
-========================================================= */
-
-function buildBook(){
-
-  spreads.innerHTML = "";
-
-  /*
-    10 pages = 5 spreads.
-    Every spread contains exactly 2 pages.
-  */
-
-  for(let i=0;i<PAGES.length;i+=2){
-
-    const spread =
-      document.createElement("div");
-
-    spread.className = "spread";
-
-    spread.dataset.spread =
-      String(i / 2);
-
-
-    spread.appendChild(
-      createPage(PAGES[i],i)
-    );
-
-    spread.appendChild(
-      createPage(PAGES[i+1],i+1)
-    );
-
-
-    spreads.appendChild(spread);
-
-  }
-
-  showSpread(0);
-
-}
-
-
-/* =========================================================
-   CREATE PAGE
-========================================================= */
-
-function createPage(data,index){
-
-  const page =
-    document.createElement("article");
-
-  page.className = "page";
-
-
-  /*
-    Background image.
-    أنت فقط تغيّر bg1.jpg ... bg10.jpg
-  */
-
-  page.style.backgroundImage =
-    `linear-gradient(
-      rgba(255,249,236,.34),
-      rgba(255,249,236,.34)
-    ),url("${data.background}")`;
-
-
-  const inner =
-    document.createElement("div");
-
-  inner.className = "page-inner";
-
-
-  const script =
-    document.createElement("div");
-
-  script.className = "page-script";
-
-  script.textContent =
-    `Chapter ${index + 1}`;
-
-
-  const title =
-    document.createElement("h2");
-
-  title.className = "page-title";
-
-  title.textContent =
-    data.title;
-
-
-  const subtitle =
-    document.createElement("div");
-
-  subtitle.className = "page-sub";
-
-  subtitle.textContent =
-    data.subtitle;
-
-
-  /*
-    الصورة لا يتم تحميلها كلها دفعة واحدة.
-    الصفحات الأولى eager والباقي lazy.
-  */
-
-  const img =
-    document.createElement("img");
-
-  img.className = "page-photo";
-
-  img.src = data.photo;
-
-  img.alt = "";
-
-  img.decoding = "async";
-
-  img.loading =
-    index < 4 ? "eager" : "lazy";
-
-  img.onerror = function(){
-
-    this.style.display = "none";
-
-  };
-
-
-  const text =
-    document.createElement("p");
-
-  text.className = "page-text";
-
-  text.textContent =
-    data.text;
-
-
-  inner.appendChild(script);
-  inner.appendChild(title);
-  inner.appendChild(subtitle);
-  inner.appendChild(img);
-  inner.appendChild(text);
-
-
-  /*
-    Video button.
-    الفيديو نفسه لا يتم تحميله هنا.
-  */
-
-  if(data.video){
-
-    const videoButton =
-      document.createElement("button");
-
-    videoButton.className =
-      "page-video-btn";
-
-    videoButton.textContent =
-      "▶ Watch This Memory";
-
-    videoButton.addEventListener(
-      "click",
-      function(e){
-
-        e.stopPropagation();
-
-        openVideo(index);
-
-      }
-    );
-
-    inner.appendChild(videoButton);
-
-  }
-
-
-  const number =
-    document.createElement("span");
-
-  number.className =
-    "page-number";
-
-  number.textContent =
-    String(index + 1).padStart(2,"0");
-
-
-  inner.appendChild(number);
-
-  page.appendChild(inner);
-
-
-  /*
-    Flowers
-  */
-
-  const flowers =
-    document.createElement("div");
-
-  flowers.className =
-    "flowers";
-
-
-  for(let i=0;i<5;i++){
-
-    const flower =
-      document.createElement("span");
-
-    flower.className =
-      "flower";
-
-    flower.textContent =
-      i % 2 === 0 ? "🌸" : "🌷";
-
-    flowers.appendChild(flower);
-
-  }
-
-  page.appendChild(flowers);
-
-
-  return page;
-
-}
-
-
-/* =========================================================
-   SHOW SPREAD
-========================================================= */
-
-function showSpread(index){
-
-  const all =
-    document.querySelectorAll(".spread");
-
-  all.forEach((item,i)=>{
-
-    item.classList.toggle(
-      "active",
-      i === index
-    );
-
-  });
-
-
-  spreadIndex = index;
-
-  const firstPage =
-    index * 2 + 1;
-
-  counter.textContent =
-    `${String(firstPage).padStart(2,"0")}–${String(firstPage+1).padStart(2,"0")} / 10`;
-
-
-  prevBtn.disabled =
-    index === 0;
-
-  nextBtn.disabled =
-    index === 4;
-
-
-  /*
-    Preload ONLY the next/previous photos.
-    No videos are loaded.
-  */
-
-  preloadNearPages(index);
-
-}
-
-
-/* =========================================================
-   SMART IMAGE PRELOAD
-========================================================= */
-
-function preloadNearPages(index){
-
-  const indexes = [
-
-    index * 2,
-
-    index * 2 + 1,
-
-    index * 2 + 2,
-
-    index * 2 + 3,
-
-    index * 2 - 1
-
-  ];
-
-
-  indexes.forEach(i=>{
-
-    if(
-      i < 0 ||
-      i >= PAGES.length
-    ) return;
-
-
-    const image =
-      new Image();
-
-    image.decoding =
-      "async";
-
-    image.src =
-      PAGES[i].background;
-
-  });
-
-}
-
-
-/* =========================================================
-   NEXT PAGE
-========================================================= */
-
-function nextSpread(){
-
-  if(busy || spreadIndex >= 4)
-    return;
-
-
-  busy = true;
-
-
-  /*
-    Current right page.
-  */
-
-  const currentRight =
-    PAGES[spreadIndex * 2 + 1];
-
-
-  turnNextSurface.style.backgroundImage =
-    `url("${currentRight.background}")`;
-
-
-  turnNext.classList.remove(
-    "active-next"
-  );
-
-
-  /*
-    Restart animation.
-  */
-
-  void turnNext.offsetWidth;
-
-
-  turnNext.classList.add(
-    "active-next"
-  );
-
-
-  /*
-    Change spread halfway through
-    the animation.
-  */
-
-  setTimeout(()=>{
-
-    showSpread(
-      spreadIndex + 1
-    );
-
-  },320);
-
-
-  setTimeout(()=>{
-
-    turnNext.classList.remove(
-      "active-next"
-    );
-
-    busy = false;
-
-  },680);
-
-}
-
-
-/* =========================================================
-   PREVIOUS PAGE
-========================================================= */
-
-function previousSpread(){
-
-  if(busy || spreadIndex <= 0)
-    return;
-
-
-  busy = true;
-
-
-  const currentLeft =
-    PAGES[spreadIndex * 2];
-
-
-  turnPrevSurface.style.backgroundImage =
-    `url("${currentLeft.background}")`;
-
-
-  turnPrev.classList.remove(
-    "active-prev"
-  );
-
-
-  void turnPrev.offsetWidth;
-
-
-  turnPrev.classList.add(
-    "active-prev"
-  );
-
-
-  setTimeout(()=>{
-
-    showSpread(
-      spreadIndex - 1
-    );
-
-  },320);
-
-
-  setTimeout(()=>{
-
-    turnPrev.classList.remove(
-      "active-prev"
-    );
-
-    busy = false;
-
-  },680);
-
-}
-
-
-nextBtn.addEventListener(
-  "click",
-  nextSpread
-);
-
-prevBtn.addEventListener(
-  "click",
-  previousSpread
-);
-
-
-/* =========================================================
-   SWIPE
-========================================================= */
-
-let startX = 0;
-let startY = 0;
-
-book.addEventListener(
-  "touchstart",
-  function(e){
-
-    if(busy) return;
-
-    const t =
-      e.changedTouches[0];
-
-    startX = t.clientX;
-    startY = t.clientY;
-
-  },
-  {passive:true}
-);
-
-
-book.addEventListener(
-  "touchend",
-  function(e){
-
-    if(busy) return;
-
-    const t =
-      e.changedTouches[0];
-
-    const dx =
-      t.clientX - startX;
-
-    const dy =
-      t.clientY - startY;
-
-
-    /*
-      Ignore small movement.
-    */
-
-    if(Math.abs(dx) < 45)
-      return;
-
-
-    /*
-      Ignore vertical movement.
-    */
-
-    if(Math.abs(dy) > Math.abs(dx))
-      return;
-
-
-    /*
-      Swipe left = next
-      Swipe right = previous
-    */
-
-    if(dx < 0){
-
-      nextSpread();
+        musicPlaying = true;
 
     }else{
 
-      previousSpread();
+        music.pause();
+
+        button.textContent = "♫";
+
+        musicPlaying = false;
 
     }
-
-  },
-  {passive:true}
-);
-
-
-/* =========================================================
-   KEYBOARD
-========================================================= */
-
-document.addEventListener(
-  "keydown",
-  function(e){
-
-    if(e.key === "ArrowLeft")
-      nextSpread();
-
-    if(e.key === "ArrowRight")
-      previousSpread();
-
-    if(e.key === "Escape"){
-      closeVideo();
-      closeLove();
-    }
-
-  }
-);
-
-
-/* =========================================================
-   VIDEO
-========================================================= */
-
-function openVideo(index){
-
-  const data =
-    PAGES[index];
-
-  if(!data || !data.video)
-    return;
-
-
-  currentVideoIndex =
-    index;
-
-
-  videoTitle.textContent =
-    data.title;
-
-
-  /*
-    الفيديو يتم تحميله فقط عند الضغط.
-  */
-
-  videoPlayer.pause();
-
-  videoPlayer.removeAttribute(
-    "src"
-  );
-
-  videoPlayer.load();
-
-
-  videoPlayer.src =
-    data.video;
-
-
-  videoModal.classList.add(
-    "open"
-  );
-
-
-  videoPlayer.play().catch(
-    ()=>{}
-  );
-
 }
 
 
-function closeVideo(){
-
-  videoPlayer.pause();
-
-  videoPlayer.removeAttribute(
-    "src"
-  );
-
-  videoPlayer.load();
-
-  videoModal.classList.remove(
-    "open"
-  );
-
-}
-
-
-document.getElementById(
-  "closeVideo"
-).addEventListener(
-  "click",
-  closeVideo
-);
-
-
-videoModal.addEventListener(
-  "click",
-  function(e){
-
-    if(e.target === videoModal)
-      closeVideo();
-
-  }
-);
-
-
 /* =========================================================
-   MUSIC
+   SCROLL REVEAL
 ========================================================= */
 
-function initAudio(){
+const observer =
+    new IntersectionObserver(
+        entries => {
 
-  if(audio)
-    return;
+            entries.forEach(entry => {
 
+                if(entry.isIntersecting){
 
-  audio =
-    new Audio(SONG);
+                    entry.target.classList.add("visible");
 
-  audio.loop = true;
+                }
 
-  audio.preload = "none";
+            });
 
-}
-
-
-async function toggleMusic(){
-
-  initAudio();
-
-
-  if(audio.paused){
-
-    try{
-
-      await audio.play();
-
-      document.getElementById(
-        "musicBtn"
-      ).textContent = "❚❚";
-
-    }catch(e){
-
-      console.log(
-        "Music could not start:",
-        e
-      );
-
-    }
-
-  }else{
-
-    audio.pause();
-
-    document.getElementById(
-      "musicBtn"
-    ).textContent = "♪";
-
-  }
-
-}
-
-
-document.getElementById(
-  "musicBtn"
-).addEventListener(
-  "click",
-  toggleMusic
-);
-
-
-/* =========================================================
-   INTRO OPEN
-========================================================= */
-
-document.getElementById(
-  "openBtn"
-).addEventListener(
-  "click",
-  function(){
-
-    intro.classList.add("hide");
-
-    main.classList.add("show");
-
-    /*
-      We do NOT autoplay music here.
-      User can press ♪.
-    */
-
-  }
-);
-
-
-/* =========================================================
-   HEART MESSAGE
-========================================================= */
-
-const MESSAGE =
-`There are so many little things I could say.
-
-So I made this tiny book instead.
-
-Ten pages.
-Ten memories.
-Ten little places for photos, videos and moments.
-
-Every page can hold something special.
-
-And when you reach the last page,
-the story does not really have to end. ♥`;
-
-
-let typingTimer = null;
-
-
-document.getElementById(
-  "heartBtn"
-).addEventListener(
-  "click",
-  function(){
-
-    loveModal.classList.add(
-      "open"
-    );
-
-
-    loveMessage.textContent =
-      "";
-
-
-    clearInterval(
-      typingTimer
-    );
-
-
-    let i = 0;
-
-
-    typingTimer =
-      setInterval(()=>{
-
-        loveMessage.textContent =
-          MESSAGE.slice(0,i++);
-
-
-        if(
-          i > MESSAGE.length
-        ){
-
-          clearInterval(
-            typingTimer
-          );
-
+        },
+        {
+            threshold:.12
         }
+    );
 
-      },15);
+document
+    .querySelectorAll(".reveal")
+    .forEach(element => {
 
-  }
-);
+        observer.observe(element);
 
-
-/* =========================================================
-   LOVE MODAL MUSIC
-========================================================= */
-
-document.getElementById(
-  "loveMusicBtn"
-).addEventListener(
-  "click",
-  toggleMusic
-);
+    });
 
 
 /* =========================================================
-   LOVE MODAL VIDEO
+   CLICK BACK TO TOP
 ========================================================= */
 
-document.getElementById(
-  "loveVideoBtn"
-).addEventListener(
-  "click",
-  function(){
+document
+    .querySelector(".back-top")
+    .addEventListener("click",function(e){
 
-    closeLove();
+        e.preventDefault();
 
-    /*
-      يفتح فيديو الصفحة الحالية.
-    */
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
 
-    const index =
-      spreadIndex * 2;
+    });
 
-    openVideo(index);
-
-  }
-);
-
-
-function closeLove(){
-
-  loveModal.classList.remove(
-    "open"
-  );
-
-}
-
-
-document.getElementById(
-  "closeLove"
-).addEventListener(
-  "click",
-  closeLove
-);
-
-
-loveModal.addEventListener(
-  "click",
-  function(e){
-
-    if(e.target === loveModal)
-      closeLove();
-
-  }
-);
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-buildBook();
 
 </script>
 
 </body>
 </html>
-
